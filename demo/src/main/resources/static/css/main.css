@@ -110,46 +110,22 @@ span {
   margin-bottom: 10px;
 }
 
-/* Quick Actions */
-.quickActions {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-}
-
-.quickActionBtn {
+/* Buttons */
+button {
   padding: 10px 20px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  background-color: #4caf50;
+  color: white;
   text-decoration: none;
 }
 
-.quickActionBtn:hover {
+button:hover {
   background-color: #45a049;
   color: #fff;
-}
-
-.addTaskBtn {
-  background-color: #4caf50;
-  color: white;
-}
-
-.editTaskBtn {
-  background-color: #3498db;
-  color: white;
-}
-
-.deleteTaskBtn {
-  background-color: #ff3333;
-  color: white;
-}
-
-.viewCompletedBtn {
-  background-color: #333;
-  color: white;
 }
 
 /* Today Tasks */
@@ -187,10 +163,23 @@ span {
     align-items: center;
   }
 
-  .quickActionBtn {
-    width: 100%;
-    margin-bottom: 10px;
-  }
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button:hover {
+  background-color: #45a049;
+  color: white;
+}
 
   .Eisenhower {
     grid-template-columns: 1fr;
