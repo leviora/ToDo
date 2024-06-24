@@ -1,0 +1,199 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  padding: 15px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.generalStats {
+  text-align: right;
+}
+
+.generalStats .statItem {
+  margin-bottom: 8px;
+}
+
+.generalStats .statLabel {
+  font-weight: bold;
+  color: #fff;
+}
+
+.generalStats .statValue {
+  color: #3498db;
+}
+
+/* Eisenhower Matrix */
+.Eisenhower {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  height: 400px;
+  margin-top: 50px;
+}
+
+.Eisenhower > div {
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.Ważne.Pilne {
+  background-color: #ff9999;
+}
+
+.Ważne.Niepilne {
+  background-color: #99cc99;
+}
+
+.Nieważne.Pilne {
+  background-color: #ffcc66;
+}
+
+.Nieważne.Niepilne {
+  background-color: #9999ff;
+}
+
+span {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Task Styles */
+.taskCategory {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.taskDescription {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.taskDueDate {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Quick Actions */
+.quickActions {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.quickActionBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.quickActionBtn:hover {
+  background-color: #45a049;
+  color: #fff;
+}
+
+.addTaskBtn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.editTaskBtn {
+  background-color: #3498db;
+  color: white;
+}
+
+.deleteTaskBtn {
+  background-color: #ff3333;
+  color: white;
+}
+
+.viewCompletedBtn {
+  background-color: #333;
+  color: white;
+}
+
+/* Today Tasks */
+.todayTasks {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.todayTasks h2 {
+  color: #333;
+}
+
+.todayTasks div {
+  margin-bottom: 10px;
+}
+
+.todayTasks span.task-title {
+  font-weight: bold;
+  color: red;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.todayTasks span.task-description {
+  color: #666;
+  display: block;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  .quickActions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quickActionBtn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .Eisenhower {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+  }
+}

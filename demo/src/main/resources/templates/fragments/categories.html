@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kategorie</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Strona główna</a></li>
+            <li><a th:href="@{/kategorie}">Kategorie</a></li>
+        </ul>
+    </nav>
+</header>
+<h2>Kategorie</h2>
+
+<ul>
+    <li th:each="category : ${categories}">
+        <span th:text="${category.categoryName}"></span>
+    </li>
+</ul>
+
+<a class="addCategoryBtn" th:href="@{/dodajKategorie}">Dodaj kategorię</a>
+<a class="addCategoryBtn" th:href="@{/edytujKategorie}">Edytuj kategorię</a>
+<a class="addCategoryBtn" th:href="@{/usunKategorie}">Usuń kategorię</a>
+
+</body>
+</html>

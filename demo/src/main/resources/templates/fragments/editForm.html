@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edycja zadania</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Strona główna</a></li>
+            <li><a th:href="@{/kategorie}">Kategorie</a></li>
+        </ul>
+    </nav>
+</header>
+
+<h1>Edycja zadania</h1>
+
+<form id="task" th:action="@{'/edytuj/'+${task.taskId}}" method="post" th:object="${task}">
+
+    <input type="hidden" th:field="*{taskId}" />
+
+    <label for="category">Kategoria:</label>
+    <input type="text" id="category" name="categoryName" th:value="${task.category.categoryName}"><br>
+
+    <label for="description">Opis zadania:</label>
+    <input type="text" id="description" name="description" th:field="*{description}" required><br>
+
+    <label for="priority">Priorytet:</label>
+    <select id="priority" name="priority" th:field="*{priority}" required>
+        <option value="urgent-important">Pilne i ważne</option>
+        <option value="not-urgent-important">Niepilne, ale ważne</option>
+        <option value="urgent-not-important">Pilne, ale nieważne</option>
+        <option value="not-urgent-not-important">Nieważne i niepilne</option>
+    </select><br>
+
+    <label for="due_Date">Termin wykonania:</label>
+    <input type="date" id="due_Date" name="due_Date" th:field="*{due_Date}" required><br>
+
+    <input type="submit" value="Zapisz">
+</form>
+
+</body>
+</html>

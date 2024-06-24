@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:for="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>dodaj kategorię</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Strona główna</a></li>
+            <li><a th:href="@{/kategorie}">Kategorie</a></li>
+            <li><a th:href="@{/zakonczoneZadania}">Zakończone zadania</a></li>
+        </ul>
+    </nav>
+</header>
+
+<h2>Dodaj kategorię</h2>
+<form id="addCategory" th:action="@{/dodajKategorie}" method="post" th:object="${category}">
+    <label for="category">Kategoria:</label>
+
+    <input type="text" id="category" th:field="*{categoryName}" />
+
+    <input type="submit" value="Dodaj kategorię">
+</form>
+</body>
+</html>
