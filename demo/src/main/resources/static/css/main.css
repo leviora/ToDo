@@ -1,16 +1,32 @@
+:root {
+  /* Color Variables */
+  --primary-color: #4a90e2; /* A modern blue color */
+  --primary-dark-color: #357ABD; /* Darker shade for primary color */
+  --secondary-color: #50e3c2; /* A subtle teal color */
+  --secondary-dark-color: #37B09A; /* Darker shade for secondary color */
+  --background-color: #f4f4f4; /* Light grey background */
+  --text-color: #333; /* Dark grey text */
+  --accent-color: #f5a623; /* A modern accent orange */
+  --accent-dark-color: #D48800; /* Darker shade for accent color */
+  --white-color: #ffffff; /* White */
+  --error-color: #e74c3c; /* Error red */
+  --success-color: #2ecc71; /* Success green */
+  --hover-opacity: 0.85; /* Opacity for hover effect */
+}
+
 /* Global Styles */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 header {
-  background-color: #333;
+  background-color: var(--primary-color);
   padding: 15px;
-  color: white;
+  color: var(--white-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,7 +34,6 @@ header {
 
 nav ul {
   list-style: none;
-  text-decoration: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -30,11 +45,12 @@ nav li {
 
 nav a {
   text-decoration: none;
-  color: white;
+  color: var(--white-color);
   font-weight: bold;
   font-size: 20px;
 }
 
+/* General Stats */
 .generalStats {
   text-align: right;
 }
@@ -45,11 +61,11 @@ nav a {
 
 .generalStats .statLabel {
   font-weight: bold;
-  color: #fff;
+  color: var(--white-color);
 }
 
 .generalStats .statValue {
-  color: #3498db;
+  color: var(--primary-color);
 }
 
 /* Eisenhower Matrix */
@@ -63,7 +79,7 @@ nav a {
 }
 
 .Eisenhower > div {
-  border: 1px solid #ccc;
+  border: 1px solid var(--text-color);
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -73,19 +89,19 @@ nav a {
 }
 
 .Ważne.Pilne {
-  background-color: #ff9999;
+  background-color: var(--error-color);
 }
 
 .Ważne.Niepilne {
-  background-color: #99cc99;
+  background-color: var(--success-color);
 }
 
 .Nieważne.Pilne {
-  background-color: #ffcc66;
+  background-color: var(--accent-color);
 }
 
 .Nieważne.Niepilne {
-  background-color: #9999ff;
+  background-color: var(--secondary-color);
 }
 
 span {
@@ -98,16 +114,19 @@ span {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  color: var(--text-color);
 }
 
 .taskDescription {
   display: block;
   margin-bottom: 5px;
+  color: var(--text-color);
 }
 
 .taskDueDate {
   display: block;
   margin-bottom: 10px;
+  color: var(--text-color);
 }
 
 /* Buttons */
@@ -118,26 +137,26 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  background-color: #4caf50;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--white-color);
   text-decoration: none;
 }
 
 button:hover {
-  background-color: #45a049;
-  color: #fff;
+  background-color: var(--primary-dark-color);
+  color: var(--white-color);
 }
 
 /* Today Tasks */
 .todayTasks {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
+  background-color: var(--background-color);
+  border: 1px solid var(--text-color);
   padding: 15px;
   margin-bottom: 20px;
 }
 
 .todayTasks h2 {
-  color: #333;
+  color: var(--text-color);
 }
 
 .todayTasks div {
@@ -146,14 +165,21 @@ button:hover {
 
 .todayTasks span.task-title {
   font-weight: bold;
-  color: red;
+  color: var(--accent-color);
   display: block;
   margin-bottom: 5px;
 }
 
 .todayTasks span.task-description {
-  color: #666;
+  color: var(--text-color);
   display: block;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+  margin: 0;
+  padding: 10px 0;
 }
 
 /* Responsive Styles */
@@ -163,23 +189,10 @@ button:hover {
     align-items: center;
   }
 
-.button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  background-color: #4caf50;
-  color: white;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.button:hover {
-  background-color: #45a049;
-  color: white;
-}
+  .button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
   .Eisenhower {
     grid-template-columns: 1fr;
