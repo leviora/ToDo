@@ -32,6 +32,13 @@ header {
   align-items: center;
 }
 
+button a {
+    text-decoration: none;
+    color: var(--text-color)
+     list-style: none;
+
+}
+
 nav ul {
   list-style: none;
   margin: 0;
