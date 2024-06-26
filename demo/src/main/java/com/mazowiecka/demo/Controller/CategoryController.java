@@ -1,42 +1,32 @@
 package com.mazowiecka.demo.Controller;
 
 import com.mazowiecka.demo.Entity.Category;
-import com.mazowiecka.demo.Entity.Task;
-import com.mazowiecka.demo.Exception.CategoryNotFoundException;
-import com.mazowiecka.demo.Exception.TaskNotFoundException;
-import com.mazowiecka.demo.Repository.TaskRepository;
 import com.mazowiecka.demo.Service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
-import java.util.Set;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class CategoryController {
+
     private final CategoryService categoryService;
-//    private final TaskRepository taskRepository;
-//
-//    public CategoryController(CategoryService categoryService, TaskRepository taskRepository) {
-//        this.categoryService = categoryService;
-//        this.taskRepository = taskRepository;
-//    }
+
+    @Autowired
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
+
     @GetMapping("/kategorie")
     public String showCategories(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "fragments/categories";
+        return "pages/categories";
     }
+
     @GetMapping("/dodajKategorie")
     public String showAddCategoryPage(Model model) {
         model.addAttribute("category", new Category());
-        return "fragments/addCategoryForm";
+        return "pages/addCategory";
     }
     @PostMapping("/dodajKategorie")
     public String addCategory(@ModelAttribute("category") Category category) {
@@ -47,39 +37,38 @@ public class CategoryController {
         }
         return "redirect:/kategorie";
     }
-    @GetMapping("/edytujKategorie")
-    public String showCategoryToEdit(Model model) {
-        List<Category> categories =  categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-        return "fragments/showCategoryToEdit";
-    }
-    @GetMapping("/edytujKategorie/{categoryId}")
-    public String showEditFormCategory(@PathVariable("categoryId") Long categoryId, Model model) {
+
+    @GetMapping("/kategorie/edytujKategorie/{categoryId}")
+    public String showEditCategoryForm(@PathVariable Long categoryId, Model model) {
         Category category = categoryService.getCategoryById(categoryId);
         model.addAttribute("category", category);
-        model.addAttribute("categoryId", categoryId);
-        return "fragments/editCategoryForm";
+        return "pages/editCategory";
     }
+
     @PostMapping("/edytujKategorie/{categoryId}")
-    public String editCategory(@PathVariable("categoryId") Long categoryId, @ModelAttribute Category updatedCategory) {
-        Category existingCategory = categoryService.getCategoryById(categoryId);
-        if(existingCategory != null) {
-            existingCategory.setCategoryName(updatedCategory.getCategoryName());
-        }
-        categoryService.updateCategory(existingCategory,categoryId);
-        return "redirect:/";
+    public String processEditCategoryForm(@PathVariable Long categoryId, @ModelAttribute Category editedCategory) {
+        Category categoryToUpdate = categoryService.getCategoryById(categoryId);
+        categoryToUpdate.setCategoryName(editedCategory.getCategoryName());
+        categoryService.updateCategory(categoryToUpdate, categoryId);
+        return "redirect:/kategorie";
     }
-    @GetMapping("/usunKategorie")
-    public String showDeleteCategory(Model model) {
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-        return "fragments/showCategoryToDelete";
+
+    @GetMapping("/kategorie/usunKategorie/{categoryId}")
+    public String showDeleteCategoryForm(@PathVariable Long categoryId, Model model) {
+        Category category = categoryService.getCategoryById(categoryId);
+        model.addAttribute("category", category);
+        return "pages/deleteCategory";
     }
-    @GetMapping("/usunKategorie/{categoryId}")
-    public String deleteCategory(@PathVariable("categoryId") Long categoryId, @ModelAttribute Category deleteCategory) {
-        Category existingCategry = categoryService.getCategoryById(categoryId);
-        categoryService.deleteCategory(deleteCategory,categoryId);
-        return "redirect:/";
+    @PostMapping("/kategorie/usunKategorie/{categoryId}")
+    public String processDeleteCategoryForm(@PathVariable Long categoryId, @ModelAttribute Category deleteCategory) {
+        Category categoryToDelete = categoryService.getCategoryById(categoryId);
+        categoryService.deleteCategory(categoryToDelete, categoryId);
+        return "redirect:/kategorie";
     }
 
 }
+
+
+
+
+
