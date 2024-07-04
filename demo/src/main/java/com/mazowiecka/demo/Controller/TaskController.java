@@ -28,40 +28,51 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-//    private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
-
     @Autowired
     private CategoryRepository categryRepository;
-
     @Autowired
     private CategoryService categoryService;
+
     @GetMapping("/dodajZadanie")
     public String showAddTaskPage(Model model) {
         Task task = new Task();
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("task", task);
         model.addAttribute("categories", categories);
-        return "addTask";
+        return "pages/addTask";
     }
+
     @PostMapping("/dodajZadanie")
-    public String addTask(@ModelAttribute("task") Task task) {
+    public String addTask(@ModelAttribute Task task,
+                          @RequestParam(name = "categoryId", required = false) Long categoryId,
+                          @RequestParam(name = "newCategory", required = false) String newCategoryName) {
+        Category category;
+        if (newCategoryName != null && !newCategoryName.isEmpty()) {
+            category = new Category();
+            category.setCategoryName(newCategoryName);
+            categoryService.addCategory(category);
+        } else {
+            category = categoryService.getCategoryById(categoryId);
+        }
+        task.setCategory(category);
         taskService.addTask(task);
         return "redirect:/";
     }
-    @GetMapping("/edytuj")
+
+    @GetMapping("/edytujZadanie")
     public String showTasktoEdit(Model model) {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
-        return "showTaskListToEdit";
+        return "fragments/showTaskListToEdit";
     }
-    @GetMapping("/edytuj/{taskId}")
+    @GetMapping("/edytujZadanie/{taskId}")
     public String showEditForm(@PathVariable("taskId") Long taskId, Model model) {
         Task task = taskService.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
         model.addAttribute("task", task);
-        return "editForm";
+        return "fragments/editForm";
     }
-    @PostMapping("/edytuj/{taskId}")
+    @PostMapping("/edytujZadanie/{taskId}")
     public String editTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task updatedTask, Model model) {
         Task existingTask = taskService.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
@@ -83,13 +94,13 @@ public class TaskController {
 
         return "redirect:/";
     }
-    @GetMapping("/usun")
+    @GetMapping("/usunZadanie")
     public String showTasktoDelete(Model model) {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
-        return "showTaskListToDelete";
+        return "fragments/showTaskListToDelete";
     }
-    @GetMapping("/usun/{taskId}")
+    @GetMapping("/usunZadanie/{taskId}")
     public String deleteTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task deletedTask, Model model) {
         taskService.deleteTask(taskId, deletedTask);
         return "redirect:/";
@@ -108,7 +119,7 @@ public class TaskController {
     public String showCompletedTasks(Model model) {
         List<Task> completedTasks = taskService.getCompletedTasks();
         model.addAttribute("completedTasks", completedTasks);
-        return "fragments/completedtasks";
+        return "pages/completedTasks";
     }
     @GetMapping("/sortuj")
     public String sortTasks(@RequestParam("sortOption") String sortOption, Model model) {
@@ -136,7 +147,12 @@ public class TaskController {
         }
         model.addAttribute("sortedTasks", sortedTasks);
         model.addAttribute("sortOption", sortOption);
-        return "sortedList";
+        return "fragments/sortedList";
+    }
+    @PostMapping("/usunZakonczoneZadania")
+    public String deleteCompletedTasks() {
+        taskService.deleteCompletedTasks();
+        return "pages/completedTasks";
     }
 
 
