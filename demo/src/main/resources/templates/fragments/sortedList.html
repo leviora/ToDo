@@ -5,7 +5,7 @@
     <title>Sortowanie zadań</title>
 </head>
 <body>
-
+<div th:fragment="sort">
 <div th:if="${sortOption == 'date'}">
     <h2>Zadania posortowane po dacie:</h2>
     <ul>
@@ -55,6 +55,6 @@
         </li>
     </ul>
 </div>
-
+</div>
 </body>
 </html>

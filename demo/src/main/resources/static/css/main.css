@@ -18,11 +18,30 @@
 body {
   margin: 0;
   padding: 0;
+  overflow: auto;
   font-family: 'Roboto', sans-serif;
+  font-size: 18px;
   background-color: var(--background-color);
   color: var(--text-color);
   min-height: 100vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+}
+.main {
+ flex: 1;
+}
+
+section {
+ width: 100%;
+ margin: 0;
+    padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 header {
@@ -34,11 +53,10 @@ header {
   align-items: center;
 }
 
-button a {
+ a {
     text-decoration: none;
     color: var(--text-color)
-     list-style: none;
-
+    list-style: none;
 }
 
 nav ul {
@@ -83,7 +101,7 @@ nav a {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 10px;
-  height: 400px;
+  min-height: 400px;
   margin-top: 50px;
 }
 
@@ -141,7 +159,7 @@ span {
 /* Buttons */
 button {
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -149,12 +167,32 @@ button {
   background-color: var(--primary-color);
   color: var(--white-color);
   text-decoration: none;
+  text-align: center;
 }
 
 button:hover {
   background-color: var(--primary-dark-color);
   color: var(--white-color);
 }
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  text-decoration: none;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: var(--primary-dark-color);
+  color: var(--white-color);
+}
+
 
 /* Today Tasks */
 .todayTasks {

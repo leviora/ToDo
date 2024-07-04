@@ -1,23 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/main.css">
+    <title>Kategoria Istnieje</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-
-<header>
-    <nav>
-        <ul>
-            <li><a href="/">Strona główna</a></li>
-            <li><a th:href="@{/kategorie}">Kategorie</a></li>
-        </ul>
-    </nav>
-
-</header>
-
-<h2>Kategoria już istnieje</h2>
-
+<div th:fragment="categoryExist">
+    <h2>Kategoria już istnieje</h2>
+    <p>Wybrana kategoria już istnieje. Proszę spróbować dodać inną kategorię.</p>
+    <a class="button" th:href="@{/dodajKategorie}">Spróbuj ponownie</a>
+    <a class="button" th:href="@{/kategorie}">Powrót do listy kategorii</a>
+</div>
 </body>
 </html>

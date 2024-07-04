@@ -1,128 +1,153 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title th:text="${pageTitle}">To-Do List</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<section>-->
-<!--    <h2>Zaznacz zadanie jako zakończone</h2>-->
-<!--    <div class="changeStatus">-->
-<!--        <ul>-->
-<!--            <li th:each="task : ${tasks}" th:if="${!task.completed}">-->
-<!--                <div>-->
-<!--                    <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>-->
-<!--                    <span class="taskDescription" th:text="${task.description}"></span><br>-->
-<!--                    <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">-->
-<!--                        <input type="hidden" name="completed" value="true" />-->
-<!--                        <input type="hidden" name="taskId" th:value="${task.taskId}" />-->
-<!--                        <button type="submit">Zakończ zadanie</button>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">To-Do List</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/contentTemplate.css">
 
-<!--    <div>-->
-<!--        <h2>Zadania na dzisiaj:</h2>-->
-<!--        <ul>-->
-<!--            <li th:each="task : ${todayTasks}" th:if="${!task.completed}">-->
-<!--                <span th:text="${task.category.categoryName}"></span> - <span th:text="${task.description}"></span>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
+</head>
+<body>
+<div th:fragment="contentTemplate">
+    <section class="main">
+        <div th:fragment="completedTask">
+            <section>
+                <div class="container">
+                    <h2>Zaznacz zadanie jako zakończone</h2>
+                    <div class="changeStatus">
+                        <ul>
+                            <li th:each="task : ${tasks}" th:if="${!task.completed}">
+                                <div>
+                                    <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
+                                    <span class="taskDescription" th:text="${task.description}"></span><br>
+                                    <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
+                                        <input type="hidden" name="completed" value="true" />
+                                        <input type="hidden" name="taskId" th:value="${task.taskId}" />
+                                        <button type="submit">Zakończ zadanie</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div th:fragment="todayTasks">
+            <section>
+                <div class="container">
+                    <h2>Zadania na dzisiaj:</h2>
+                    <ul>
+                        <li th:each="task : ${todayTasks}" th:if="${!task.completed}">
+                            <span th:text="${task.category.categoryName}"></span> - <span th:text="${task.description}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <div th:fragment="sortedTasks">
+            <section>
+                <div class="container">
+                    <form action="/sortuj" method="get">
+                        <label for="sortOption">Sortuj według:</label>
+                        <select id="sortOption" name="sortOption">
+                            <option value="date">Daty rosnąco</option>
+                            <option value="importantUrgent">Ważne i Pilne</option>
+                            <option value="importantNotUrgent">Ważne, ale Niepilne</option>
+                            <option value="notImportantUrgent">Nie Wazne, ale Pilne</option>
+                            <option value="notImportantNotUrgent">Nie Wazne i Nie Pilne</option>
+                        </select>
+                        <button type="submit">Sortuj</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+        <div th:fragment="eisenhowerMatrix">
+            <section>
+                <div class="Eisenhower">
+                    <div class="Ważne Pilne">
+                        <span>Ważne Pilne</span>
+                        <ul>
+                            <li th:each="task : ${tasks}" th:if="${task.priority == 'urgent-important' and !task.completed}">
+                                <div>
+                                    <label th:for="${'task_' + task.taskId}">
+                                        <span>Kategoria: </span>
+                                        <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
+                                        <span>Data wykonania: </span>
+                                        <span class="taskdueDate" th:text="${task.due_Date}"></span><br>
+                                        <span>Opis: </span>
+                                        <span class="taskDescription" th:text="${task.description}"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-<!--    <form action="/sortuj" method="get">-->
-<!--        <label for="sortOption">Sortuj według:</label>-->
-<!--        <select id="sortOption" name="sortOption">-->
-<!--            <option value="date">Daty rosnąco</option>-->
-<!--            <option value="importantUrgent">Ważne i Pilne</option>-->
-<!--            <option value="importantNotUrgent">Ważne, ale Niepilne</option>-->
-<!--            <option value="notImportantUrgent">Nie Wazne, ale Pilne</option>-->
-<!--            <option value="notImportantNotUrgent">Nie Wazne i Nie Pilne</option>-->
-<!--        </select>-->
-<!--        <button type="submit">Sortuj</button>-->
-<!--    </form>-->
+                    <div class="Pilne Nieważne">
+                        <span>Pilne Nieważne</span>
+                        <ul>
+                            <li th:each="task : ${tasks}" th:if="${task.priority == 'urgent-not-important' and !task.completed}">
+                                <div>
+                                    <label th:for="${'task_' + task.taskId}">
+                                        <span>Kategoria: </span>
+                                        <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
+                                        <span>Data wykonania: </span>
+                                        <span class="taskdueDate" th:text="${task.due_Date}"></span><br>
+                                        <span>Opis: </span>
+                                        <span class="taskDescription" th:text="${task.description}"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-<!--    <div class="Eisenhower">-->
-<!--        <div class="Ważne Pilne">-->
-<!--            <span>Ważne Pilne</span>-->
-<!--            <ul>-->
-<!--                <li th:each="task : ${tasks}" th:if="${task.priority == 'urgent-important' and !task.completed}">-->
-<!--                    <div>-->
-<!--                        <label th:for="${'task_' + task.taskId}">-->
-<!--                            <span>Kategoria: </span>-->
-<!--                            <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>-->
-<!--                            <span>Data wykonania: </span>-->
-<!--                            <span class="taskdueDate" th:text="${task.due_Date}"></span><br>-->
-<!--                            <span>Opis: </span>-->
-<!--                            <span class="taskDescription" th:text="${task.description}"></span>-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
+                    <div class="Niepilne Ważne">
+                        <span>Niepilne Ważne</span>
+                        <ul>
+                            <li th:each="task : ${tasks}" th:if="${task.priority == 'not-urgent-important' and !task.completed}">
+                                <div>
+                                    <label th:for="${'task_' + task.taskId}">
+                                        <span>Kategoria: </span>
+                                        <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
+                                        <span>Data wykonania: </span>
+                                        <span class="taskdueDate" th:text="${task.due_Date}"></span><br>
+                                        <span>Opis: </span>
+                                        <span class="taskDescription" th:text="${task.description}"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-<!--        <div class="Pilne Nieważne">-->
-<!--            <span>Pilne Nieważne</span>-->
-<!--            <ul>-->
-<!--                <li th:each="task : ${tasks}" th:if="${task.priority == 'urgent-not-important' and !task.completed}">-->
-<!--                    <div>-->
-<!--                        <label th:for="${'task_' + task.taskId}">-->
-<!--                            <span>Kategoria: </span>-->
-<!--                            <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>-->
-<!--                            <span>Data wykonania: </span>-->
-<!--                            <span class="taskdueDate" th:text="${task.due_Date}"></span><br>-->
-<!--                            <span>Opis: </span>-->
-<!--                            <span class="taskDescription" th:text="${task.description}"></span>-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-
-<!--        <div class="Niepilne Ważne">-->
-<!--            <span>Niepilne Ważne</span>-->
-<!--            <ul>-->
-<!--                <li th:each="task : ${tasks}" th:if="${task.priority == 'not-urgent-important' and !task.completed}">-->
-<!--                    <div>-->
-<!--                        <label th:for="${'task_' + task.taskId}">-->
-<!--                            <span>Kategoria: </span>-->
-<!--                            <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>-->
-<!--                            <span>Data wykonania: </span>-->
-<!--                            <span class="taskdueDate" th:text="${task.due_Date}"></span><br>-->
-<!--                            <span>Opis: </span>-->
-<!--                            <span class="taskDescription" th:text="${task.description}"></span>-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-
-<!--        <div class="Niepilne Nieważne">-->
-<!--            <span>Niepilne Nieważne</span>-->
-<!--            <ul>-->
-<!--                <li th:each="task : ${tasks}" th:if="${task.priority == 'not-urgent-not-important' and !task.completed}">-->
-<!--                    <div>-->
-<!--                        <label th:for="${'task_' + task.taskId}">-->
-<!--                            <span>Kategoria: </span>-->
-<!--                            <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>-->
-<!--                            <span>Data wykonania: </span>-->
-<!--                            <span class="taskdueDate" th:text="${task.due_Date}"></span><br>-->
-<!--                            <span>Opis: </span>-->
-<!--                            <span class="taskDescription" th:text="${task.description}"></span>-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <section class="quickActions">-->
-<!--        <a class="quickActionBtn addTaskBtn" th:href="@{/dodajZadanie}">Dodaj zadanie</a>-->
-<!--        <a class="quickActionBtn editTaskBtn" th:href="@{/edytuj}">Edytuj zadanie</a>-->
-<!--        <a class="quickActionBtn deleteTaskBtn" th:href="@{/usun}">Usuń zadanie</a>-->
-<!--    </section>-->
-<!--</section>-->
-<!--</body>-->
-<!--</html>-->
+                    <div class="Niepilne Nieważne">
+                        <span>Niepilne Nieważne</span>
+                        <ul>
+                            <li th:each="task : ${tasks}" th:if="${task.priority == 'not-urgent-not-important' and !task.completed}">
+                                <div>
+                                    <label th:for="${'task_' + task.taskId}">
+                                        <span>Kategoria: </span>
+                                        <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
+                                        <span>Data wykonania: </span>
+                                        <span class="taskdueDate" th:text="${task.due_Date}"></span><br>
+                                        <span>Opis: </span>
+                                        <span class="taskDescription" th:text="${task.description}"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div th:fragment="quickActions">
+            <section class="quickActions">
+                <div class="container">
+                    <a class="button" th:href="@{/dodajZadanie}">Dodaj zadanie</a>
+                    <a class="button" th:href="@{/edytujZadanie}">Edytuj zadanie</a>
+                    <a class="button" th:href="@{/usunZadanie}">Usuń zadanie</a>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+</body>
+</html>

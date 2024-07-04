@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edycja zadania</title>
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 
 <h1>Edycja zadania</h1>
 
-<form id="task" th:action="@{'/edytuj/'+${task.taskId}}" method="post" th:object="${task}">
+<form id="task" th:action="@{'/edytujZadanie/'+${task.taskId}}" method="post" th:object="${task}">
 
     <input type="hidden" th:field="*{taskId}" />
 

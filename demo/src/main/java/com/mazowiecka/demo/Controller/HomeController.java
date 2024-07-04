@@ -19,9 +19,6 @@ public class HomeController {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
 
-        List<Task> uncompletedTasks = taskService.getAllIncompleteTasks();
-        model.addAttribute("uncompletedTasks", uncompletedTasks);
-
         List<Task> todayTasks = taskService.getTodayTasks();
         model.addAttribute("todayTasks", todayTasks);
 
@@ -29,6 +26,7 @@ public class HomeController {
         model.addAttribute("contentTemplate", "content/index :: content");
 
         model.addAttribute("pageTitle", "Main Page");
+
         return "layout/main";
     }
 

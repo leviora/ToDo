@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToDo</title>
-  <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-<header>
-  <nav>
-    <ul>
-      <li><a href="/">Strona główna</a></li>
-      <li><a th:href="@{/kategorie}">Kategorie</a></li>
-    </ul>
-  </nav>
-</header>
+<!--<header>-->
+<!--  <nav>-->
+<!--    <ul>-->
+<!--      <li><a href="/">Strona główna</a></li>-->
+<!--      <li><a th:href="@{/kategorie}">Kategorie</a></li>-->
+<!--    </ul>-->
+<!--  </nav>-->
+<!--</header>-->
 
 <h1>Zadania:</h1>
 <ul>
@@ -24,7 +24,7 @@
       <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
       <span class="taskDescription" th:text="${task.description}"></span>
 
-      <a th:href="@{/edytuj/{taskId}(taskId = ${task.taskId})}">Edytuj zadanie</a>
+      <a th:href="@{/edytujZadanie/{taskId}(taskId = ${task.taskId})}">Edytuj zadanie</a>
     </div>
   </li>
 </ul>

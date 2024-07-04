@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kategorie</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+     .button {
+        font-size:12px;
+     }
+     .li {
+         display:block;
+         margin-bottom:10px;
+     }
+         </style>
+</head>
+<body>
+
+<div th:replace="layout/header :: header"></div>
+
+<main>
+    <div th:replace="fragments/categories :: categories"></div>
+</main>
+
+<div th:replace="layout/footer :: footer"></div>
+
+</body>
+</html>
