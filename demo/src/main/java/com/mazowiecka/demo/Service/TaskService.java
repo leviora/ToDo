@@ -61,14 +61,24 @@ public class TaskService {
     public List<Task> getCompletedTasks() {
         List<Task> completedTasks = taskRepository.findAll();
         completedTasks = completedTasks.stream().filter(task -> task.isCompleted() == true).collect(Collectors.toList());
-
         return completedTasks;
     }
     public List<Task> findTasksByPriority(String priority) {
         return taskRepository.findTasksByPriority(priority);
     }
-    public List<Task> getAllIncompleteTasks() {
-        return taskRepository.findByCompletedFalse();
+
+    public void deleteCompletedTasks() {
+        List<Task> completedTasks = taskRepository.findByCompleted(true);
+        taskRepository.deleteAll(completedTasks);
     }
+
+
+//    public List<Task> getAllUncompleteTasks() {
+//        return taskRepository.findByCompletedFalse();
+//    }
+//    public List<Task> getAllUncompleteTasks() {
+//        List<Task> uncompletedTasks = taskRepository.findByCompletedFalse();
+//        return uncompletedTasks;
+//    }
 
 }
