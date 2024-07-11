@@ -12,6 +12,7 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalControllerAdvice {
     private final TaskService taskService;
+
     @Autowired
     public GlobalControllerAdvice(TaskService taskService) {
         this.taskService = taskService;

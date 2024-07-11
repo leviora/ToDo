@@ -13,11 +13,11 @@ import java.util.List;
 //@EntityScan(basePackages = "com.mazowiecka.demo.Entity")
 public class ToDoListApplication {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(ToDoListApplication.class, args);
-		DatabaseConnectionChecker connectionChecker = context.getBean(DatabaseConnectionChecker.class);
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(ToDoListApplication.class, args);
+        DatabaseConnectionChecker connectionChecker = context.getBean(DatabaseConnectionChecker.class);
 
-		connectionChecker.checkDatabaseConnection();
-	}
+        connectionChecker.checkDatabaseConnection();
+    }
 
 }

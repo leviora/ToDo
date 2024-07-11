@@ -24,6 +24,7 @@ public class TaskController {
     private TaskRepository taskRepository;
     @Autowired
     private TaskService taskService;
+
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
@@ -65,6 +66,7 @@ public class TaskController {
         model.addAttribute("tasks", tasks);
         return "fragments/showTaskListToEdit";
     }
+
     @GetMapping("/edytujZadanie/{taskId}")
     public String showEditForm(@PathVariable("taskId") Long taskId, Model model) {
         Task task = taskService.getTaskById(taskId)
@@ -72,6 +74,7 @@ public class TaskController {
         model.addAttribute("task", task);
         return "fragments/editForm";
     }
+
     @PostMapping("/edytujZadanie/{taskId}")
     public String editTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task updatedTask, Model model) {
         Task existingTask = taskService.getTaskById(taskId)
@@ -94,17 +97,20 @@ public class TaskController {
 
         return "redirect:/";
     }
+
     @GetMapping("/usunZadanie")
     public String showTasktoDelete(Model model) {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
         return "fragments/showTaskListToDelete";
     }
+
     @GetMapping("/usunZadanie/{taskId}")
     public String deleteTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task deletedTask, Model model) {
         taskService.deleteTask(taskId, deletedTask);
         return "redirect:/";
     }
+
     @PostMapping("/changeStatus/{taskId}")
     public String changeTaskStatus(@PathVariable Long taskId, Model model) {
         List<Task> tasks = taskService.getAllTasks();
@@ -115,12 +121,14 @@ public class TaskController {
         taskService.updateTask(task, taskId);
         return "redirect:/";
     }
+
     @GetMapping("/zakonczoneZadania")
     public String showCompletedTasks(Model model) {
         List<Task> completedTasks = taskService.getCompletedTasks();
         model.addAttribute("completedTasks", completedTasks);
         return "pages/completedTasks";
     }
+
     @GetMapping("/sortuj")
     public String sortTasks(@RequestParam("sortOption") String sortOption, Model model) {
 
@@ -147,13 +155,13 @@ public class TaskController {
         }
         model.addAttribute("sortedTasks", sortedTasks);
         model.addAttribute("sortOption", sortOption);
-        return "fragments/sortedList";
+        return "pages/sort";
     }
+
     @PostMapping("/usunZakonczoneZadania")
     public String deleteCompletedTasks() {
         taskService.deleteCompletedTasks();
         return "pages/completedTasks";
     }
-
 
 }

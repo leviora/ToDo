@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Usuń kategorię</title>
-  <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8">
+    <title>Usuń kategorię</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <div th:fragment="deleteCategoryForm">
-  <h2>Usuń kategorię</h2>
-  <form th:object="${category}" th:action="@{/kategorie/usunKategorie/{categoryId}(categoryId=${category.categoryId})}" method="post">
-    <input type="hidden" th:field="*{categoryId}" />
-    <p>Na pewno chcesz usunąć kategorię: <strong th:text="${category.categoryName}"></strong>?</p>
-<!--    <label>Nazwa kategorii:</label>-->
-<!--    <input type="text" th:field="*{categoryName}" required />-->
-    <button type="submit">Usuń</button>
-  </form>
+    <h2>Usuń kategorię</h2>
+    <form th:object="${category}"
+          th:action="@{/kategorie/usunKategorie/{categoryId}(categoryId=${category.categoryId})}" method="post">
+        <input type="hidden" th:field="*{categoryId}"/>
+        <p>Na pewno chcesz usunąć kategorię: <strong th:text="${category.categoryName}"></strong>?</p>
+        <!--    <label>Nazwa kategorii:</label>-->
+        <!--    <input type="text" th:field="*{categoryName}" required />-->
+        <button type="submit">Usuń</button>
+    </form>
 </div>
 </body>
 </html>

@@ -25,13 +25,15 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-        public Category getCategoryById(Long categoryId) {
+    public Category getCategoryById(Long categoryId) {
         return categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Kategoria o id " + categoryId + " nie istnieje."));
     }
+
     public boolean categoryExists(String categoryName) {
         return categoryRepository.existsByCategoryName(categoryName);
     }
+
     public Category addCategory(Category category) {
         return categoryRepository.save(category);
     }
@@ -40,9 +42,11 @@ public class CategoryService {
         Optional<Category> categoryOptional = categoryRepository.findByCategoryName(categoryName);
         return categoryOptional.orElse(null);
     }
-    public Category updateCategory(Category updatedCategory, Long categoryId ) {
+
+    public Category updateCategory(Category updatedCategory, Long categoryId) {
         return categoryRepository.save(updatedCategory);
     }
+
     public void deleteCategory(Category deletedCategory, Long categoryId) {
         categoryRepository.deleteById(categoryId);
     }

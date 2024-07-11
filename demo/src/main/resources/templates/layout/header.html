@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <header th:fragment="header">
@@ -15,23 +15,13 @@
         </ul>
     </nav>
 
-    <div class="a">
-        <h1>Nieukończone zadania</h1>
-        <ul>
-            <li th:each="task : ${uncompletedTasks}">
-                <span th:text="${task.name}">Nazwa zadania</span>
-            </li>
-        </ul>
-    </div>
-
-<!--    <div class="generalStats">-->
-<!--        <div class="statItem">-->
-<!--            <span class="statLabel">Liczba zadań:</span>-->
-<!--            <div class="statValue">-->
-<!--                <span th:text="${#lists.size(uncompletedTasks)}">42</span>-->
-
-<!--            </div>-->
-<!--        </div>-->
+<!--    <div class="a">-->
+<!--        <h1>Nieukończone zadania</h1>-->
+<!--        <ul>-->
+<!--            <li th:each="task : ${uncompletedTasks}">-->
+<!--                <span th:text="${task.name}">Nazwa zadania</span>-->
+<!--            </li>-->
+<!--        </ul>-->
 <!--    </div>-->
 
 </header>

@@ -35,13 +35,15 @@ body {
 section {
  width: 100%;
  margin: 0;
-    padding: 0;
+ margin-bottom: 30px;
+ padding: 0;
 }
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  margin-left:10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 header {
@@ -53,10 +55,22 @@ header {
   align-items: center;
 }
 
+form {
+  margin-bottom: 15px;
+}
+
  a {
     text-decoration: none;
     color: var(--text-color)
     list-style: none;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 10px;
 }
 
 nav ul {
@@ -106,17 +120,19 @@ nav a {
 }
 
 .Eisenhower > div {
-  border: 1px solid var(--text-color);
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  border: none;
+
 }
 
 .Ważne.Pilne {
   background-color: var(--error-color);
+
 }
 
 .Ważne.Niepilne {
@@ -133,15 +149,13 @@ nav a {
 
 span {
   font-size: 1.2em;
-  font-weight: bold;
 }
 
 /* Task Styles */
 .taskCategory {
   display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
   color: var(--text-color);
+
 }
 
 .taskDescription {
@@ -156,9 +170,17 @@ span {
   color: var(--text-color);
 }
 
+.sortedTasks section {
+  margin-bottom: 20px;
+}
+.quickActions section {
+  margin-top: 20px;
+}
+
 /* Buttons */
 button {
   padding: 10px 20px;
+  margin-left: 5px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
@@ -177,6 +199,7 @@ button:hover {
 .button {
   display: inline-block;
   padding: 10px 20px;
+  margin-bottom: 5px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
@@ -221,11 +244,20 @@ button:hover {
   color: var(--text-color);
   display: block;
 }
+.todayTasks ul, .completedTask ul {
+  padding-left: 20px;
+}
+
+.todayTasks li, .completedTask li {
+  margin-bottom: 10px;
+}
+
 
 /* Headers */
 h1, h2, h3, h4, h5, h6 {
   color: var(--primary-color);
   margin: 0;
+  margin-bottom: 15px;
   padding: 10px 0;
 }
 
@@ -239,6 +271,7 @@ h1, h2, h3, h4, h5, h6 {
   .button {
     width: 100%;
     margin-bottom: 10px;
+    margin-right: 10px;
   }
 
   .Eisenhower {

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title th:text="${pageTitle}">To-Do List</title>
-  <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">To-Do List</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <div th:replace="~{layout/header :: header}"></div>
 <main>
-  <div th:insert="~{pages/index :: contentTemplate}"></div>
+    <div th:insert="~{pages/index :: contentTemplate}"></div>
 </main>
 <div th:replace="~{layout/footer :: footer}"></div>
 </body>

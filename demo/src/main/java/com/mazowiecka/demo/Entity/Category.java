@@ -3,7 +3,9 @@ package com.mazowiecka.demo.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 @Entity
+//@Table(name = "category", uniqueConstraints = {@UniqueConstraint(columnNames = "categoryName")})
 @Table(name = "Categories")
 @Getter
 @Setter
@@ -22,6 +24,7 @@ public class Category {
                 "categoryName='" + categoryName + '\'' +
                 '}';
     }
+
     public Category() {
     }
 }

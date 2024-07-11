@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/main.css">
-  <title>Zakończone Zadania</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Zakończone Zadania</title>
 </head>
 <body>
 
 <div th:fragment="completedTasks">
-  <section class="completedTasks">
-    <div class="container">
-      <h2>Zakończone zadania</h2>
-      <div th:each="completedTask : ${completedTasks}">
-        <div th:if="${completedTask.completed == true}">
-          <div>
-            <span class="task-category" th:text="${completedTask.category.categoryName}"></span>
-            <span class="task-description" th:text="${completedTask.description}"></span>
-          </div>
+    <section class="completedTasks">
+        <div class="container">
+            <h2>Zakończone zadania</h2>
+            <div th:each="completedTask : ${completedTasks}">
+                <div th:if="${completedTask.completed == true}">
+                    <div>
+                        <span class="task-category" th:text="${completedTask.category.categoryName}"></span>
+                        <span class="task-description" th:text="${completedTask.description}"></span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <form th:action="@{/usunZakonczoneZadania}" method="post" onsubmit="return confirm('Czy na pewno chcesz usunąć wszystkie zakończone zadania?')">
-      <button type="submit">Usuń wszystkie zakończone zadania</button>
-    </form>
-  </section>
+        <form th:action="@{/usunZakonczoneZadania}" method="post"
+              onsubmit="return confirm('Czy na pewno chcesz usunąć wszystkie zakończone zadania?')">
+            <button class="button" type="submit">Usuń wszystkie zakończone zadania</button>
+        </form>
+    </section>
 </div>
 </body>
 </html>

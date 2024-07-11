@@ -28,6 +28,7 @@ public class CategoryController {
         model.addAttribute("category", new Category());
         return "pages/addCategory";
     }
+
     @PostMapping("/dodajKategorie")
     public String addCategory(@ModelAttribute("category") Category category) {
         if (!categoryService.categoryExists(category.getCategoryName())) {
@@ -59,6 +60,7 @@ public class CategoryController {
         model.addAttribute("category", category);
         return "pages/deleteCategory";
     }
+
     @PostMapping("/kategorie/usunKategorie/{categoryId}")
     public String processDeleteCategoryForm(@PathVariable Long categoryId, @ModelAttribute Category deleteCategory) {
         Category categoryToDelete = categoryService.getCategoryById(categoryId);

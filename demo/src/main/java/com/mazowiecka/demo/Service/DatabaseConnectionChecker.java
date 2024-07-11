@@ -12,6 +12,7 @@ import java.sql.SQLException;
 @Component
 public class DatabaseConnectionChecker {
     private final DataSource dataSource;
+
     @Autowired
     public DatabaseConnectionChecker(DataSource dataSource) {
         this.dataSource = dataSource;

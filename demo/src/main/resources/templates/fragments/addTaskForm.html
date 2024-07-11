@@ -16,7 +16,8 @@
         <select id="category" name="categoryId">
             <option value="" disabled selected>Wybierz kategorię</option>
             <option th:each="cat : ${categories}" th:value="${cat.categoryId}"
-                    th:text="${cat.categoryName}">Wybierz kategorię</option>
+                    th:text="${cat.categoryName}">Wybierz kategorię
+            </option>
         </select>
         <label for="newCategory">Lub dodaj nową kategorię</label>
         <input type="text" id="newCategory" name="newCategory"
@@ -38,12 +39,6 @@
 </div>
 </body>
 </html>
-
-
-
-
-
-
 
 
 <!--<h2>Dodaj nowe zadanie</h2>-->

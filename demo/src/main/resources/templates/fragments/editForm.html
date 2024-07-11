@@ -22,7 +22,7 @@
 
 <form id="task" th:action="@{'/edytujZadanie/'+${task.taskId}}" method="post" th:object="${task}">
 
-    <input type="hidden" th:field="*{taskId}" />
+    <input type="hidden" th:field="*{taskId}"/>
 
     <label for="category">Kategoria:</label>
     <input type="text" id="category" name="categoryName" th:value="${task.category.categoryName}"><br>
