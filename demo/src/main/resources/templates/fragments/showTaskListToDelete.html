@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-
+<div th:replace="layout/header :: header"></div>
+<div th:fragment="showTaskListToDelete">
 <h1>Zadania:</h1>
 <ul>
     <li th:each="task : ${tasks}">
@@ -15,10 +16,11 @@
             <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
             <span class="taskDescription" th:text="${task.description}"></span>
 
-            <a th:href="@{/usunZadanie/{taskId}(taskId = ${task.taskId})}">Usuń zadanie </a>
+            <a class="button" th:href="@{/usunZadanie/{taskId}(taskId = ${task.taskId})}">Usuń zadanie </a>
         </div>
     </li>
 </ul>
-
+</div>
+<div th:replace="layout/footer :: footer"></div>
 </body>
 </html>

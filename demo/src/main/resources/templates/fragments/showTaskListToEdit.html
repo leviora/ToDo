@@ -8,18 +8,20 @@
 </head>
 <body>
 
+<div th:replace="layout/header :: header"></div>
+<div th:fragent="showTaskListToEdit">
+    <h1>Zadania:</h1>
+    <ul>
+        <li th:each="task : ${tasks}">
+            <div>
+                <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
+                <span class="taskDescription" th:text="${task.description}"></span>
 
-<h1>Zadania:</h1>
-<ul>
-    <li th:each="task : ${tasks}">
-        <div>
-            <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
-            <span class="taskDescription" th:text="${task.description}"></span>
-
-            <a th:href="@{/edytujZadanie/{taskId}(taskId = ${task.taskId})}">Edytuj zadanie</a>
-        </div>
-    </li>
-</ul>
-
+                <a class="button" th:href="@{/edytujZadanie/{taskId}(taskId = ${task.taskId})}">Edytuj zadanie</a>
+            </div>
+        </li>
+    </ul>
+</div>
+<div th:replace="layout/footer :: footer"></div>
 </body>
 </html>

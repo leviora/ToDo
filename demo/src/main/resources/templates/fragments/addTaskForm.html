@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dodaj nowe zadanie</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-
+<div th:replace="layout/header :: header"></div>
 <div th:fragment="addTaskForm">
     <h2>Dodaj nowe zadanie</h2>
 
@@ -19,9 +19,9 @@
                     th:text="${cat.categoryName}">Wybierz kategorię
             </option>
         </select>
-        <label for="newCategory">Lub dodaj nową kategorię</label>
-        <input type="text" id="newCategory" name="newCategory"
-               placeholder="Dodaj nową kategorię">
+        <!--        <label for="newCategory">Lub dodaj nową kategorię</label>-->
+        <!--        <input type="text" id="newCategory" name="newCategory"-->
+        <!--               placeholder="Dodaj nową kategorię">-->
 
         <label for="description">Opis zadania:</label>
         <input type="text" id="description" name="description" th:field="*{description}" required><br>
@@ -36,40 +36,8 @@
         <input type="date" id="due_Date" name="due_Date" th:field="*{due_Date}" required><br>
         <input type="submit" value="Dodaj zadanie">
     </form>
+
 </div>
+<div th:replace="layout/footer :: footer"></div>
 </body>
 </html>
-
-
-<!--<h2>Dodaj nowe zadanie</h2>-->
-<!--<form id="task" th:action="@{/dodajZadanie}" method="post" th:object="${task}">-->
-
-<!--    th:action="@{/dodajZadanie}": Ustawia akcję formularza na "/dodajZadanie". Składnia @{/...} to sposób Thymeleafa na generowanie adresów URL.-->
-<!--    method="post": Wskazuje, że formularz będzie wysłany za pomocą metody HTTP POST.-->
-<!--    th:object="${task}": Powiązuje formularz z obiektem "task". Oznacza to, że pola formularza zostaną wypełnione wartościami z obiektu "task", -->
-<!--    a po wysłaniu formularza wartości zostaną zmapowane z powrotem do obiektu "task".-->
-<!--    <label for="title">Tytuł zadania:</label>-->
-<!--    <input type="text" id="title" name="title" th:field="*{title}" required><br>-->
-<!--    th:field="*{title}" oznacza, że wartość tego pola będzie pobierana i ustawiana z pola "title" obiektu "task"-->
-
-<!--    <label for="category">Kategoria:</label>-->
-<!--    <input type="text" id="category" name="category" th:field="*{category}"><br>-->
-
-<!--    <label for="description">Opis zadania:</label>-->
-<!--    <input type="text" id="description" name="description" th:field="*{description}" required><br>-->
-
-<!--    <label for="priority">Priorytet:</label>-->
-<!--    <select id="priority" name="priority" th:field="*{priority}" required>-->
-<!--        <option value="urgent-important">Pilne i ważne</option>-->
-<!--        <option value="not-urgent-important">Niepilne, ale ważne</option>-->
-<!--        <option value="urgent-not-important">Pilne, ale nieważne</option>-->
-<!--        <option value="not-urgent-not-important">Nieważne i niepilne</option>-->
-<!--    </select><br>-->
-
-<!--    <label for="due_Date">Termin wykonania:</label>-->
-<!--    <input type="date" id="due_Date" name="due_Date" th:field="*{due_Date}" required><br>-->
-
-<!--    <input type="submit" value="Dodaj zadanie">-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
