@@ -21,5 +21,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findByCompleted(boolean completed);
 
+    List<Task> findByCategory_CategoryId(Long categoryId);
+
 
 }

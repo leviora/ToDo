@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Edytuj kategorię</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <div th:fragment="editCategoryForm">
-    <h2>Edytuj kategorię</h2>
-    <form th:object="${category}" th:action="@{/edytujKategorie/{categoryId}(categoryId=${category.categoryId})}"
-          method="post">
-        <input type="hidden" th:field="*{categoryId}"/>
-        <label>Nazwa kategorii:</label>
-        <input type="text" th:field="*{categoryName}" required/>
-        <button class="button" type="submit">Zapisz</button>
-    </form>
+    <div class="container">
+        <h2>Edytuj kategorię</h2>
+        <form th:object="${category}" th:action="@{/edytujKategorie/{categoryId}(categoryId=${category.categoryId})}"
+              method="post">
+            <input type="hidden" th:field="*{categoryId}"/>
+            <label>Nazwa kategorii:</label>
+            <input type="text" th:field="*{categoryName}" required/>
+            <button class="button" type="submit">Zapisz</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

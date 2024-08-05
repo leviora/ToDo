@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Usuń kategorię</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <title>Usuń Kategorię</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <div th:fragment="deleteCategoryForm">
-    <h2>Usuń kategorię</h2>
-    <form th:object="${category}"
-          th:action="@{/kategorie/usunKategorie/{categoryId}(categoryId=${category.categoryId})}" method="post">
-        <input type="hidden" th:field="*{categoryId}"/>
-        <p>Na pewno chcesz usunąć kategorię: <strong th:text="${category.categoryName}"></strong>?</p>
-        <!--    <label>Nazwa kategorii:</label>-->
-        <!--    <input type="text" th:field="*{categoryName}" required />-->
+    <div class="container">
+    <h1>Usuń Kategorię</h1>
+    <p>Czy na pewno chcesz usunąć kategorię: <span th:text="${category.categoryName}"></span>?</p>
+    <form th:action="@{/kategorie/usunKategorie/{categoryId}(categoryId=${category.categoryId})}" method="post">
         <button type="submit">Usuń</button>
     </form>
+    <a class="button" th:href="@{/kategorie}">Anuluj</a>
+    </div>
 </div>
 </body>
 </html>

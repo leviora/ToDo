@@ -3,58 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Sortowanie zadań</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <div th:fragment="sort">
-    <div th:if="${sortOption == 'date'}">
-        <h2>Zadania posortowane po dacie:</h2>
-        <ul>
-            <li th:each="task : ${sortedTasks}">
-                <span th:text="${task.category.categoryName}"></span> - <span th:text="${task.description}"></span>
-                - <span th:text="${task.due_Date}"></span>
-            </li>
-        </ul>
-    </div>
+    <div class="section">
+        <div class="container">
+            <div th:if="${sortOption == 'date'}">
+                <h2>Zadania posortowane po dacie:</h2>
+                <ul>
+                    <li th:each="task : ${sortedTasks}">
+                        <span th:text="${task.category.categoryName}"></span> - <span
+                            th:text="${task.description}"></span>
+                        - <span th:text="${task.due_Date}"></span>
+                    </li>
+                </ul>
+            </div>
 
-    <div th:if="${sortOption == 'importantUrgent'}">
-        <h2>Zadania ważne i pilne:</h2>
-        <ul>
-            <li th:each="task : ${sortedTasks}">
-                <span th:text="${task.category.categoryName}"></span> - <span th:text="${task.description}"></span>
-                - <span th:text="${task.priority}"></span>
-            </li>
-        </ul>
-    </div>
+            <div th:if="${sortOption == 'importantUrgent'}">
+                <h2>Zadania ważne i pilne:</h2>
+                <ul>
+                    <li th:each="task : ${sortedTasks}">
+                        <span th:text="${task.category.categoryName}"></span> - <span
+                            th:text="${task.description}"></span>
+                        - <span th:text="${task.priority}"></span>
+                    </li>
+                </ul>
+            </div>
 
-    <div th:if="${sortOption == 'importantNotUrgent'}">
-        <h2>Zadania ważne, ale niepilne:</h2>
-        <ul>
-            <li th:each="task : ${sortedTasks}">
-                <span th:text="${task.category.categoryName}"></span> - <span th:text="${task.description}"></span>
-                - <span th:text="${task.priority}"></span>
-            </li>
-        </ul>
-    </div>
+            <div th:if="${sortOption == 'importantNotUrgent'}">
+                <h2>Zadania ważne, ale niepilne:</h2>
+                <ul>
+                    <li th:each="task : ${sortedTasks}">
+                        <span th:text="${task.category.categoryName}"></span> - <span
+                            th:text="${task.description}"></span>
+                        - <span th:text="${task.priority}"></span>
+                    </li>
+                </ul>
+            </div>
 
-    <div th:if="${sortOption == 'notImportantUrgent'}">
-        <h2>Zadania nieistotne, ale pilne:</h2>
-        <ul>
-            <li th:each="task : ${sortedTasks}">
-                <span th:text="${task.category.categoryName}"></span> - <span th:text="${task.description}"></span>
-                - <span th:text="${task.priority}"></span>
-            </li>
-        </ul>
-    </div>
+            <div th:if="${sortOption == 'notImportantUrgent'}">
+                <h2>Zadania nieistotne, ale pilne:</h2>
+                <ul>
+                    <li th:each="task : ${sortedTasks}">
+                        <span th:text="${task.category.categoryName}"></span> - <span
+                            th:text="${task.description}"></span>
+                        - <span th:text="${task.priority}"></span>
+                    </li>
+                </ul>
+            </div>
 
-    <div th:if="${sortOption == 'notImportantNotUrgent'}">
-        <h2>Zadania nieistotne i niepilne:</h2>
-        <ul>
-            <li th:each="task : ${sortedTasks}">
-                <span th:text="${task.category.categoryName}"></span> - <span th:text="${task.description}"></span>
-                - <span th:text="${task.priority}"></span>
-            </li>
-        </ul>
+            <div th:if="${sortOption == 'notImportantNotUrgent'}">
+                <h2>Zadania nieistotne i niepilne:</h2>
+                <ul>
+                    <li th:each="task : ${sortedTasks}">
+                        <span th:text="${task.category.categoryName}"></span> - <span
+                            th:text="${task.description}"></span>
+                        - <span th:text="${task.priority}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -20,9 +20,7 @@ public class TaskService {
     }
 
     public List<Task> getAllTasks() {
-        List<Task> tasks =taskRepository.findAll();
-        return tasks;
-//        return taskRepository.findAll();
+        return taskRepository.findAll();
     }
 
     public Optional<Task> getTaskById(Long id) {
@@ -84,10 +82,6 @@ public class TaskService {
         taskRepository.deleteAll(completedTasks);
     }
 
-
-//    public List<Task> getAllUncompleteTasks() {
-//        return taskRepository.findByCompletedFalse();
-//    }
     public List<Task> getAllUncompleteTasks() {
         List<Task> uncompletedTasks = taskRepository.findByCompletedFalse();
         return uncompletedTasks;

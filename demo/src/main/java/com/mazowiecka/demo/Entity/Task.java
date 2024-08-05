@@ -1,8 +1,11 @@
 package com.mazowiecka.demo.Entity;
 
 import jakarta.persistence.*;
+//import jakarta.validation.constraints.NotEmpty;
+//import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
 
 import java.time.LocalDate;
 
@@ -18,6 +21,8 @@ public class Task {
     @Column(name = "task_id")
     private Long taskId;
 
+//    @NotEmpty(message = "Opis zadania nie może być pusty")
+//    @Size(max = 255, message = "Opis zadania nie może przekraczać 255 znaków")
     private String description;
     private String priority;
     private LocalDate due_Date;
