@@ -1,12 +1,15 @@
 :root {
   /* Color Variables */
-  --primary-color: #4a90e2; /* Modern blue */
-  --secondary-color: #50e3c2; /* Subtle teal */
-  --background-color: #f4f4f4; /* Light grey background */
-  --text-color: #333; /* Dark grey text */
-  --accent-color: #f5a623; /* Accent orange */
-  --white-color: #ffffff; /* White */
-  --hover-opacity: 0.85; /* Opacity for hover effect */
+  --primary-color: #005A3D; /* Głęboka butelkowa zieleń */
+  --secondary-color: #A77B4C; /* Miedziany jako drugi kolor */
+  --background-color: #F4F4F4; /* Jasnoszary tło */
+  --text-color: #333; /* Ciemnoszary tekst */
+  --accent-color: #D3AF6A; /* Złoty akcent */
+  --highlight-color: #FFD700; /* Jasny złoty jako dodatkowy akcent */
+  --button-color: #E0E0E0; /* Jasnoszary dla przycisków */
+  --button-hover-color: #C0C0C0; /* Jaśniejszy szary przy hover */
+  --white-color: #FFFFFF; /* Biały */
+  --hover-opacity: 0.9; /* Przezroczystość przy hover */
 }
 
 html, body {
@@ -47,14 +50,14 @@ section {
 }
 
 header, footer {
-  background-color: var(--primary-color);
-  color: var(--white-color);
+  background-color: var(--background-color);
   padding: 20px;
   text-align: center;
   position: relative;
 }
 
 header {
+  color: var(--text-color);
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
@@ -64,12 +67,25 @@ header {
 header nav ul {
   display: flex;
   gap: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+header nav ul a {
+  color: var(--text-color);
+  display: flex;
+  gap: 20px;
 }
 
 header h1 {
   margin: 0;
   animation: slideInFromTop 1s ease-out;
 }
+
+.task-list ul {
+    list-style-type: none; /* Usunięcie wypunktowania */
+    padding-left: 0; /* Usunięcie wcięcia */
+}
+
 
 @keyframes slideInFromTop {
   0% {
@@ -108,6 +124,7 @@ h1, h2, h3, h4, h5, h6 {
 
 button, .button {
   padding: 10px 20px;
+  margin-bottom:20px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
@@ -135,6 +152,9 @@ form {
   grid-template-rows: 1fr 1fr;
   gap: 10px;
   margin-top: 20px;
+
+
+  position: relative;
 }
 
 .Eisenhower > div {
@@ -148,6 +168,9 @@ form {
   text-align: center;
   border-radius: 5px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
+  position: relative;
 }
 
 .Eisenhower > div:hover {
@@ -164,11 +187,11 @@ form {
 }
 
 .Nieważne.Pilne {
-  border-left: 5px solid var(--accent-color);
+  border-left: 5px solid var(--secondary-color);
 }
 
 .Nieważne.Niepilne {
-  border-left: 5px solid var(--text-color);
+  border-left: 5px solid var(--primary-color);
 }
 
 span {
@@ -207,44 +230,40 @@ a {
   gap: 20px;
 }
 
-/* Tooltip
-.tooltip {
+.Eisenhower div[data-description] {
   position: relative;
-  display: inline-block;
-  cursor: pointer;
 }
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 200px;
-  background-color: var(--primary-color);
-  color: var(--white-color);
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
+.Eisenhower div[data-description]::after {
+  content: attr(data-description);
   position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -100px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: var(--white-color);
+  padding: 10px;
+  border-radius: 5px;
+  white-space: normal; /* Pozwól tekstowi na łamanie wierszy */
+  max-width: 500px;
+  min-height: 50px;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  word-wrap: break-word;
+  z-index: 10;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.tooltip:hover .tooltiptext {
+.Eisenhower div:hover[data-description]::after {
   visibility: visible;
   opacity: 1;
 }
-*/
+
 @media screen and (max-width: 600px) {
   .Eisenhower {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
   }
-  .task-list {
-    grid-template-columns: 1fr;
-  }
-
 
   .task {
     display: flex;
@@ -260,7 +279,7 @@ a {
   .taskDueDate {
     font-size: 1.2em;
     font-weight: bold;
-    margin-bottom: 10px; /* Margin to create space between rows */
+    margin-bottom: 10px;
   }
 
   .taskCategory, .taskDescription {
@@ -268,18 +287,10 @@ a {
   }
 
   .taskCategory {
-    font-weight: bold; /* Optional: make the category stand out */
+    font-weight: bold;
   }
 
   .taskDescription {
     font-size: 1em;
   }
-
-
-
-
-
-
-
-
 }

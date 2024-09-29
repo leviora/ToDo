@@ -22,14 +22,13 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final TaskRepository taskRepository;
 
-    @Autowired
     public CategoryService(CategoryRepository categoryRepository, TaskRepository taskRepository) {
         this.categoryRepository = categoryRepository;
         this.taskRepository = taskRepository;
     }
+
     @Value("${default.category.id}")
     private Long defaultCategoryId;
-
 
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
@@ -56,6 +55,7 @@ public class CategoryService {
     public Category updateCategory(Category updatedCategory, Long categoryId) {
         return categoryRepository.save(updatedCategory);
     }
+
     private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
 
     @Transactional

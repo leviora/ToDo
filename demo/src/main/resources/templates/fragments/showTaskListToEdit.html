@@ -10,17 +10,21 @@
 
 <div th:replace="layout/header :: header"></div>
 <div th:fragent="showTaskListToEdit">
-    <h1>Zadania:</h1>
-    <ul>
-        <li th:each="task : ${tasks}">
-            <div>
-                <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
-                <span class="taskDescription" th:text="${task.description}"></span>
+    <div class="container">
+        <h1>Zadania:</h1>
+        <div>
+            <ul>
+                <li th:each="task : ${tasks}">
 
-                <a class="button" th:href="@{/edytujZadanie/{taskId}(taskId = ${task.taskId})}">Edytuj zadanie</a>
-            </div>
+                    <span th:text="${task.due_Date}"></span> -
+                    <span th:text="${task.category.categoryName}"></span> -
+                    <span th:text="${task.description}"></span>
+
+                    <a class="button" th:href="@{/edytujZadanie/{taskId}(taskId = ${task.taskId})}">Edytuj zadanie</a>
+        </div>
         </li>
-    </ul>
+        </ul>
+    </div>
 </div>
 <div th:replace="layout/footer :: footer"></div>
 </body>

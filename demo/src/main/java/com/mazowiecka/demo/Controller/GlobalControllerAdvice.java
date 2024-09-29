@@ -18,8 +18,8 @@ public class GlobalControllerAdvice {
         this.taskService = taskService;
     }
 
-//    @ModelAttribute
-//    public void addAttributes(Model model) {
-//        model.addAttribute("uncompletedTasks", taskService.getAllUncompleteTasks());
-//    }
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("uncompletedTasks", taskService.getAllUncompleteTasks());
+    }
 }

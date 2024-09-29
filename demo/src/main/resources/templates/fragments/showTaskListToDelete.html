@@ -9,17 +9,21 @@
 <body>
 <div th:replace="layout/header :: header"></div>
 <div th:fragment="showTaskListToDelete">
-<h1>Zadania:</h1>
-<ul>
-    <li th:each="task : ${tasks}">
+    <div class="container">
+        <h1>Zadania:</h1>
         <div>
-            <span class="taskCategory" th:text="${task.category.categoryName}"></span><br>
-            <span class="taskDescription" th:text="${task.description}"></span>
+            <ul>
+                <li th:each="task : ${tasks}">
 
-            <a class="button" th:href="@{/usunZadanie/{taskId}(taskId = ${task.taskId})}">Usuń zadanie </a>
+                    <span th:text="${task.due_Date}"></span> -
+                    <span th:text="${task.category.categoryName}"></span> -
+                    <span th:text="${task.description}"></span>
+
+                    <a class="button" th:href="@{/usunZadanie/{taskId}(taskId = ${task.taskId})}">Usuń zadanie </a>
         </div>
-    </li>
-</ul>
+        </li>
+        </ul>
+    </div>
 </div>
 <div th:replace="layout/footer :: footer"></div>
 </body>

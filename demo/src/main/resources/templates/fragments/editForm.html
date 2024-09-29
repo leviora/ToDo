@@ -11,31 +11,31 @@
 
 <div th:replace="layout/header :: header"></div>
 <div th:fragment="editForm">
-<h1>Edycja zadania</h1>
+    <h1>Edycja zadania</h1>
 
-<form id="task" th:action="@{'/edytujZadanie/'+${task.taskId}}" method="post" th:object="${task}">
+    <form id="task" th:action="@{'/edytujZadanie/'+${task.taskId}}" method="post" th:object="${task}">
 
-    <input type="hidden" th:field="*{taskId}"/>
+        <input type="hidden" th:field="*{taskId}"/>
 
-    <label for="category">Kategoria:</label>
-    <input type="text" id="category" name="categoryName" th:value="${task.category.categoryName}"><br>
+        <label for="category">Kategoria:</label>
+        <input type="text" id="category" name="categoryName" th:value="${task.category.categoryName}"><br>
 
-    <label for="description">Opis zadania:</label>
-    <input type="text" id="description" name="description" th:field="*{description}" required><br>
+        <label for="description">Opis zadania:</label>
+        <input type="text" id="description" name="description" th:field="*{description}" required><br>
 
-    <label for="priority">Priorytet:</label>
-    <select id="priority" name="priority" th:field="*{priority}" required>
-        <option value="urgent-important">Pilne i ważne</option>
-        <option value="not-urgent-important">Niepilne, ale ważne</option>
-        <option value="urgent-not-important">Pilne, ale nieważne</option>
-        <option value="not-urgent-not-important">Nieważne i niepilne</option>
-    </select><br>
+        <label for="priority">Priorytet:</label>
+        <select id="priority" name="priority" th:field="*{priority}" required>
+            <option value="urgent-important">Pilne i ważne</option>
+            <option value="not-urgent-important">Niepilne, ale ważne</option>
+            <option value="urgent-not-important">Pilne, ale nieważne</option>
+            <option value="not-urgent-not-important">Nieważne i niepilne</option>
+        </select><br>
 
-    <label for="due_Date">Termin wykonania:</label>
-    <input type="date" id="due_Date" name="due_Date" th:field="*{due_Date}" required><br>
+        <label for="due_Date">Termin wykonania:</label>
+        <input type="date" id="due_Date" name="due_Date" th:field="*{due_Date}" required><br>
 
-    <input type="submit" value="Zapisz">
-</form>
+        <input type="submit" value="Zapisz">
+    </form>
 </div>
 <div th:replace="layout/footer :: footer"></div>
 </body>
