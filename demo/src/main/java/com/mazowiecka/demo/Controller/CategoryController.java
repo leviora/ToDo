@@ -55,17 +55,15 @@ public class CategoryController {
 
     @GetMapping("/kategorie/usunKategorie/{categoryId}")
     public String showDeleteCategoryForm(@PathVariable Long categoryId, Model model) {
-        System.out.println("GET request for deleting category with ID: " + categoryId);
         Category category = categoryService.getCategoryById(categoryId);
         model.addAttribute("category", category);
-        return "pages/deleteCategory"; // tutaj wstaw ścieżkę do widoku HTML dla potwierdzenia usunięcia kategorii
+        return "pages/deleteCategory";
     }
 
     @PostMapping("/kategorie/usunKategorie/{categoryId}")
     public String processDeleteCategoryForm(@PathVariable Long categoryId) {
-        System.out.println("POST request for deleting category with ID: " + categoryId);
         categoryService.deleteCategory(categoryId);
-        return "redirect:/kategorie"; // przekierowanie do listy kategorii po usunięciu
+        return "redirect:/kategorie";
     }
 
 }

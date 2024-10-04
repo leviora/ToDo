@@ -152,8 +152,6 @@ form {
   grid-template-rows: 1fr 1fr;
   gap: 10px;
   margin-top: 20px;
-
-
   position: relative;
 }
 
@@ -168,8 +166,6 @@ form {
   text-align: center;
   border-radius: 5px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-
   position: relative;
 }
 

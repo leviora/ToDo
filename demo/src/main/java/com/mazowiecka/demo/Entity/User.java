@@ -14,17 +14,21 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String username;
+
     @Size(min = 8, message = "Hasło musi mieć co najmniej 8 znaków")
     @Column(nullable = false)
     private String password;
 
-    public User() {
+    @Column(nullable = false, unique = true)
+    private String email;
 
+    public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
     public Long getId() {
@@ -49,5 +53,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
