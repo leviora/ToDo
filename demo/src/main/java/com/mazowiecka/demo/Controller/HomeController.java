@@ -2,6 +2,7 @@ package com.mazowiecka.demo.Controller;
 
 import com.mazowiecka.demo.Entity.Task;
 import com.mazowiecka.demo.Service.TaskService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ public class HomeController {
     private TaskService taskService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
 
@@ -26,6 +27,15 @@ public class HomeController {
         model.addAttribute("contentTemplate", "content/index :: content");
 
         model.addAttribute("pageTitle", "Main Page");
+
+        String loggedUser = (String) session.getAttribute("loggedUser");
+        System.out.println("Zalogowany użytkownik w HomeController: " + loggedUser); // Debug
+        if (loggedUser != null) {
+            model.addAttribute("loggedUser", loggedUser); // Dodaj użytkownika do modelu
+        }
+
+        model.addAttribute("isLoggedIn", loggedUser != null);
+
 
         return "layout/main";
     }

@@ -33,6 +33,16 @@
         <!--                    </section>-->
         <!--                </div>-->
 
+        <div th:if="${isLoggedIn}">
+            <p>Jesteś zalogowany jako: <span th:text="${loggedUser}"></span></p>
+        </div>
+        <div th:if="${not isLoggedIn}">
+            <p>Nie jesteś zalogowany. <a href="/logowanie">Zaloguj się tutaj</a>.</p>
+        </div>
+
+
+
+
         <div th:fragment="todayTasks">
             <section>
                 <div class="container">
@@ -68,6 +78,10 @@
                 </div>
             </section>
         </div>
+
+        <a class="button" th:href="@{/tasks/dynamic-priority}">Pokaż zadania według dynamicznych priorytetów</a>
+
+
 
         <div th:fragment="eisenhowerMatrix">
             <section class="eisenhowerMatrix">

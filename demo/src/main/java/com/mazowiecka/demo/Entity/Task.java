@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 //import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-
-
 import java.time.LocalDate;
 
 @Entity
@@ -27,6 +25,9 @@ public class Task {
     private String priority;
     private LocalDate due_Date;
     private boolean completed = false;
+
+    @Column(name = "dynamic_priority")
+    private String dynamicPriority;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

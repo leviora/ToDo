@@ -7,16 +7,13 @@ import com.mazowiecka.demo.Repository.TaskRepository;
 import com.mazowiecka.demo.Service.CategoryService;
 import com.mazowiecka.demo.Service.TaskService;
 import com.mazowiecka.demo.Exception.TaskNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class TaskController {
@@ -163,5 +160,36 @@ public class TaskController {
         taskService.deleteCompletedTasks();
         return "pages/completedTasks";
     }
+
+    @PostMapping("/tasks/updateDynamicPriority")
+    public String updateDynamicPriority(@RequestParam Long taskId, Model model) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new IllegalArgumentException("Zadanie nie znalezione"));
+
+        taskRepository.save(task);
+
+        return "redirect:/tasks";
+    }
+    @GetMapping("/tasks/dynamic-priority")
+    public String getTasksWithDynamicPriority(Model model) {
+        List<Task> tasks = taskService.getAllTasks();
+        List<Task> tasksWithDynamicPriority = tasks.stream()
+                .map(task -> {
+                    String dynamicPriority = taskService.calculateDynamicPriority(task);
+                    task.setDynamicPriority(dynamicPriority);
+                    System.out.println("Zadanie: " + task.getDescription() + ", Dynamiczny priorytet: " + dynamicPriority); // Debug
+                    return task;
+                })
+                .collect(Collectors.toList());
+
+        model.addAttribute("tasks", tasksWithDynamicPriority);
+        return "pages/dynamicPriorityPage";
+    }
+
+
+
+
+
+
 
 }

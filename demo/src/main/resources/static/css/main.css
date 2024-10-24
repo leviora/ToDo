@@ -255,6 +255,27 @@ a {
   opacity: 1;
 }
 
+.centered-table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    width: 100%; /* Zajmuje całą szerokość */
+    max-width: 800px;
+}
+
+.centered-table th, .centered-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center; /* Tekst w środku komórek */
+}
+
+.centered-table th {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+
+
 @media screen and (max-width: 600px) {
   .Eisenhower {
     grid-template-columns: 1fr;

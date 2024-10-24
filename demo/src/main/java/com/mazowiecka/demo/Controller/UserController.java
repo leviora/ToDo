@@ -1,15 +1,19 @@
 package com.mazowiecka.demo.Controller;
 
+import com.mazowiecka.demo.Entity.Role;
 import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 @Controller
 public class UserController {
+
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -26,37 +30,58 @@ public class UserController {
 
     @PostMapping("/tworzenieUzytkownika")
     public String saveUser(@ModelAttribute User user, Model model) {
-        if (userService.isUsernameTaken(user.getUsername())) {
-            model.addAttribute("usernameError", "Podana nazwa użytkownika już istnieje.");
+        try {
+            user.setRole(Role.USER);
+            userService.saveUser(user);
+
+            return "redirect:/logowanie";  // Przekierowanie po poprawnej rejestracji do logowania
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().contains("Nazwa użytkownika jest już zajęta")) {
+                model.addAttribute("usernameError", "Nazwa użytkownika jest już zajęta.");
+            } else if (e.getMessage().contains("Hasło nie spełnia wymagań")) {
+                model.addAttribute("passwordError", "Hasło nie spełnia wymagań.");
+            }
             return "fragments/createUser";
         }
-        if (userService.isEmailTaken(user.getEmail())) {
-            model.addAttribute("emailError", "Podany adres e-mail już istnieje.");
-            return "fragments/createUser";
-        }
-        if (!userService.isPasswordStrong(user.getPassword())) {
-            model.addAttribute("passwordError", "Hasło musi mieć co najmniej 8 znaków, zawierać cyfrę i znak specjalny.");
-            return "fragments/createUser";
-        }
-        userService.saveUser(user);
-        return "redirect:/";
     }
 
     @GetMapping("/logowanie")
-    public String showLoginForm() {
+    public String showLoginForm(@RequestParam(value = "error", required = false) String error, Model model) {
+        if (error != null) {
+            model.addAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło.");
+        }
         return "fragments/login";
     }
 
     @PostMapping("/logowanie")
-    public String login(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
-        User user = userService.getUserByUsername(username);
-
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return "redirect:/";
+    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
+        // Sprawdzenie poprawności danych logowania
+        if (userService.login(username, password)) {
+            session.setAttribute("loggedUser", username); // Zapisz użytkownika w sesji
+            System.out.println("Zalogowany użytkownik: " + session.getAttribute("loggedUser")); // Debug
+            return "redirect:/"; // Po udanym logowaniu przekierowanie do strony głównej
         } else {
-            redirectAttributes.addFlashAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło");
-//            return "redirect:/logowanie";
-            return "redirect:/";
+            model.addAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło.");
+            return "fragments/login"; // Powrót do strony logowania z błędem
+        }
+    }
+    @PostMapping("/wylogowanie")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Inwaliduj sesję
+        return "redirect:/logowanie"; // Przekieruj na stronę logowania
+    }
+
+
+
+    @GetMapping("/testFindUser")
+    @ResponseBody
+    public String testFindUser(@RequestParam String username) {
+        Optional<User> user = userService.getUserByUsername(username);
+
+        if (user.isPresent()) {
+            return "Znaleziono użytkownika: " + user.get().getUsername();
+        } else {
+            return "Nie znaleziono użytkownika o nazwie: " + username;
         }
     }
 

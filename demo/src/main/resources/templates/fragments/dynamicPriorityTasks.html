@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Zadania według dynamicznych priorytetów</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div th:fragment="dynamicPriorityTasks">
+    <section>
+        <div class="container">
+            <h1>Zadania według dynamicznych priorytetów</h1>
+            <table class="centered-table">
+                <thead>
+                <tr>
+                    <th>Opis</th>
+                    <th>Data zakończenia</th>
+                    <th>Priorytet dynamiczny</th>
+                    <th>Dni do zakończenia</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="task : ${tasks}">
+                    <td th:text="${task.description}"></td>
+                    <td th:text="${task.due_Date}"></td>
+                    <td th:text="${task.dynamicPriority}"></td>
+                    <td th:text="${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), task.due_Date)} + ' dni'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+</body>
+</html>

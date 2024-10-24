@@ -2,21 +2,26 @@ package com.mazowiecka.demo.Service;
 
 import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
+
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.passwordEncoder = new BCryptPasswordEncoder();
+        this.passwordEncoder = passwordEncoder;
     }
-
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -25,54 +30,65 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public boolean isPasswordHashed(String password) {
-        return password.startsWith("$2a$") || password.startsWith("$2b$");
-    }
-
-    public void saveUser(User user) {
-        try {
-            // Walidacja hasła
-            if (!isPasswordStrong(user.getPassword())) {
-                throw new IllegalArgumentException("Hasło nie spełnia wymagań siły.");
-            }
-            // Haszuj hasło przed zapisaniem
-            String hashedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(hashedPassword);
-            userRepository.save(user);
-        } catch (Exception e) {
-            throw new RuntimeException("Nie udało się zapisać użytkownika", e);
+    public Optional<User> getUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            System.out.println("Znaleziono użytkownika: " + user.get().getUsername());
+        } else {
+            System.out.println("Nie znaleziono użytkownika o nazwie: " + username);
         }
+        return user;
+    }
+    public void saveUser(User user) {
+        if (isUsernameTaken(user.getUsername())) {
+            throw new IllegalArgumentException("Nazwa użytkownika jest już zajęta.");
+        }
+
+        if (!isPasswordStrong(user.getPassword())) {
+            throw new IllegalArgumentException("Hasło nie spełnia wymagań siły.");
+        }
+
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
+        userRepository.save(user);
     }
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
-    public boolean isLoginCorrectFormat(String login) {
-        // Walidacja: minimum 3 znaki, tylko litery i cyfry
-        return login.matches("[a-zA-Z0-9]{3,}");
-    }
-
     public boolean isUsernameTaken(String username) {
-        return userRepository.findByUsername(username) != null;
+        return userRepository.findByUsername(username).isPresent();
     }
 
     public boolean isPasswordStrong(String password) {
-        // walidacja: hasło musi składać się z co najmniej 8 znaków, mieć co najmniej 1 cyfrę i znak specjalny
         boolean isLongEnough = password.length() >= 8;
         boolean hasDigit = password.matches(".*\\d.*");
         boolean hasSpecialChar = password.matches(".*[!@#$%^&*,.].*");
-
         return isLongEnough && hasDigit && hasSpecialChar;
     }
 
-    public boolean isEmailTaken(String email) {
-        return userRepository.findByEmail(email) != null;
+    public boolean checkLoginCredentials(String username, String rawPassword) {
+        return userRepository.findByUsername(username)
+                .map(user -> {
+                    System.out.println("Sprawdzanie hasła: " + rawPassword + " vs " + user.getPassword());
+                    return passwordEncoder.matches(rawPassword, user.getPassword());
+                })
+                .orElseGet(() -> {
+                    System.out.println("Nie znaleziono użytkownika: " + username);
+                    return false;
+                });
     }
+
+    public boolean login(String username, String password) {
+        return checkLoginCredentials(username, password);
+    }
+
+    public boolean isLoggedIn(HttpSession session) {
+        return session.getAttribute("loggedUser") != null;
+    }
+
+
 
 
 
