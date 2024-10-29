@@ -40,9 +40,6 @@
             <p>Nie jesteś zalogowany. <a href="/logowanie">Zaloguj się tutaj</a>.</p>
         </div>
 
-
-
-
         <div th:fragment="todayTasks">
             <section>
                 <div class="container">
@@ -78,11 +75,14 @@
                 </div>
             </section>
         </div>
-
-        <a class="button" th:href="@{/tasks/dynamic-priority}">Pokaż zadania według dynamicznych priorytetów</a>
-
-
-
+        <div>
+            <section>
+                <div class="container">
+                    <a class="button" th:href="@{/tasks/dynamic-priority}">Pokaż zadania według dynamicznych
+                        priorytetów</a>
+                </div>
+            </section>
+        </div>
         <div th:fragment="eisenhowerMatrix">
             <section class="eisenhowerMatrix">
                 <div class="container">

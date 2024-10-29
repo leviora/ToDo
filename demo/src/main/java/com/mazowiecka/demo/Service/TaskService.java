@@ -87,14 +87,11 @@ public class TaskService {
         return uncompletedTasks;
     }
     public String calculateDynamicPriority(Task task) {
-        // Pobierz dzisiejszą datę
+
         LocalDate today = LocalDate.now();
         LocalDate dueDate = task.getDue_Date();
-
-        // Oblicz liczbę dni pozostałych do terminu
         long daysLeft = ChronoUnit.DAYS.between(today, dueDate);
 
-        // Ustaw priorytet na podstawie liczby dni pozostałych do terminu
         if (daysLeft < 0) {
             return "zadania przeterminowane";
         } else if (daysLeft <= 1) {

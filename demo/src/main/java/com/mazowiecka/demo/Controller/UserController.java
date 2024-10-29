@@ -34,7 +34,7 @@ public class UserController {
             user.setRole(Role.USER);
             userService.saveUser(user);
 
-            return "redirect:/logowanie";  // Przekierowanie po poprawnej rejestracji do logowania
+            return "redirect:/logowanie";
         } catch (IllegalArgumentException e) {
             if (e.getMessage().contains("Nazwa użytkownika jest już zajęta")) {
                 model.addAttribute("usernameError", "Nazwa użytkownika jest już zajęta.");
@@ -55,23 +55,20 @@ public class UserController {
 
     @PostMapping("/logowanie")
     public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
-        // Sprawdzenie poprawności danych logowania
         if (userService.login(username, password)) {
-            session.setAttribute("loggedUser", username); // Zapisz użytkownika w sesji
-            System.out.println("Zalogowany użytkownik: " + session.getAttribute("loggedUser")); // Debug
-            return "redirect:/"; // Po udanym logowaniu przekierowanie do strony głównej
+            session.setAttribute("loggedUser", username);
+            System.out.println("Zalogowany użytkownik: " + session.getAttribute("loggedUser"));
+            return "redirect:/";
         } else {
             model.addAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło.");
-            return "fragments/login"; // Powrót do strony logowania z błędem
+            return "fragments/login";
         }
     }
     @PostMapping("/wylogowanie")
     public String logout(HttpSession session) {
-        session.invalidate(); // Inwaliduj sesję
-        return "redirect:/logowanie"; // Przekieruj na stronę logowania
+        session.invalidate();
+        return "redirect:/logowanie";
     }
-
-
 
     @GetMapping("/testFindUser")
     @ResponseBody

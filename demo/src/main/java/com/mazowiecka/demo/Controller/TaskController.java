@@ -170,6 +170,7 @@ public class TaskController {
 
         return "redirect:/tasks";
     }
+
     @GetMapping("/tasks/dynamic-priority")
     public String getTasksWithDynamicPriority(Model model) {
         List<Task> tasks = taskService.getAllTasks();
@@ -185,11 +186,6 @@ public class TaskController {
         model.addAttribute("tasks", tasksWithDynamicPriority);
         return "pages/dynamicPriorityPage";
     }
-
-
-
-
-
 
 
 }

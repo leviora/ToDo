@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.util.List;
-
 @SpringBootApplication
 //@EntityScan(basePackages = "com.mazowiecka.demo.Entity")
 public class ToDoListApplication {
