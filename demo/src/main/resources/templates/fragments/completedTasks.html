@@ -10,7 +10,8 @@
 <body>
 
 <div th:fragment="completedTasks">
-    <section class="completedTasks">
+    <section id="completedTasks">
+        <a href="#completedTasks">
         <div class="container">
             <h2>Zakończone zadania</h2>
             <div class="changeStatus tasks-grid">
@@ -28,7 +29,9 @@
               onsubmit="return confirm('Czy na pewno chcesz usunąć wszystkie zakończone zadania?')">
             <button class="button" type="submit">Usuń wszystkie zakończone zadania</button>
         </form>
+        </a>
     </section>
 </div>
+
 </body>
 </html>

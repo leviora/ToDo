@@ -1,3 +1,5 @@
+@import url('header.css');
+
 :root {
   /* Color Variables */
   --primary-color: #005A3D; /* Głęboka butelkowa zieleń */
@@ -37,7 +39,6 @@ body {
 section {
   width: 100%;
   margin: 0;
-  margin-bottom: 30px;
   padding: 0;
 }
 
@@ -45,8 +46,8 @@ section {
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
-  background-color: var(--white-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+
 }
 
 header, footer {
@@ -56,36 +57,10 @@ header, footer {
   position: relative;
 }
 
-header {
-  color: var(--text-color);
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header nav ul {
-  display: flex;
-  gap: 20px;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-header nav ul a {
-  color: var(--text-color);
-  display: flex;
-  gap: 20px;
-}
-
-header h1 {
-  margin: 0;
-  animation: slideInFromTop 1s ease-out;
-}
-
 .task-list ul {
-    list-style-type: none; /* Usunięcie wypunktowania */
-    padding-left: 0; /* Usunięcie wcięcia */
+  list-style-type: none;
+  padding-left: 0;
 }
-
 
 @keyframes slideInFromTop {
   0% {
@@ -124,7 +99,7 @@ h1, h2, h3, h4, h5, h6 {
 
 button, .button {
   padding: 10px 20px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
@@ -217,7 +192,6 @@ nav ul {
 a {
   text-decoration: none;
   color: var(--white-color);
-  list-style: none;
 }
 
 .task-list {
@@ -237,7 +211,7 @@ a {
   color: var(--white-color);
   padding: 10px;
   border-radius: 5px;
-  white-space: normal; /* Pozwól tekstowi na łamanie wierszy */
+  white-space: normal;
   max-width: 500px;
   min-height: 50px;
   visibility: hidden;
@@ -256,25 +230,23 @@ a {
 }
 
 .centered-table {
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-    width: 100%; /* Zajmuje całą szerokość */
-    max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
 }
 
 .centered-table th, .centered-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center; /* Tekst w środku komórek */
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
 }
 
 .centered-table th {
-    background-color: var(--primary-color);
-    color: var(--white-color);
+  background-color: var(--primary-color);
+  color: var(--white-color);
 }
-
-
 
 @media screen and (max-width: 600px) {
   .Eisenhower {

@@ -3,20 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
 <header th:fragment="header">
-    <nav>
-        <ul>
-            <li><a th:href="@{/}">Strona główna</a></li>
-            <li><a th:href="@{/kategorie}">Kategorie</a></li>
-            <li><a th:href="@{/zakonczoneZadania}">Zakończone zadania</a></li>
+    <section id="header-section">
+        <div class="container">
+            <div class="header-content">
+                <nav class="header-nav">
+                    <!-- Przycisk do rozwijania menu -->
+                    <button class="menu-button" aria-label="Menu">
+                        <p>menu</p>
+                        <div class="menu-icon"></div>
+                        <div class="menu-icon"></div>
+                    </button>
 
-            <li><a th:href="@{/tworzenieUzytkownika}">Zarejestruj się</a></li>
-            <li><a th:href="@{/logowanie}">Zaloguj się</a></li>
-        </ul>
-    </nav>
+
+                    <div class="header-title">
+                        <h1>To-Do List</h1>
+                        <p>Zarządzaj swoimi zadaniami w prosty i efektywny sposób.</p>
+                    </div>
+
+                    <!-- Menu w formie pełnoekranowych kafelków -->
+                    <div class="nav-menu hidden">
+                        <!-- Krzyżyk do zamykania menu -->
+                        <button class="close-button" aria-label="Zamknij menu">&times;</button>
+
+                        <!-- Kafelki menu -->
+                        <div class="menu-item">
+                            <a th:href="@{/}">
+                                <div class="menu-content">
+                                    <span>Strona główna</span>
+                                    <img src="/images/kotek.png" alt="Opis obrazu 1" class="menu-image"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a th:href="@{/kategorie}">
+                                <div class="menu-content">
+                                    <span>Kategorie</span>
+                                    <img src="/images/kotek.png" alt="Opis obrazu 2" class="menu-image"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a th:href="@{/zakonczoneZadania}">
+                                <div class="menu-content">
+                                    <span>Zakończone zadania</span>
+                                    <img src="/images/kotek.png" alt="Opis obrazu 3" class="menu-image"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a th:href="@{/tworzenieUzytkownika}">
+                                <div class="menu-content">
+                                    <span>Zarejestruj się</span>
+                                    <img src="/images/kotek.png" alt="Opis obrazu 4" class="menu-image"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a th:href="@{/logowanie}">
+                                <div class="menu-content">
+                                    <span>Zaloguj się</span>
+                                    <img src="/images/kotek.png" alt="Opis obrazu 5" class="menu-image"/>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </section>
 </header>
+<script src="/js/menu.js"></script>
 </body>
 </html>

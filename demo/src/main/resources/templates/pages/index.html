@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title th:text="${pageTitle}">To-Do List</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="/css/welcomeSection.css">
+
+    <script src="js/menu.js" defer></script>
 
 </head>
 <body>
@@ -39,6 +43,14 @@
         <div th:if="${not isLoggedIn}">
             <p>Nie jesteś zalogowany. <a href="/logowanie">Zaloguj się tutaj</a>.</p>
         </div>
+
+
+        <div th:replace="~{fragments/welcomeSection :: welcomeSection}"></div>
+
+
+
+
+
 
         <div th:fragment="todayTasks">
             <section>
