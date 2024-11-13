@@ -1,19 +1,15 @@
+@import url('css/main.css');
+
 :root {
-  --primary-color: #005A3D;
-  --secondary-color: #A77B4C;
-  --background-color: #F4F4F4;
   --nav-menu-background: #2A2A2A;
-  --text-color: #333;
-  --accent-color: #D3AF6A;
-  --highlight-color: #FFD700;
-  --button-color: #E0E0E0;
-  --button-hover-color: #C0C0C0;
-  --white-color: #FFFFFF;
-  --hover-opacity: 0.9;
   --text-hover-color: #CCCCCC;
 }
+
 html {
     scroll-behavior: smooth;
+}
+.header-title p {
+    font-size: 1.2rem;
 }
 
 .header-nav {
@@ -22,32 +18,31 @@ html {
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: Arial, sans-serif;
-
 }
 
 .menu-button {
     background: none;
-    border: none; /* Usunięcie obramowania */
+    border: none;
     color: var(--text-color);
     cursor: pointer;
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 11;
+    position: fixed;  /* Ustawiłem 'fixed', aby ikona była przypięta */
+    top: 0;  /* Górna krawędź */
+    left: 0; /* Lewa krawędź */
+    z-index: 11; /* Ustawiłem wyższy z-index, aby menu było widoczne */
     display: block;
-    transition: none;
-}
-.menu-button:hover {
-    background: none; /* Usunięcie tła przy najechaniu */
-    border: none; /* Usunięcie obramowania */
-    color: var(--text-color); /* Zachowanie domyślnego koloru tekstu */
-    transform: none; /* Usunięcie transformacji */
-    opacity: 1; /* Brak zmiany przezroczystości */
-    transition: none; /* Brak animacji */
-    transform: translateY(-50%);
+    transition: none; /* Brak animacji przy hover */
 }
 
+/* Usunięcie wszelkich efektów hover dla menu */
+.menu-button:hover {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    opacity: 1;
+    transition: none; /* Brak animacji */
+}
+
+/* Ikona menu hamburger */
 .menu-icon {
     width: 25px;
     height: 3px;
@@ -56,7 +51,7 @@ html {
 }
 
 .nav-menu {
-    position: fixed;
+    position: fixed;  /* Ustawiłem 'fixed', aby menu było przyklejone do ekranu */
     top: 0;
     left: 0;
     width: 100vw;
@@ -135,14 +130,14 @@ html {
     font-size: 30px;
     cursor: pointer;
 }
-.close-button:hover {
-    background: none; /* Usunięcie tła przy najechaniu */
-    border: none; /* Usunięcie obramowania */
-    color: var(--accent-color); /* Zachowanie domyślnego koloru tekstu */
-    transform: none; /* Usunięcie transformacji */
-    opacity: 1; /* Brak zmiany przezroczystości */
-    transition: none; /* Brak animacji */
 
+.close-button:hover {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    transform: none;
+    opacity: 1;
+    transition: none;
 }
 
 .hidden {

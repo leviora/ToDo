@@ -1,7 +1,6 @@
-@import url('header.css');
+/* @import url('header.css'); */
 
 :root {
-  /* Color Variables */
   --primary-color: #005A3D; /* Głęboka butelkowa zieleń */
   --secondary-color: #A77B4C; /* Miedziany jako drugi kolor */
   --background-color: #F4F4F4; /* Jasnoszary tło */

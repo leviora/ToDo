@@ -37,39 +37,37 @@
         <!--                    </section>-->
         <!--                </div>-->
 
-        <div th:if="${isLoggedIn}">
-            <p>Jesteś zalogowany jako: <span th:text="${loggedUser}"></span></p>
-        </div>
-        <div th:if="${not isLoggedIn}">
-            <p>Nie jesteś zalogowany. <a href="/logowanie">Zaloguj się tutaj</a>.</p>
-        </div>
-
 
         <div th:replace="~{fragments/welcomeSection :: welcomeSection}"></div>
 
 
+        <div th:insert="fragments/todayTasks :: todayTasks"></div>
 
 
 
 
-        <div th:fragment="todayTasks">
-            <section>
-                <div class="container">
-                    <h2>Zadania na dzisiaj:</h2>
-                    <ul>
-                        <li th:each="task : ${todayTasks}" th:if="${!task.completed}">
-                            <span th:text="${task.category.categoryName}"></span> -
-                            <span th:text="${task.description}"></span>
-                            <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
-                                <input type="hidden" name="completed" value="true"/>
-                                <input type="hidden" name="taskId" th:value="${task.taskId}"/>
-                                <button type="submit">Zakończ zadanie</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </div>
+<!--        <div th:fragment="todayTasks">-->
+<!--            <section>-->
+<!--                <div class="container">-->
+<!--                    <h2>Zadania na dzisiaj:</h2>-->
+<!--                    <ul>-->
+<!--                        <li th:each="task : ${todayTasks}" th:if="${!task.completed}">-->
+<!--                            <span th:text="${task.category.categoryName}"></span> - -->
+<!--                            <span th:text="${task.description}"></span>-->
+<!--                            <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">-->
+<!--                                <input type="hidden" name="completed" value="true"/>-->
+<!--                                <input type="hidden" name="taskId" th:value="${task.taskId}"/>-->
+<!--                                <button type="submit">Zakończ zadanie</button>-->
+<!--                            </form>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </section>-->
+<!--        </div>-->
+
+
+
+
         <div th:fragment="sortedTasks">
             <section>
                 <div class="container">
@@ -191,6 +189,13 @@
                     <a class="button" th:href="@{/usunZadanie}">Usuń zadanie</a>
                 </div>
             </section>
+        </div>
+
+        <div th:if="${isLoggedIn}">
+            <p>Jesteś zalogowany jako: <span th:text="${loggedUser}"></span></p>
+        </div>
+        <div th:if="${not isLoggedIn}">
+            <p>Nie jesteś zalogowany. <a href="/logowanie">Zaloguj się tutaj</a>.</p>
         </div>
     </section>
 </div>

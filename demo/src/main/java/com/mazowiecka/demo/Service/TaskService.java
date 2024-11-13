@@ -103,5 +103,14 @@ public class TaskService {
         }
     }
 
+    public long countUncompletedTodayTasks() {
+        List<Task> todayTasks = getTodayTasks();  // Pobierz zadania na dzisiaj
+        List<Task> uncompletedTodayTasks = todayTasks.stream()
+                .filter(task -> !task.isCompleted())  // Filtruj zadania, które nie są ukończone
+                .collect(Collectors.toList());
+        return uncompletedTodayTasks.size();  // Zwróć liczbę niezakończonych zadań na dzisiaj
+    }
+
+
 
 }

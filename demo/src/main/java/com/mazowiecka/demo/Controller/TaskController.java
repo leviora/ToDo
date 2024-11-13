@@ -187,6 +187,4 @@ public class TaskController {
         return "pages/dynamicPriorityPage";
     }
 
-
-
 }

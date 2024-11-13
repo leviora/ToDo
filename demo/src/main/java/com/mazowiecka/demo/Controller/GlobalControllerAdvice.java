@@ -20,6 +20,8 @@ public class GlobalControllerAdvice {
 
     @ModelAttribute
     public void addAttributes(Model model) {
-        model.addAttribute("uncompletedTasks", taskService.getAllUncompleteTasks());
+
+        long uncompletedTodayTasksCount = taskService.countUncompletedTodayTasks();
+        model.addAttribute("uncompletedTodayTasksCount", uncompletedTodayTasksCount);
     }
 }
