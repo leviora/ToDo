@@ -1,87 +1,75 @@
-@import url('main.css'); /* Importowanie głównego pliku CSS */
+@import url('main.css');
 
-#today-tasks {
-    padding: 20px;
+
+.today-tasks-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 h2 {
+    color: var(--primary-color);
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Większy odstęp od kafelków */
 }
 
-.top-row {
+#tasksToDoCounter {
+    color: var(--primary-color); /* Zmieniony kolor na ten sam co w nagłówku */
+}
+
+/* Kontener obrazka i kafelków */
+.tasks-row {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.image-container {
-    flex: 1 1 33%; /* Grafika zajmuje 1/3 szerokości */
-    margin-right: 20px;
+/* Obrazek */
+.task-image {
+    width: 25%;         /* Obrazek zajmuje 25% szerokości */
+    height: auto;       /* Zachowujemy proporcje */
+    object-fit: contain; /* Zapewnia, że obrazek się nie rozciąga */
 }
 
-.menu-image {
-    width: 100%;
-    height: auto;
-}
-
+/* Kontener kafelków */
 .tasks-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Odstęp między kafelkami */
-    justify-content: space-between;
+    gap: 20px;
+    width: 70%;          /* Kafelki zajmują 70% szerokości */
 }
 
-.top-tasks .task-card {
-    flex: 1 1 calc(45% - 10px); /* Pierwsze dwa zadania zajmują 45% szerokości */
-    background-color: #f4f4f4;
-    padding: 10px; /* Zmniejszono padding */
-    border-radius: 8px; /* Mniejsze zaokrąglenie */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); /* Delikatniejszy cień */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 14px; /* Mniejszy font */
-}
-
-.bottom-tasks .task-card {
-    flex: 1 1 calc(30% - 10px); /* Pozostałe zadania zajmują 30% szerokości */
-    background-color: #f4f4f4;
-    padding: 10px; /* Zmniejszono padding */
-    border-radius: 8px; /* Mniejsze zaokrąglenie */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); /* Delikatniejszy cień */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 14px; /* Mniejszy font */
+/* Kafelki */
+.task-card {
+    background-color: var(--white-color);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px);  /* Kafelki zajmują 1/3 szerokości (po uwzględnieniu odstępu) */
+    box-sizing: border-box;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .task-card h3 {
-    font-size: 16px; /* Mniejszy rozmiar nagłówka */
-    margin-bottom: 8px; /* Zmniejszono margines */
+    font-size: 16px;
+    color: var(--primary-color);
+    margin: 0 0 5px 0;
 }
 
 .task-card p {
-    font-size: 12px; /* Zmniejszenie czcionki w opisie */
-    margin-bottom: 10px; /* Zmniejszono margines */
-}
-
-.task-card form {
-    display: flex;
-    justify-content: center;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
 }
 
 .task-card button {
-    padding: 8px 12px; /* Zmniejszenie paddingu przycisku */
-    background-color: #007bff;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white-color);
     border: none;
-    border-radius: 5px;
+    padding: 5px 10px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 12px; /* Mniejszy font w przycisku */
 }
 
 .task-card button:hover {
-    background-color: #0056b3;
+    background-color: var(--accent-color);
 }

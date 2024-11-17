@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Zadania na dzisiaj</title>
-    <link rel="stylesheet" href="/css/todayTasks.css"> <!-- Importowanie nowego pliku CSS -->
-    <script src="/js/todayTasks.js" defer></script> <!-- Dołączenie pliku JavaScript -->
+    <link rel="stylesheet" href="/css/todayTasks.css">
 </head>
 <body>
 <div th:fragment="todayTasks">
     <section id="today-tasks">
-        <h2> Liczba zadań do zrobienia na dziś:
-            <span id="tasksToDoCounter" th:text="${uncompletedTodayTasksCount}"></span>
-        </h2>
-        <div class="image-container">
-            <img src="/images/kotek.png" alt="Opis obrazu" class="menu-image"/>
-        </div>
-        <div class="tasks-container">
-            <div class="task-card" th:each="task : ${todayTasks}" th:if="${!task.completed}">
-                <h3 th:text="${task.description}"></h3>
-                <p th:text="'Kategoria: ' + ${task.category.categoryName}"></p>
-                <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
-                    <input type="hidden" name="completed" value="true"/>
-                    <input type="hidden" name="taskId" th:value="${task.taskId}"/>
-                    <button type="submit">Zakończ</button>
-                </form>
+        <div class="container">
+            <div class="today-tasks-content">
+                <h2>Liczba zadań do zrobienia na dziś:
+                    <span id="tasksToDoCounter" th:text="${uncompletedTodayTasksCount}"></span>
+                </h2>
+
+                <div class="tasks-row">
+                    <img src="/images/rufi.png" class="task-image"/>
+
+                    <div class="tasks-container">
+                        <!-- Iteracja po zadaniach na dzisiaj -->
+                        <div class="task-card" th:each="task : ${uncompletedTodayTasks}">
+                            <h3 th:text="${task.description}"></h3>
+                            <p th:text="'Kategoria: ' + ${task.category.categoryName}"></p>
+                            <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
+                                <input type="hidden" name="completed" value="true"/>
+                                <input type="hidden" name="taskId" th:value="${task.taskId}"/>
+                                <button type="submit">Zakończ</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-</div>
-</section>
+    </section>
 </div>
 </body>
 </html>

@@ -17,11 +17,12 @@ public class GlobalControllerAdvice {
     public GlobalControllerAdvice(TaskService taskService) {
         this.taskService = taskService;
     }
-
     @ModelAttribute
-    public void addAttributes(Model model) {
+    public String addAttributes(Model model) {
 
-        long uncompletedTodayTasksCount = taskService.countUncompletedTodayTasks();
-        model.addAttribute("uncompletedTodayTasksCount", uncompletedTodayTasksCount);
+        List<Task> uncompletedTodayTasks = taskService.getUncompletedTodayTasks();
+        model.addAttribute("uncompletedTodayTasks", uncompletedTodayTasks);
+        Model uncompletedTodayTasksCount = model.addAttribute("uncompletedTodayTasksCount", uncompletedTodayTasks.size());
+        return "todayTasks";
     }
 }

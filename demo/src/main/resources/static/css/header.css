@@ -1,4 +1,4 @@
-@import url('css/main.css');
+@import url('main.css');
 
 :root {
   --nav-menu-background: #2A2A2A;
@@ -25,24 +25,22 @@ html {
     border: none;
     color: var(--text-color);
     cursor: pointer;
-    position: fixed;  /* Ustawiłem 'fixed', aby ikona była przypięta */
-    top: 0;  /* Górna krawędź */
-    left: 0; /* Lewa krawędź */
-    z-index: 11; /* Ustawiłem wyższy z-index, aby menu było widoczne */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
     display: block;
-    transition: none; /* Brak animacji przy hover */
+    transition: none;
 }
 
-/* Usunięcie wszelkich efektów hover dla menu */
 .menu-button:hover {
     background: none;
     border: none;
     color: var(--text-color);
     opacity: 1;
-    transition: none; /* Brak animacji */
+    transition: none;
 }
 
-/* Ikona menu hamburger */
 .menu-icon {
     width: 25px;
     height: 3px;
@@ -51,7 +49,7 @@ html {
 }
 
 .nav-menu {
-    position: fixed;  /* Ustawiłem 'fixed', aby menu było przyklejone do ekranu */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;

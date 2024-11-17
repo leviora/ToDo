@@ -5,9 +5,10 @@
     <title th:text="${pageTitle}">To-Do List</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="/css/welcomeSection.css">
+<!--    <link rel="stylesheet" href="/css/welcomeSection.css">-->
 
     <script src="js/menu.js" defer></script>
+    <script src="js/sortTasks.js" defer></script>
 
 </head>
 <body>
@@ -39,52 +40,11 @@
 
 
         <div th:replace="~{fragments/welcomeSection :: welcomeSection}"></div>
-
-
         <div th:insert="fragments/todayTasks :: todayTasks"></div>
+        <div th:insert="fragments/sortTasks :: sortTasks"></div>
 
 
 
-
-<!--        <div th:fragment="todayTasks">-->
-<!--            <section>-->
-<!--                <div class="container">-->
-<!--                    <h2>Zadania na dzisiaj:</h2>-->
-<!--                    <ul>-->
-<!--                        <li th:each="task : ${todayTasks}" th:if="${!task.completed}">-->
-<!--                            <span th:text="${task.category.categoryName}"></span> - -->
-<!--                            <span th:text="${task.description}"></span>-->
-<!--                            <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">-->
-<!--                                <input type="hidden" name="completed" value="true"/>-->
-<!--                                <input type="hidden" name="taskId" th:value="${task.taskId}"/>-->
-<!--                                <button type="submit">Zakończ zadanie</button>-->
-<!--                            </form>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </section>-->
-<!--        </div>-->
-
-
-
-
-        <div th:fragment="sortedTasks">
-            <section>
-                <div class="container">
-                    <form action="/sortuj" method="get">
-                        <label for="sortOption">Sortuj według:</label>
-                        <select id="sortOption" name="sortOption">
-                            <option value="date">Daty rosnąco</option>
-                            <option value="importantUrgent">Ważne i pilne</option>
-                            <option value="importantNotUrgent">Ważne, ale niepilne</option>
-                            <option value="notImportantUrgent">Nieważne, ale pilne</option>
-                            <option value="notImportantNotUrgent">Nieważne i niepilne</option>
-                        </select>
-                        <button type="submit">Sortuj</button>
-                    </form>
-                </div>
-            </section>
-        </div>
         <div>
             <section>
                 <div class="container">
@@ -93,6 +53,10 @@
                 </div>
             </section>
         </div>
+
+
+
+
         <div th:fragment="eisenhowerMatrix">
             <section class="eisenhowerMatrix">
                 <div class="container">

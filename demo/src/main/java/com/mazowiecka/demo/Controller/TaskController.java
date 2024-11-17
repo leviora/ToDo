@@ -126,34 +126,61 @@ public class TaskController {
         return "pages/completedTasks";
     }
 
+//    @GetMapping("/sortuj")
+//    public String sortTasks(@RequestParam("sortOption") String sortOption, Model model) {
+//
+//        List<Task> sortedTasks;
+//        switch (sortOption) {
+//            case "date":
+//                sortedTasks = taskRepository.findAllByOrderByDueDateAsc();
+//                break;
+//            case "importantUrgent":
+//                sortedTasks = taskService.findTasksByPriority("urgent-important");
+//                break;
+//            case "importantNotUrgent":
+//                sortedTasks = taskService.findTasksByPriority("not-urgent-important");
+//                break;
+//            case "notImportantUrgent":
+//                sortedTasks = taskService.findTasksByPriority("urgent-not-important");
+//                break;
+//            case "notImportantNotUrgent":
+//                sortedTasks = taskService.findTasksByPriority("not-urgent-not-important");
+//                break;
+//            default:
+//                sortedTasks = taskRepository.findAll();
+//                break;
+//        }
+//        model.addAttribute("sortedTasks", sortedTasks);
+//        model.addAttribute("sortOption", sortOption);
+//        return "pages/sort";
+//    }
+
+
     @GetMapping("/sortuj")
     public String sortTasks(@RequestParam("sortOption") String sortOption, Model model) {
-
-        List<Task> sortedTasks;
-        switch (sortOption) {
-            case "date":
-                sortedTasks = taskRepository.findAllByOrderByDueDateAsc();
-                break;
-            case "importantUrgent":
-                sortedTasks = taskService.findTasksByPriority("urgent-important");
-                break;
-            case "importantNotUrgent":
-                sortedTasks = taskService.findTasksByPriority("not-urgent-important");
-                break;
-            case "notImportantUrgent":
-                sortedTasks = taskService.findTasksByPriority("urgent-not-important");
-                break;
-            case "notImportantNotUrgent":
-                sortedTasks = taskService.findTasksByPriority("not-urgent-not-important");
-                break;
-            default:
-                sortedTasks = taskRepository.findAll();
-                break;
-        }
+        List<Task> sortedTasks = getSortedTasks(sortOption);
         model.addAttribute("sortedTasks", sortedTasks);
         model.addAttribute("sortOption", sortOption);
-        return "pages/sort";
+        return "/pages/sort.html";
     }
+
+    private List<Task> getSortedTasks(String sortOption) {
+        switch (sortOption) {
+            case "date":
+                return taskRepository.findAllByOrderByDueDateAsc();
+            case "importantUrgent":
+                return taskService.findTasksByPriority("urgent-important");
+            case "importantNotUrgent":
+                return taskService.findTasksByPriority("not-urgent-important");
+            case "notImportantUrgent":
+                return taskService.findTasksByPriority("urgent-not-important");
+            case "notImportantNotUrgent":
+                return taskService.findTasksByPriority("not-urgent-not-important");
+            default:
+                return taskRepository.findAll();
+        }
+    }
+
 
     @PostMapping("/usunZakonczoneZadania")
     public String deleteCompletedTasks() {
@@ -178,7 +205,7 @@ public class TaskController {
                 .map(task -> {
                     String dynamicPriority = taskService.calculateDynamicPriority(task);
                     task.setDynamicPriority(dynamicPriority);
-                    System.out.println("Zadanie: " + task.getDescription() + ", Dynamiczny priorytet: " + dynamicPriority); // Debug
+                    System.out.println("Zadanie: " + task.getDescription() + ", Dynamiczny priorytet: " + dynamicPriority);
                     return task;
                 })
                 .collect(Collectors.toList());
