@@ -12,23 +12,30 @@
 <div th:fragment="completedTasks">
     <section id="completedTasks">
         <a href="#completedTasks">
-        <div class="container">
-            <h2>Zakończone zadania</h2>
-            <div class="changeStatus tasks-grid">
-                <div th:each="completedTask : ${completedTasks}" class="task-item">
-                    <div th:if="${completedTask.completed == true}">
-                        <div>
-                            <span class="task-category" th:text="${completedTask.category.categoryName}"></span>
-                            <span class="task-description" th:text="${completedTask.description}"></span>
+            <div class="container">
+                <div class="completedTasks-content">
+                    <h2>Zakończone zadania</h2>
+                    <div class="changeStatus tasks-grid">
+                        <div th:each="completedTask : ${completedTasks}" class="task-item">
+                            <div th:if="${completedTask.completed == true}" style="color: var(--text-color);">
+                                <div>
+                                    <span class="task-category" th:text="${completedTask.category.categoryName}"></span>
+                                    <span class="task-description" th:text="${completedTask.description}"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <form th:action="@{/usunZakonczoneZadania}" method="post"
-              onsubmit="return confirm('Czy na pewno chcesz usunąć wszystkie zakończone zadania?')">
-            <button class="button" type="submit">Usuń wszystkie zakończone zadania</button>
-        </form>
+            <form th:action="@{/usunZakonczoneZadania}" method="post"
+                  onsubmit="return confirm('Czy na pewno chcesz usunąć wszystkie zakończone zadania?')">
+                <button class="button" type="submit">Usuń wszystkie zakończone zadania</button>
+            </form>
+
+            <div class="return-buttons">
+                <a href="/" class="button">Powrót na stronę główną</a>
+            </div>
+
         </a>
     </section>
 </div>
