@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @Controller
 public class UserController {
 
@@ -50,7 +48,7 @@ public class UserController {
         if (error != null) {
             model.addAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło.");
         }
-        return "fragments/login";
+        return "pages/loginPage";
     }
 
     @PostMapping("/logowanie")
@@ -61,26 +59,23 @@ public class UserController {
             return "redirect:/";
         } else {
             model.addAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło.");
-            return "fragments/login";
+            return "pages/loginPage";
         }
     }
-    @PostMapping("/wylogowanie")
+
+    @RequestMapping(value = "/wylogowanie", method = {RequestMethod.GET, RequestMethod.POST})
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/logowanie";
-    }
-
-    @GetMapping("/testFindUser")
-    @ResponseBody
-    public String testFindUser(@RequestParam String username) {
-        Optional<User> user = userService.getUserByUsername(username);
-
-        if (user.isPresent()) {
-            return "Znaleziono użytkownika: " + user.get().getUsername();
-        } else {
-            return "Nie znaleziono użytkownika o nazwie: " + username;
-        }
+        return "redirect:/";
     }
 
 
 }
+
+
+
+
+
+
+
+

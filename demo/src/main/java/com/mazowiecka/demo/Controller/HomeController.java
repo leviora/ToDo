@@ -26,16 +26,12 @@ public class HomeController {
         model.addAttribute("pageTitle", "Home Page");
         model.addAttribute("contentTemplate", "content/index :: content");
 
-        model.addAttribute("pageTitle", "Main Page");
-
         String loggedUser = (String) session.getAttribute("loggedUser");
         System.out.println("Zalogowany użytkownik w HomeController: " + loggedUser); // Debug
         if (loggedUser != null) {
             model.addAttribute("loggedUser", loggedUser); // Dodaj użytkownika do modelu
         }
-
         model.addAttribute("isLoggedIn", loggedUser != null);
-
 
         return "layout/main";
     }

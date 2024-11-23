@@ -1,6 +1,5 @@
 package com.mazowiecka.demo;
 
-import com.mazowiecka.demo.Entity.Task;
 import com.mazowiecka.demo.Service.DatabaseConnectionChecker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${pageTitle}">To-Do List</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/header.css">
@@ -14,15 +13,11 @@
     <script src="/js/menu.js" defer></script>
     <script src="/js/quotes.js" defer></script>
     <script src="/js/todayTasks.js" defer></script>
-<!--    <script src="js/auth-panel.js" defer></script>-->
 </head>
 <body>
-
-<div th:replace="~{fragments/auth-panel :: auth-panel}"></div>
-
 <div th:replace="~{layout/header :: header}"></div>
 <main>
-    <div th:insert="~{pages/index :: contentTemplate}"></div>
+  <div th:insert="~{fragments/login :: login}"></div>
 </main>
 <div th:replace="~{layout/footer :: footer}"></div>
 </body>

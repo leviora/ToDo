@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel logowania</title>
+    <link rel="stylesheet" href="/css/auth-panel.css">
+</head>
+<body>
+
+<div th:fragment="auth-panel">
+    <header>
+        <nav class="auth-panel-container">
+            <div class="auth-links">
+
+                <button th:if="${!isLoggedIn}" type="button" class="login-link" onclick="location.href='/logowanie'">
+                    Zaloguj się
+                </button>
+
+                <div th:if="${isLoggedIn}" class="user-profile">
+                    <a href="/panel-uzytkownika" class="avatar-link">
+                        <span th:text="${loggedUser}"></span>
+                        <img src="/images/profile.png" alt="Avatar użytkownika" class="avatar">
+
+                    </a>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+</div>
+
+</body>
+</html>

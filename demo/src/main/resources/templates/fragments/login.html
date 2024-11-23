@@ -6,28 +6,35 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-<div class="container">
-    <h1>Logowanie</h1>
-    <form th:action="@{/logowanie}" method="post">
-        <div>
-            <label for="username">Nazwa użytkownika:</label>
-            <input type="text" name="username" id="username" />
+<div th:fragment="login">
+    <section>
+        <div class="container">
+            <div class="login-content">
+                <h1>Logowanie</h1>
+                <form th:action="@{/logowanie}" method="post">
+                    <div>
+                        <label for="username">Nazwa użytkownika:</label>
+                        <input type="text" name="username" id="username"/>
+                    </div>
+                    <div>
+                        <label for="password">Hasło:</label>
+                        <input type="password" name="password" id="password"/>
+                    </div>
+                    <button type="submit">Zaloguj się</button>
+                    <div th:if="${error}" class="error">
+                        <p th:text="${error}"></p>
+                    </div>
+                </form>
+
+                <div>
+                    <span>Jeśli nie masz konta</span>
+                    <button type="button" onclick="location.href='tworzenieUzytkownika'">
+                        Utwórz konto
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <div>
-            <label for="password">Hasło:</label>
-            <input type="password" name="password" id="password" />
-        </div>
-
-        <button type="submit">Zaloguj się</button>
-
-        <!-- Wyświetlanie błędów logowania -->
-        <div th:if="${error}" class="error">
-            <p th:text="${error}"></p>
-        </div>
-    </form>
-
-
+    </section>
 </div>
 </body>
 </html>

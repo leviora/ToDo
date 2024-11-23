@@ -59,7 +59,10 @@ public class TaskController {
 
     @GetMapping("/edytujZadanie")
     public String showTasktoEdit(Model model) {
-        List<Task> tasks = taskService.getAllTasks();
+        List<Task> tasks = taskService.getAllTasks()
+                .stream()
+                .filter(task -> !task.isCompleted())
+                .collect(Collectors.toList());
         model.addAttribute("tasks", tasks);
         return "fragments/showTaskListToEdit";
     }
@@ -74,9 +77,9 @@ public class TaskController {
 
     @PostMapping("/edytujZadanie/{taskId}")
     public String editTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task updatedTask, Model model) {
+
         Task existingTask = taskService.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
-
         Category updatedCategory = updatedTask.getCategory();
 
         if (updatedCategory != null) {
@@ -91,13 +94,17 @@ public class TaskController {
         existingTask.setDue_Date(updatedTask.getDue_Date());
 
         taskService.updateTask(existingTask, taskId);
-
         return "redirect:/";
+
     }
+
 
     @GetMapping("/usunZadanie")
     public String showTasktoDelete(Model model) {
-        List<Task> tasks = taskService.getAllTasks();
+        List<Task> tasks = taskService.getAllTasks()
+                .stream()
+                .filter(task -> !task.isCompleted())
+                .collect(Collectors.toList());
         model.addAttribute("tasks", tasks);
         return "fragments/showTaskListToDelete";
     }
@@ -213,5 +220,6 @@ public class TaskController {
         model.addAttribute("tasks", tasksWithDynamicPriority);
         return "pages/dynamicPriorityPage";
     }
+
 
 }

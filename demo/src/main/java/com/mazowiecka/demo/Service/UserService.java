@@ -3,9 +3,6 @@ package com.mazowiecka.demo.Service;
 import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -87,6 +84,10 @@ public class UserService {
     public boolean isLoggedIn(HttpSession session) {
         return session.getAttribute("loggedUser") != null;
     }
+
+
+
+
 
 
 

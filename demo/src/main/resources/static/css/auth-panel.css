@@ -1,0 +1,90 @@
+@import url('main.css');
+
+.auth-panel-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--background-color);
+    border: none;
+    box-shadow: none;
+}
+
+.auth-links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Linki do logowania i rejestracji */
+.auth-links a {
+    font-size: 16px; /* Wielkość czcionki */
+    color: var(--primary-color); /* Kolor główny */
+    text-decoration: none;
+    padding: 8px 15px; /* Odstępy wokół tekstu */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    background-color: transparent; /* Tło transparentne */
+    border: 2px solid var(--primary-color); /* Ramka wokół przycisku */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Przycisk do panelu użytkownika */
+.user-panel-btn {
+    font-size: 16px;
+    color: white;
+    background-color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    line-height: 1; /* Dopasowanie wysokości linii */
+    display: flex; /* Umożliwia wyrównanie w kontenerze */
+    align-items: center; /* Wyrównanie w pionie */
+}
+
+/* Separator */
+.separator {
+    font-size: 16px;
+    color: var(--text-color);
+    margin: 0 10px;
+}
+
+/* Avatar użytkownika */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover; /* Dopasowanie rozmiaru obrazu do okrągłego kontenera */
+    display: block; /* Zapewnia, że obrazek będzie traktowany jak blok */
+    vertical-align: middle; /* Wyrównanie względem linii bazowej */
+    margin-right: 10px; /* Odstęp między avatarem a przyciskiem */
+    position: relative; /* Umożliwia drobne przesunięcia */
+    top: 2px; /* Drobne przesunięcie w górę */
+    align-self: center; /* Wyrównanie avatara względem kontenera */
+    cursor: default; /* Brak zmiany kursora przy hoverze */
+}
+
+/* Usunięcie efektu hover na avatarze */
+.avatar:hover {
+    transform: none; /* Brak efektu powiększenia */
+}
+
+/* Usunięcie domyślnej ramki z linków */
+.auth-links a {
+    border: none; /* Usuwamy domyślną ramkę wokół linków */
+    padding: 0; /* Usuwamy dodatkowe odstępy wokół obrazka */
+    display: inline-block; /* Zapewniamy, że link nie dodaje niepożądanych marginesów */
+}
+
+.auth-links a img {
+    border: none; /* Usuwamy ramkę wokół obrazka */
+}
+
+/* Kontener panelu użytkownika */
+.user-panel {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Odstęp między elementami */
+}
