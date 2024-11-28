@@ -86,6 +86,57 @@ public class UserService {
     }
 
 
+    public void changePassword(String username, String currentPassword, String newPassword, String confirmPassword) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+
+        if (userOptional.isEmpty()) {
+            throw new IllegalArgumentException("Użytkownik nie został znaleziony.");
+        }
+
+        User user = userOptional.get();
+
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new IllegalArgumentException("Obecne hasło jest nieprawidłowe.");
+        }
+
+        if (!isPasswordStrong(newPassword)) {
+            throw new IllegalArgumentException("Nowe hasło nie spełnia wymagań siły.");
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            throw new IllegalArgumentException("Nowe hasło i jego potwierdzenie nie są zgodne.");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
+    public void updateUsername(String currentUsername, String newUsername) {
+        User user = userRepository.findByUsername(currentUsername)
+                .orElseThrow(() -> new IllegalArgumentException("Użytkownik nie został znaleziony."));
+        user.setUsername(newUsername);
+        userRepository.save(user);
+        System.out.println("Zaktualizowany użytkownik: " + user);
+    }
+
+
+    public void updateEmail(String username, String newEmail) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Użytkownik nie został znaleziony."));
+        user.setEmail(newEmail);
+        userRepository.save(user);
+        System.out.println("Zaktualizowany e-mail użytkownika: " + user);
+    }
+    public void deleteUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+
+        if(user.isEmpty()) {
+            throw new IllegalArgumentException("Nie znaleziono użytkownika o podanej nazwie");
+        }
+
+        userRepository.delete(user.get());
+    }
+
 
 
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Usuń konto</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div th:fragment="delete-account">
+
+  <div class="container">
+    <h2>Czy na pewno chcesz usunąć swoje konto, <span th:text="${loggedUser}"></span>?</h2>
+    <p>Usunięcie konta jest nieodwracalne, a wszystkie Twoje dane zostaną utracone.</p>
+
+    <form th:action="@{/panel-uzytkownika/usun-konto}" method="post">
+      <button type="submit" class="delete-button">Usuń konto</button>
+      <a href="/panel-uzytkownika" class="cancel-link">Anuluj</a>
+    </form>
+  </div>
+
+</div>
+</body>
+</html>

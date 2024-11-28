@@ -63,13 +63,6 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/wylogowanie", method = {RequestMethod.GET, RequestMethod.POST})
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/";
-    }
-
-
 }
 
 

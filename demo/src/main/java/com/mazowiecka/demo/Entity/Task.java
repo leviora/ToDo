@@ -19,8 +19,6 @@ public class Task {
     @Column(name = "task_id")
     private Long taskId;
 
-//    @NotEmpty(message = "Opis zadania nie może być pusty")
-//    @Size(max = 255, message = "Opis zadania nie może przekraczać 255 znaków")
     private String description;
     private String priority;
     private LocalDate due_Date;
@@ -32,6 +30,10 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public Task(Category category, String description) {
         this.category = category;

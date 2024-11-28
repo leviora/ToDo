@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj Profil</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div th:fragment="editProfile"></div>
+
+<section>
+    <div class="container">
+        <div class="edit-profile-content">
+            <h1>Edytuj Profil</h1>
+
+            <section>
+                <h2>Zmiana nazwy użytkownika</h2>
+                <p>Obecna nazwa użytkownika: <span th:text="${loggedUsername}"></span></p>
+                <form th:action="@{/panel-uzytkownika/zmien-nazwe-uzytkownika}" method="post">
+                    <label for="newUsername">Nowa nazwa użytkownika:</label>
+                    <input type="text" id="newUsername" name="newUsername" placeholder="Wprowadź nową nazwę" required />
+                    <button type="submit">Zmień nazwę</button>
+                </form>
+            </section>
+
+            <section>
+                <h2>Zmiana adresu e-mail</h2>
+                <p>Obecny adres e-mail: <span th:text="${loggedEmail}"></span></p>
+                <form th:action="@{/panel-uzytkownika/zmien-email}" method="post">
+                    <label for="newEmail">Nowy adres e-mail:</label>
+                    <input type="email" id="newEmail" name="newEmail" placeholder="Wprowadź nowy e-mail" required />
+                    <button type="submit">Zmień e-mail</button>
+                </form>
+            </section>
+
+
+            <section>
+                <h2>Zmień Hasło</h2>
+                <form th:action="@{/panel-uzytkownika/zmien-haslo}" method="post">
+                    <div>
+                        <label for="currentPassword">Obecne hasło:</label>
+                        <input type="password" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div>
+                        <label for="newPassword">Nowe hasło:</label>
+                        <input type="password" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div>
+                        <label for="confirmPassword">Potwierdź nowe hasło:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit">Zmień hasło</button>
+                </form>
+            </section>
+
+<button> <a href="/panel-uzytkownika">Powrót do panelu</a> </button>
+        </div>
+    </div>
+</section>
+</body>
+</html>

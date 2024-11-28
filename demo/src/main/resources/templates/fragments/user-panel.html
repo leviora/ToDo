@@ -8,8 +8,19 @@
 <body>
 <div th:fragment="user-panel">
 
+    <div class="messages">
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
+        <div th:if="${success}" class="success-message">
+            <p th:text="${success}"></p>
+        </div>
+    </div>
+
     <section class="user-section">
         <div class="container">
+
             <div class="user-panel-content">
 
                 <div class="welcome-section">
@@ -24,9 +35,9 @@
                     <div class="user-section">
                         <h3>Konto i bezpieczeństwo</h3>
                         <ul>
-                            <li><a href="/edytuj-profil">Twoje dane</a></li>
-                            <li><a href="/wylogowanie">Wyloguj się</a></li>
-                            <li><a href="/usun-konto">Usuń konto</a></li>
+                            <li><a href="/panel-uzytkownika/edytuj-profil">Twoje dane</a></li>
+                            <li><a href="/panel-uzytkownika/wylogowanie">Wyloguj się</a></li>
+                            <li><a href="/panel-uzytkownika/usun-konto">Usuń konto</a></li>
                         </ul>
                     </div>
 
@@ -48,6 +59,7 @@
                             <li><a href="/zadania-do-wykonania">Zadania do wykonania</a></li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
