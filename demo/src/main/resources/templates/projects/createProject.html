@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<section>
+    <div class="container">
+        <h1>Utwórz nowy projekt</h1>
+        <form th:action="@{/projekty/utworz-projekt}" th:object="${project}" method="post">
+            <label for="project_name">Nazwa projektu:</label>
+            <input type="text" id="project_name" th:field="*{project_name}" required>
+
+            <label for="project_description">Opis projektu:</label>
+            <input id="project_description" th:field="*{project_description}" required>
+
+            <button type="submit">Utwórz projekt</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>
