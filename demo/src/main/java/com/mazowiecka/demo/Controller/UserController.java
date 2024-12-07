@@ -55,14 +55,23 @@ public class UserController {
 
     @PostMapping("/logowanie")
     public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
-        if (userService.login(username, password)) {
-            session.setAttribute("loggedUser", username);
-            System.out.println("Zalogowany użytkownik: " + session.getAttribute("loggedUser"));
-            return "redirect:/";
-        } else {
-            model.addAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło.");
-            return "pages/loginPage";
+
+        Optional<User> optionalUser = userService.getUserByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                session.setAttribute("loggedUserId", user.getId());
+                session.setAttribute("loggedUser", username);
+                System.out.println("Zalogowany użytkownik: " + session.getAttribute("loggedUser"));
+                System.out.println("Zalogowany użytkownik o ID: " + user.getId());
+                return "redirect:/";
+            }
         }
+
+        model.addAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło.");
+        return "pages/loginPage";
     }
 
 

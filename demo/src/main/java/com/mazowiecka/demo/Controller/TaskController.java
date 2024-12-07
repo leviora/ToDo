@@ -98,7 +98,6 @@ public class TaskController {
 
     }
 
-
     @GetMapping("/usunZadanie")
     public String showTasktoDelete(Model model) {
         List<Task> tasks = taskService.getAllTasks()
@@ -110,7 +109,7 @@ public class TaskController {
     }
 
     @GetMapping("/usunZadanie/{taskId}")
-    public String deleteTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task deletedTask, Model model) {
+    public String deleteTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task deletedTask) {
         taskService.deleteTask(taskId, deletedTask);
         return "redirect:/";
     }
@@ -187,7 +186,6 @@ public class TaskController {
                 return taskRepository.findAll();
         }
     }
-
 
     @PostMapping("/usunZakonczoneZadania")
     public String deleteCompletedTasks() {

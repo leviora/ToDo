@@ -1,5 +1,6 @@
 package com.mazowiecka.demo.Entity;
 
+import com.mazowiecka.demo.Repository.UserRepository;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,10 +33,20 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
 
-
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectUser> projectUsers = new ArrayList<>();
+
+//    public Long getUserId() {
+//        return user != null ? user.getId() : null;
+//    }
+//
+//    public void setUserId(Long userId, UserRepository userRepository) {
+//        this.user = userRepository.findById(userId).orElse(null);
+//    }
 
 }

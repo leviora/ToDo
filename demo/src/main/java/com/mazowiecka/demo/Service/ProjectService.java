@@ -1,6 +1,7 @@
 package com.mazowiecka.demo.Service;
 
 import com.mazowiecka.demo.Entity.Project;
+import com.mazowiecka.demo.Entity.ProjectUser;
 import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Repository.ProjectRepository;
 import com.mazowiecka.demo.Repository.UserRepository;
@@ -15,9 +16,12 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
 
-    public ProjectService(ProjectRepository projectRepository, UserRepository userRepository) {
+    private final ProjectUserService projectUserService;
+
+    public ProjectService(ProjectRepository projectRepository, UserRepository userRepository, ProjectUserService projectUserService) {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
+        this.projectUserService = projectUserService;
     }
 
     public List<Project> getAllProjects() {
@@ -28,28 +32,56 @@ public class ProjectService {
         return projectRepository.findById(project_id);
     }
 
+    public Project updateProject(Project updatedProject, Long projectId) {
+       return projectRepository.save(updatedProject);
+    }
+
     public Project saveProject(Project project) {
         return projectRepository.save(project);
     }
 
-    public void deleteProject(Long project_id) {
-        projectRepository.deleteById(project_id);
+    public void deleteProject(Long projectId) {
+
+        if (!projectRepository.existsById(projectId)) {
+            throw new IllegalArgumentException("Projekt o podanym ID nie istnieje.");
+        }
+        projectRepository.deleteById(projectId);
     }
+
+
+
+
+
     public List<Project> getCompletedProjects() {
         return projectRepository.findByCompleted(true);
     }
 
-    public Project createProjectForUser(Long userId, Project project) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Nie znaleziono użytkownika o ID: " + userId));
+//    public Project createProjectForUser(Long userId, Project project) {
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new RuntimeException("Nie znaleziono użytkownika o ID: " + userId));
+//
+//        project.setUser(user); // Przypisanie użytkownika do projektu
+//        return projectRepository.save(project);
+//    }
 
-        project.setUser(user); // Przypisanie użytkownika do projektu
-        return projectRepository.save(project);
-    }
-
-
-
-
-
+//    public Project createProjectForUser(Long userId, Project project) {
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new RuntimeException("Nie znaleziono użytkownika o ID: " + userId));
+//
+//        project = projectRepository.save(project);
+//
+//        ProjectUser projectUser = new ProjectUser();
+//        projectUser.setProject(project);
+//        projectUser.setUser(user);
+//        projectUserService.saveProjectUser(projectUser);
+//
+//        return project;
+//    }
 
 }
+
+
+
+
+
+

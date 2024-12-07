@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Edytuj projekt</title>
-  <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8">
+    <title>Edytuj projekt</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <section>
-  <div class="container">
-    <h1>Edytuj projekt</h1>
-    <form th:action="@{/projekty/edytowanie/{project_id}(project_id=${project.project_id})}"
-          th:object="${project}" method="post">
-      <label for="project_name">Nazwa projektu:</label>
-      <input type="text" id="project_name" th:field="*{project_name}" required>
+    <div class="container">
+        <h1>Edytuj projekt</h1>
 
-      <label for="project_description">Opis projektu:</label>
-      <input id="project_description" th:field="*{project_description}" required>
+        <form th:action="@{/projekty/edytowanie/{project_id}(project_id=${project.project_id})}" method="post">
+            <label for="name">Nazwa projektu:</label>
+            <input type="text" id="name" name="project_name" th:value="${project.project_name}" required/>
 
-      <label for="completed">Zakończony:</label>
-      <input type="checkbox" id="completed" th:field="*{completed}">
+            <label for="description">Opis projektu:</label>
+            <textarea id="description" name="project_description" th:text="${project.project_description}"></textarea>
 
-      <input type="hidden" th:field="*{project_id}" />
+            <label for="completed">Czy zakończony:</label>
+            <input type="checkbox" id="completed" name="completed" th:checked="${project.completed}"/>
 
+            <button type="submit">Zapisz</button>
+        </form>
 
-      <button type="submit">Zapisz zmiany</button>
-    </form>
+        <a href="/panel-uzytkownika" class="button">Powrót do panelu</a>
 
-    <button> <a href="/panel-uzytkownika">Powrót do panelu</a> </button>
-  </div>
+    </div>
 </section>
 </body>
 </html>
+

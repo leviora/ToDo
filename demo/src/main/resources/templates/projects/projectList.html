@@ -9,7 +9,7 @@
     <style>
         .button-group {
             display: flex;
-            gap: 10px; /* Odstęp między przyciskami */
+            gap: 10px;
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
         <h1>Lista projektów</h1>
         <div th:if="${projects != null}">
             <ul>
-                <li th:each="project : ${projects}">
+                <li th:each="project : ${projects}" th:if="${project.completed == false}">
                     <div>
                         <p th:text="'Projekt: ' + ${project.project_name}">Projekt: Nazwa projektu</p>
                         <p th:text="'Opis: ' + ${project.project_description}">Opis projektu</p>
@@ -49,3 +49,4 @@
 </section>
 </body>
 </html>
+
