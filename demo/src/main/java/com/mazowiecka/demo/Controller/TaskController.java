@@ -132,36 +132,6 @@ public class TaskController {
         return "pages/completedTasks";
     }
 
-//    @GetMapping("/sortuj")
-//    public String sortTasks(@RequestParam("sortOption") String sortOption, Model model) {
-//
-//        List<Task> sortedTasks;
-//        switch (sortOption) {
-//            case "date":
-//                sortedTasks = taskRepository.findAllByOrderByDueDateAsc();
-//                break;
-//            case "importantUrgent":
-//                sortedTasks = taskService.findTasksByPriority("urgent-important");
-//                break;
-//            case "importantNotUrgent":
-//                sortedTasks = taskService.findTasksByPriority("not-urgent-important");
-//                break;
-//            case "notImportantUrgent":
-//                sortedTasks = taskService.findTasksByPriority("urgent-not-important");
-//                break;
-//            case "notImportantNotUrgent":
-//                sortedTasks = taskService.findTasksByPriority("not-urgent-not-important");
-//                break;
-//            default:
-//                sortedTasks = taskRepository.findAll();
-//                break;
-//        }
-//        model.addAttribute("sortedTasks", sortedTasks);
-//        model.addAttribute("sortOption", sortOption);
-//        return "pages/sort";
-//    }
-
-
     @GetMapping("/sortuj")
     public String sortTasks(@RequestParam("sortOption") String sortOption, Model model) {
         List<Task> sortedTasks = getSortedTasks(sortOption);

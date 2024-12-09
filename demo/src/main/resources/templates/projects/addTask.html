@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Dodaj zadanie do projektu</h1>
+<form action="/projekty/dodaj-zadanie" method="post">
+    <label for="projectId">Projekt:</label>
+    <select name="projectId" id="projectId">
+        <option th:each="project : ${projects}"
+                th:value="${project.project_id}"
+                th:text="${project.project_name}"></option>
+    </select>
+
+    <label for="description">Opis zadania:</label>
+    <textarea name="description" id="description" required></textarea>
+
+    <button type="submit">Dodaj zadanie</button>
+</form>
+
+
+</body>
+</html>

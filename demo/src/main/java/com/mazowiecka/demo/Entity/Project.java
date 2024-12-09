@@ -37,16 +37,8 @@ public class Project {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProjectUser> projectUsers = new ArrayList<>();
 
-//    public Long getUserId() {
-//        return user != null ? user.getId() : null;
-//    }
-//
-//    public void setUserId(Long userId, UserRepository userRepository) {
-//        this.user = userRepository.findById(userId).orElse(null);
-//    }
 
 }

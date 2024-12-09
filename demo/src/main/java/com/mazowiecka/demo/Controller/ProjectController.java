@@ -6,6 +6,7 @@ import com.mazowiecka.demo.Entity.Task;
 import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Repository.ProjectRepository;
 import com.mazowiecka.demo.Service.ProjectService;
+import com.mazowiecka.demo.Service.TaskService;
 import com.mazowiecka.demo.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,22 +26,22 @@ import java.util.Optional;
 public class ProjectController {
     private final ProjectService projectService;
     private final UserService userService;
+    private final TaskService taskService;
 
     @Autowired
     private ProjectRepository projectRepository;
 
-    public ProjectController(ProjectService projectService, UserService userService) {
+    public ProjectController(ProjectService projectService, UserService userService, TaskService taskService) {
         this.projectService = projectService;
         this.userService = userService;
+        this.taskService = taskService;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
     @GetMapping
     public String getAllProjects(Model model) {
-
         List<Project> projects = projectRepository.findByCompleted(false);
-//        List<Project> projects = projectService.getAllProjects();
         model.addAttribute("projects", projects);
         return "projects/projectList";
     }
@@ -200,6 +202,34 @@ public class ProjectController {
             model.addAttribute("error", "Wystąpił błąd podczas usuwania projektu.");
             return "error";
         }
+    }
+
+    @GetMapping("/dodaj-zadanie")
+    public String showAddTaskForm(Model model, HttpSession session) {
+        String username = (String) session.getAttribute("loggedUser");
+        Optional<User> optionalUser = userService.getUserByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            User loggedUser = optionalUser.get();
+            model.addAttribute("task", new Task());
+            model.addAttribute("projects", projectService.getProjectsByUser(loggedUser));
+        }
+        return "projects/addTask";
+    }
+
+    @PostMapping("/dodaj-zadanie")
+    public String addTaskToProject(@RequestParam("projectId") Long projectId,
+                                   @RequestParam("description") String description,
+                                   HttpSession session) {
+        String username = (String) session.getAttribute("loggedUser");
+        Optional<User> optionalUser = userService.getUserByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            User loggedUser = optionalUser.get();
+            projectService.addTaskToProject(projectId, description, loggedUser);
+        }
+        return "redirect:/projekty";
+
     }
 
 

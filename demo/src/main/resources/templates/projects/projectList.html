@@ -1,3 +1,56 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Lista projektów</title>-->
+<!--    <link rel="stylesheet" href="/css/main.css">-->
+<!--    <style>-->
+<!--        .button-group {-->
+<!--            display: flex;-->
+<!--            gap: 10px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<section>-->
+<!--    <div class="container">-->
+<!--        <h1>Lista projektów</h1>-->
+<!--        <div th:if="${projects != null}">-->
+<!--            <ul>-->
+<!--                <li th:each="project : ${projects}" th:if="${project.completed == false}">-->
+<!--                    <div>-->
+<!--                        <p th:text="'Projekt: ' + ${project.project_name}">Projekt: Nazwa projektu</p>-->
+<!--                        <p th:text="'Opis: ' + ${project.project_description}">Opis projektu</p>-->
+<!--                        <div class="button-group">-->
+<!--                            <form th:action="@{/projekty/edytowanie/{project_id}(project_id=${project.project_id})}" method="get">-->
+<!--                                <button type="submit">Edytuj</button>-->
+<!--                            </form>-->
+<!--                            <form th:action="@{/projekty/usun/{project_id}(project_id=${project.project_id})}" method="post" onsubmit="return confirm('Czy na pewno chcesz usunąć ten projekt?')">-->
+<!--                                <button type="submit">Usuń</button>-->
+<!--                            </form>-->
+<!--                            <form th:action="@{/projekty/zakoncz/{project_id}(project_id=${project.project_id})}" method="post">-->
+<!--                                <button type="submit">Oznacz jako zakończony</button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <hr/>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div th:if="${projects == null}">-->
+<!--            <p>Brak projektów do wyświetlenia.</p>-->
+<!--        </div>-->
+
+<!--        <button> <a href="/panel-uzytkownika">Powrót do panelu</a> </button>-->
+
+<!--    </div>-->
+<!--</section>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,45 +59,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista projektów</title>
     <link rel="stylesheet" href="/css/main.css">
-    <style>
-        .button-group {
-            display: flex;
-            gap: 10px;
-        }
-    </style>
 </head>
 <body>
 <section>
     <div class="container">
         <h1>Lista projektów</h1>
-        <div th:if="${projects != null}">
-            <ul>
-                <li th:each="project : ${projects}" th:if="${project.completed == false}">
+        <ul>
+            <li th:each="project : ${projects}">
+                <div>
+                    <p th:text="'Projekt: ' + ${project.project_name}">Projekt: Nazwa projektu</p>
+                    <p th:text="'Opis: ' + ${project.project_description}">Opis projektu</p>
                     <div>
-                        <p th:text="'Projekt: ' + ${project.project_name}">Projekt: Nazwa projektu</p>
-                        <p th:text="'Opis: ' + ${project.project_description}">Opis projektu</p>
-                        <div class="button-group">
-                            <form th:action="@{/projekty/edytowanie/{project_id}(project_id=${project.project_id})}" method="get">
-                                <button type="submit">Edytuj</button>
-                            </form>
-                            <form th:action="@{/projekty/usun/{project_id}(project_id=${project.project_id})}" method="post" onsubmit="return confirm('Czy na pewno chcesz usunąć ten projekt?')">
-                                <button type="submit">Usuń</button>
-                            </form>
-                            <form th:action="@{/projekty/zakoncz/{project_id}(project_id=${project.project_id})}" method="post">
-                                <button type="submit">Oznacz jako zakończony</button>
-                            </form>
-                        </div>
+                        <form th:action="@{/projekty/edytowanie/{project_id}(project_id=${project.project_id})}" method="get">
+                            <button type="submit">Edytuj</button>
+                        </form>
+                        <form th:action="@{/projekty/usun/{project_id}(project_id=${project.project_id})}" method="post" onsubmit="return confirm('Czy na pewno chcesz usunąć ten projekt?')">
+                            <button type="submit">Usuń</button>
+                        </form>
+                        <form th:action="@{/projekty/zakoncz/{project_id}(project_id=${project.project_id})}" method="post">
+                            <button type="submit">Oznacz jako zakończony</button>
+                        </form>
                     </div>
-                    <hr/>
-                </li>
-            </ul>
-        </div>
-        <div th:if="${projects == null}">
-            <p>Brak projektów do wyświetlenia.</p>
-        </div>
-
-        <button> <a href="/panel-uzytkownika">Powrót do panelu</a> </button>
-
+                </div>
+                <hr/>
+            </li>
+        </ul>
+        <a th:href="@{/panel-uzytkownika}" class="button">Powrót do panelu użytkownika</a>
     </div>
 </section>
 </body>
