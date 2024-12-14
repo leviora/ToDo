@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/menu.js" defer></script>
 </head>
 <body>
-<h1>Dodaj zadanie do projektu</h1>
-<form action="/projekty/dodaj-zadanie" method="post">
-    <label for="projectId">Projekt:</label>
-    <select name="projectId" id="projectId">
-        <option th:each="project : ${projects}"
-                th:value="${project.project_id}"
-                th:text="${project.project_name}"></option>
-    </select>
+<div th:replace="~{layout/header :: header}"></div>
+<section>
+    <div class="container">
+        <h1>Dodaj zadanie do projektu</h1>
+        <form action="/projekty/dodaj-zadanie" method="post">
+            <label for="projectId">Projekt:</label>
+            <select name="projectId" id="projectId">
+                <option th:each="project : ${projects}"
+                        th:value="${project.project_id}"
+                        th:text="${project.project_name}"></option>
+            </select>
 
-    <label for="description">Opis zadania:</label>
-    <textarea name="description" id="description" required></textarea>
+            <label for="description">Opis zadania:</label>
+            <textarea name="description" id="description" required></textarea>
 
-    <button type="submit">Dodaj zadanie</button>
-</form>
-
-
+            <button type="submit">Dodaj zadanie</button>
+        </form>
+        <a href="/panel-uzytkownika" class="button">Powrót do panelu</a>
+    </div>
+</section>
+<div th:replace="~{layout/footer :: footer}"></div>
 </body>
 </html>

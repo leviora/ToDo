@@ -37,12 +37,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="task : ${tasks}">
+                    <tr th:each="task : ${tasks}" th:if="${task.project == null}">
                         <td th:text="${task.description}"></td>
-                        <td th:text="${task.due_Date}"></td>
+                        <td th:text="${task.due_Date != null ? task.due_Date : 'Brak terminu'}"></td>
+                        <td th:text="${task.due_Date != null ? T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), task.due_Date) + ' dni' : 'Brak priorytetu'}"></td>
                         <td th:text="${task.dynamicPriority}"></td>
-                        <td th:text="${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), task.due_Date)} + ' dni'"></td>
                     </tr>
+
                     </tbody>
                 </table>
 

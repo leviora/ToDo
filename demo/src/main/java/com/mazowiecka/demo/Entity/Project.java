@@ -1,6 +1,5 @@
 package com.mazowiecka.demo.Entity;
 
-import com.mazowiecka.demo.Repository.UserRepository;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -23,6 +23,7 @@ public class TaskService {
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
+
     public Optional<Task> getTaskById(Long id) {
         return taskRepository.findById(id);
     }
@@ -39,19 +40,6 @@ public class TaskService {
         return taskRepository.save(updatedTask);
     }
 
-    public long countAllTask() {
-        return taskRepository.count();
-    }
-
-    public List<Task> getLatestTasks() {
-        List<Task> Latesttasks = taskRepository.findAll();
-
-        Latesttasks = Latesttasks.stream()
-                .filter(task -> task.getDue_Date() != null)
-                .sorted((task1, task2) -> task1.getDue_Date().compareTo(task2.getDue_Date()))
-                .collect(Collectors.toList());
-        return Latesttasks;
-    }
 
     public List<Task> getTodayTasks() {
         List<Task> tasks = taskRepository.findAll();
@@ -82,16 +70,15 @@ public class TaskService {
         taskRepository.deleteAll(completedTasks);
     }
 
-    public List<Task> getAllUncompleteTasks() {
-        List<Task> uncompletedTasks = taskRepository.findByCompletedFalse();
-        return uncompletedTasks;
-    }
     public String calculateDynamicPriority(Task task) {
+        if (task.getDue_Date() == null) {
+            return "brak terminu";
+        }
 
         LocalDate today = LocalDate.now();
         LocalDate dueDate = task.getDue_Date();
-        long daysLeft = ChronoUnit.DAYS.between(today, dueDate);
 
+        long daysLeft = ChronoUnit.DAYS.between(today, dueDate);
         if (daysLeft < 0) {
             return "zadania przeterminowane";
         } else if (daysLeft <= 1) {
@@ -109,10 +96,5 @@ public class TaskService {
                 .filter(task -> !task.isCompleted())
                 .collect(Collectors.toList());
     }
-
-
-
-
-
 
 }

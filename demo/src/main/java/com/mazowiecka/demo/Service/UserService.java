@@ -19,6 +19,7 @@ public class UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -36,6 +37,7 @@ public class UserService {
         }
         return user;
     }
+
     public void saveUser(User user) {
         if (isUsernameTaken(user.getUsername())) {
             throw new IllegalArgumentException("Nazwa użytkownika jest już zajęta.");
@@ -82,8 +84,11 @@ public class UserService {
     }
 
     public boolean isLoggedIn(HttpSession session) {
-        return session.getAttribute("loggedUser") != null;
+        return Optional.ofNullable(session)
+                .map(s -> s.getAttribute("loggedUser"))
+                .isPresent();
     }
+
 
 
     public void changePassword(String username, String currentPassword, String newPassword, String confirmPassword) {
@@ -127,17 +132,15 @@ public class UserService {
         userRepository.save(user);
         System.out.println("Zaktualizowany e-mail użytkownika: " + user);
     }
+
     public void deleteUserByUsername(String username) {
         Optional<User> user = userRepository.findByUsername(username);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             throw new IllegalArgumentException("Nie znaleziono użytkownika o podanej nazwie");
         }
 
         userRepository.delete(user.get());
     }
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
 }

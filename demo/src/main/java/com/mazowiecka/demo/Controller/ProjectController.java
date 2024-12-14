@@ -1,10 +1,10 @@
 package com.mazowiecka.demo.Controller;
 
-import com.mazowiecka.demo.Entity.Category;
 import com.mazowiecka.demo.Entity.Project;
 import com.mazowiecka.demo.Entity.Task;
 import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Repository.ProjectRepository;
+import com.mazowiecka.demo.Repository.TaskRepository;
 import com.mazowiecka.demo.Service.ProjectService;
 import com.mazowiecka.demo.Service.TaskService;
 import com.mazowiecka.demo.Service.UserService;
@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +29,7 @@ public class ProjectController {
 
     @Autowired
     private ProjectRepository projectRepository;
+    private TaskRepository taskRepository;
 
     public ProjectController(ProjectService projectService, UserService userService, TaskService taskService) {
         this.projectService = projectService;
@@ -231,7 +231,6 @@ public class ProjectController {
         return "redirect:/projekty";
 
     }
-
 
 }
 

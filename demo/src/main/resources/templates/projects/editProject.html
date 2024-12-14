@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Edytuj projekt</title>
     <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/menu.js" defer></script>
 </head>
 <body>
+<div th:replace="~{layout/header :: header}"></div>
 <section>
     <div class="container">
         <h1>Edytuj projekt</h1>
@@ -27,6 +29,7 @@
 
     </div>
 </section>
+<div th:replace="~{layout/footer :: footer}"></div>
 </body>
 </html>
 

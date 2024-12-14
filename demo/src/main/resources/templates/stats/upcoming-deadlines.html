@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Statystyki: Nadchodzące terminy</title>
+</head>
+<body>
+<h1>Nadchodzące terminy realizacji</h1>
+<ul>
+  <li th:each="task : ${upcomingDeadlines}" th:text="${task.description + ' - ' + task.dueDate}"></li>
+</ul>
+</body>
+</html>

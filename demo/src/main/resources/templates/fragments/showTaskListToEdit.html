@@ -16,7 +16,7 @@
         <h1>Zadania:</h1>
         <div>
             <ul>
-                <li th:each="task : ${tasks}">
+                <li th:each="task : ${tasks}" th:if="${task.project == null}">>
 
                     <span th:text="${task.due_Date}"></span> -
                     <span th:text="${task.category.categoryName}"></span> -

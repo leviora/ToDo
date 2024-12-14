@@ -17,6 +17,7 @@ public class GlobalControllerAdvice {
     public GlobalControllerAdvice(TaskService taskService) {
         this.taskService = taskService;
     }
+
     @ModelAttribute
     public String addAttributes(Model model) {
 

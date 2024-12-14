@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+.button-container {
+    margin-top: 30px;
+}
+
+    </style>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/menu.js" defer></script>
+</head>
+<body>
+<div th:replace="~{layout/header :: header}"></div>
+<section>
+    <div class="container">
+
+        <div class="stats-description">
+            <h1><strong th:text="${loggedUser + ', Twój postęp to prawdziwy sukces!'}"></strong></h1>
+            <img src="/images/motivation/logo.png" alt="Motywacja" class="motivation-image"
+                 style="width: 100%; max-width: 300px;">
+
+<!--            <p><strong>Łączna liczba zadań: <span th:text="${progressStats['totalTasks']}"></span></strong></p>-->
+<!--            <p><strong>Ukończone zadania: <span th:text="${progressStats['completedTasks']}"></span></strong></p>-->
+<!--            <p><strong>Nieukończone zadania: <span th:text="${progressStats['remainingTasks']}"></span></strong></p>-->
+        </div>
+
+
+
+        <h2>Postęp zadań</h2>
+        <canvas id="progressChart" width="500" height="250"></canvas>
+
+        <script th:inline="javascript">
+    const progressData = /*[[${progressStats}]]*/ {};
+    const labels = Object.keys(progressData);
+    const data = Object.values(progressData);
+
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Zadania ukończone',
+                data: data,
+                borderColor: '#005A3D',
+                fill: false
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Postęp ukończonych zadań w czasie'
+                }
+            }
+        }
+    });
+
+        </script>
+        <div class="button-container">
+            <a href="/panel-uzytkownika" class="button">Powrót do panelu</a>
+        </div>
+
+    </div>
+</section>
+<div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

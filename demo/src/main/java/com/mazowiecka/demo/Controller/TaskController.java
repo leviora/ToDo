@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,10 +86,7 @@ public class TaskController {
         if (updatedCategory != null) {
 
             existingTask.getCategory().setCategoryId(updatedCategory.getCategoryId());
-        } else {
-            // Obsługa błędu - jeśli kategoria jest nullem
         }
-
         existingTask.setDescription(updatedTask.getDescription());
         existingTask.setPriority(updatedTask.getPriority());
         existingTask.setDue_Date(updatedTask.getDue_Date());

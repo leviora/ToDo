@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 //import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDate;
 
 @Entity
@@ -12,7 +13,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
-//@Access(AccessType.FIELD)
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

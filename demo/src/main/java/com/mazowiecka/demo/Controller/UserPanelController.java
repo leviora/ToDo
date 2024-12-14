@@ -110,11 +110,13 @@ public class UserPanelController {
 
         return "fragments/user-panel";
     }
+
     @RequestMapping(value = "/wylogowanie", method = {RequestMethod.GET, RequestMethod.POST})
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
+
     @GetMapping("/usun-konto")
     public String showDeleteAccountConfirmation(HttpSession session, Model model) {
         String loggedUsername = (String) session.getAttribute("loggedUser");
@@ -124,7 +126,7 @@ public class UserPanelController {
         }
 
         model.addAttribute("loggedUser", loggedUsername);
-        return "fragments/deleteAccountConfirmation"; // strona potwierdzenia
+        return "fragments/deleteAccountConfirmation";
     }
 
     @PostMapping("/usun-konto")
@@ -138,18 +140,12 @@ public class UserPanelController {
         Optional<User> user = userService.getUserByUsername(loggedUsername);
         if (user.isPresent()) {
             userService.deleteUser(user.get().getId());
-            session.invalidate(); // wylogowanie po usunięciu
-            return "redirect:/"; // przekierowanie na stronę główną
+            session.invalidate();
+            return "redirect:/";
         }
 
         model.addAttribute("error", "Nie udało się usunąć konta.");
-        return "fragments/user-panel"; // powrót do panelu w przypadku błędu
+        return "fragments/user-panel";
     }
-
-
-
-
-
-
 
 }

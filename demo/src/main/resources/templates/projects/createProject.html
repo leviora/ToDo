@@ -1,38 +1,13 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--    <link rel="stylesheet" href="/css/main.css">-->
-<!--</head>-->
-<!--<body>-->
-<!--<section>-->
-<!--    <div class="container">-->
-<!--        <h1>Utwórz nowy projekt</h1>-->
-
-<!--        <form th:action="@{/projekty/utworz-projekt}" th:object="${project}" method="post">-->
-<!--            <label for="project_name">Nazwa projektu:</label>-->
-<!--            <input type="text" id="project_name" th:field="*{project_name}" required>-->
-
-<!--            <label for="project_description">Opis projektu:</label>-->
-<!--            <input id="project_description" th:field="*{project_description}" required>-->
-
-<!--            <button type="submit">Utwórz projekt</button>-->
-<!--        </form>-->
-
-<!--    </div>-->
-<!--</section>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Utwórz nowy projekt</title>
     <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/menu.js" defer></script>
 </head>
 <body>
+<div th:replace="~{layout/header :: header}"></div>
 <section>
     <div class="container">
         <h1>Utwórz nowy projekt</h1>
@@ -45,12 +20,14 @@
             <label for="project_description">Opis projektu:</label>
             <textarea id="project_description" th:field="*{project_description}" required></textarea>
 
-<!--            <label for="project_deadline">Termin:</label>-->
-<!--            <input type="date" id="project_deadline" th:field="*{deadline}">-->
+            <!--            <label for="project_deadline">Termin:</label>-->
+            <!--            <input type="date" id="project_deadline" th:field="*{deadline}">-->
 
             <button type="submit">Utwórz projekt</button>
         </form>
+        <a href="/panel-uzytkownika" class="button">Powrót do panelu</a>
     </div>
 </section>
+<div th:replace="~{layout/footer :: footer}"></div>
 </body>
 </html>

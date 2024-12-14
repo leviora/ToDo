@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .nav li a {
+            color: #333;
+        }
+
+    </style>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/menu.js" defer></script>
+</head>
+<body>
+<div th:replace="~{layout/header :: header}"></div>
+<section>
+    <div class="container">
+        <div class="content">
+            <h1>Main view</h1>
+            <div class="nav">
+                <ul>
+                    <li><a href="/statystyki/completed-tasks">Zadania ukończone</a></li>
+                    <li><a href="/statystyki/progress">Postęp zadań w czasie</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

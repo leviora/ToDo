@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Panel użytkownika</title>
     <link rel="stylesheet" href="/css/user-panel.css">
+    <script src="/js/menu.js" defer></script>
 </head>
 <body>
+<div th:replace="~{layout/header :: header}"></div>
 <div th:fragment="user-panel">
-
     <div class="messages">
         <div th:if="${error}" class="error-message">
             <p th:text="${error}"></p>
@@ -45,19 +46,15 @@
                         <h3>Grupowanie zadań w projekty</h3>
                         <ul>
                             <li><a href="/projekty/utworz-projekt">Utwórz nowy projekt</a></li>
-<!--                            <a href="/projekty">Zobacz moje projekty</a>-->
                             <li><a href="/projekty">Zarządzaj swoimi projektami</a></li>
                             <li><a href="/projekty/dodaj-zadanie">Dodaj zadanie do projektu</a></li>
                         </ul>
                     </div>
 
-
-
                     <div class="user-section">
                         <h3>Statystyki zadań</h3>
                         <ul>
                             <li><a href="/statystyki">Przegląd statystyk</a></li>
-                            <li><a href="/zadania-do-wykonania">Zadania do wykonania</a></li>
                         </ul>
                     </div>
 
@@ -66,5 +63,6 @@
         </div>
     </section>
 </div>
+<div th:replace="~{layout/footer :: footer}"></div>
 </body>
 </html>

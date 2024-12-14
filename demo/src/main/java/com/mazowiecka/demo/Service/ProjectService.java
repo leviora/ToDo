@@ -36,7 +36,7 @@ public class ProjectService {
     }
 
     public Project updateProject(Project updatedProject, Long projectId) {
-       return projectRepository.save(updatedProject);
+        return projectRepository.save(updatedProject);
     }
 
     public Project saveProject(Project project) {
@@ -78,9 +78,6 @@ public class ProjectService {
             throw new IllegalArgumentException("Nie znaleziono projektu o podanym ID");
         }
     }
-
-
-
 
 
 }
