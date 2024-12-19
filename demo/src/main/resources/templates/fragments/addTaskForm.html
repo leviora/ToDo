@@ -32,8 +32,9 @@
             </select><br>
             <label for="due_Date">Termin wykonania:</label>
             <input type="date" id="due_Date" name="due_Date" th:field="*{due_Date}" required><br>
-            <input type="submit" class="button" value="Dodaj zadanie">
+            <input type="submit" class="button" value="Dodaj zadanie" > <a href="/" class="button">Powrót na stronę główną</a>
         </form>
+
     </div>
 </div>
 <div th:replace="layout/footer :: footer"></div>

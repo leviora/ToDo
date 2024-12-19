@@ -3,30 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${pageTitle}">To-Do List</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="header.css">
+    <!--    <link rel="stylesheet" href="main.css">-->
+
+    <!--    <link rel="stylesheet" href="header.css">-->
     <!--    <link rel="stylesheet" href="/css/welcomeSection.css">-->
 
-    <script src="js/menu.js" defer></script>
-    <script src="js/sortTasks.js" defer></script>
+    <!--    <script src="js/menu.js" defer></script>-->
+    <!--    <script src="js/sortTasks.js" defer></script>-->
 
 </head>
 <body>
+<!--<div th:replace="~{layout/header :: header}"></div>-->
 <div th:fragment="contentTemplate">
     <section class="main">
 
         <div th:replace="~{fragments/welcomeSection :: welcomeSection}"></div>
         <div th:insert="fragments/todayTasks :: todayTasks"></div>
-        <div th:insert="fragments/sortTasks :: sortTasks"></div>
 
-        <div>
-            <section>
-                <div class="container">
-                    <a class="button" th:href="@{/tasks/dynamic-priority}">Pokaż zadania według dynamicznych
-                        priorytetów</a>
-                </div>
-            </section>
-        </div>
 
         <div th:replace="~{fragments/einsenhowerMatrix :: eisenhowerMatrix}"></div>
 
@@ -40,12 +33,17 @@
             </section>
         </div>
 
-<!--        <div th:if="${isLoggedIn}">-->
-<!--            <p>Jesteś zalogowany jako: <span th:text="${loggedUser}"></span></p>-->
-<!--        </div>-->
-<!--        <div th:if="${not isLoggedIn}">-->
-<!--            <p>Nie jesteś zalogowany. <a href="/logowanie">Zaloguj się tutaj</a>.</p>-->
-<!--        </div>-->
+        <div th:insert="fragments/sortTasks :: sortTasks"></div>
+
+        <div>
+            <section>
+                <div class="container">
+                    <h1>Dynamiczne Priorytety: Twoje Zadania w Ruchu</h1>
+                    <a class="button" th:href="@{/tasks/dynamic-priority}">Pokaż zadania według dynamicznych
+                        priorytetów</a>
+                </div>
+            </section>
+        </div>
 
     </section>
 </div>

@@ -8,6 +8,7 @@
 html {
     scroll-behavior: smooth;
 }
+
 .header-title p {
     font-size: 1.2rem;
 }
@@ -19,6 +20,7 @@ html {
     color: var(--text-color);
     font-family: Arial, sans-serif;
 }
+
 
 .menu-button {
     background: none;

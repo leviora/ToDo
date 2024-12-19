@@ -14,13 +14,14 @@
     <script src="/js/menu.js" defer></script>
     <script src="/js/quotes.js" defer></script>
     <script src="/js/todayTasks.js" defer></script>
-<!--    <script src="js/auth-panel.js" defer></script>-->
+    <script src="js/sortTasks.js" defer></script>
+    <script src="js/auth-panel.js" defer></script>
 </head>
 <body>
 
 <div th:replace="~{fragments/auth-panel :: auth-panel}"></div>
 
-<div th:replace="~{layout/header :: header}"></div>
+<div th:insert="~{layout/header :: header}"></div>
 <main>
     <div th:insert="~{pages/index :: contentTemplate}"></div>
 </main>

@@ -6,54 +6,53 @@
     <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
-<header th:fragment="header">
-    <section id="header-section">
-        <div class="container">
-            <div class="header-content">
-                <nav class="header-nav">
-                    <button class="menu-button" aria-label="Menu">
-                        <p>menu</p>
-                        <div class="menu-icon"></div>
-                        <div class="menu-icon"></div>
-                    </button>
+<div th:fragment="header">
+    <button class="menu-button" aria-label="Menu">
+        <p>menu</p>
+        <div class="menu-icon"></div>
+        <div class="menu-icon"></div>
+    </button>
 
-                    <div class="header-title">
-                        <p>Zarządzaj swoimi zadaniami w prosty i efektywny sposób.</p>
-                    </div>
+    <div class="nav-menu hidden">
+        <button class="close-button" aria-label="Zamknij menu">&times;</button>
 
-                    <div class="nav-menu hidden">
-                        <button class="close-button" aria-label="Zamknij menu">&times;</button>
-
-                        <div class="menu-item">
-                            <a th:href="@{/}">
-                                <div class="menu-content">
-                                    <span>Strona główna</span>
-                                    <img src="/images/kotek.png" alt="Opis obrazu 1" class="menu-image"/>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a th:href="@{/kategorie}">
-                                <div class="menu-content">
-                                    <span>Kategorie</span>
-                                    <img src="/images/kotek.png" alt="Opis obrazu 2" class="menu-image"/>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a th:href="@{/zakonczoneZadania}">
-                                <div class="menu-content">
-                                    <span>Zakończone zadania</span>
-                                    <img src="/images/kotek.png" alt="Opis obrazu 3" class="menu-image"/>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+        <div class="menu-item">
+            <a th:href="@{/}">
+                <div class="menu-content">
+                    <span>Strona główna</span>
+                    <img src="/images/motivation/logo.png" alt="logo" class="menu-image"/>
+                </div>
+            </a>
         </div>
-    </section>
-</header>
+        <div class="menu-item">
+            <a th:href="@{/kategorie}">
+                <div class="menu-content">
+                    <span>Kategorie</span>
+                    <img src="/images/categories.png" alt="kategorie" class="menu-image"/>
+                </div>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a th:href="@{/zakonczoneZadania}">
+                <div class="menu-content">
+                    <span>Zakończone zadania</span>
+                    <img src="/images/completedTasks.png" alt="zakończone zadania" class="menu-image"/>
+                </div>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a th:href="@{/o-nas}">
+                <div class="menu-content">
+                    <span>Poznaj nas</span>
+                    <img src="/images/aboutUs.png" alt="o nas" class="menu-image"/>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</div>
 <script src="/js/menu.js"></script>
 </body>
 </html>

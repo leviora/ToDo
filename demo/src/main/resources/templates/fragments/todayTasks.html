@@ -15,10 +15,10 @@
                 </h2>
 
                 <div class="tasks-row">
-                    <img src="/images/rufi.png" class="task-image"/>
+                    <img src="/images/todayTasks.jpg" class="task-image"/>
 
                     <div class="tasks-container">
-                        <!-- Iteracja po zadaniach na dzisiaj -->
+
                         <div class="task-card" th:each="task : ${uncompletedTodayTasks}">
                             <h3 th:text="${task.description}"></h3>
                             <p th:text="'Kategoria: ' + ${task.category.categoryName}"></p>

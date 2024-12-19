@@ -1,33 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:fragment="sortTasks">-->
-<!--    <section>-->
-<!--        <div class="container">-->
-<!--            <div class="sortTasks-content">-->
-<!--                <form action="/sortuj" method="get" id="sortForm">-->
-<!--                    <label for="sortOption">Sortuj według:</label>-->
-<!--                    <select id="sortOption" name="sortOption">-->
-<!--                        <option value="date">Daty rosnąco</option>-->
-<!--                        <option value="importantUrgent">Ważne i pilne</option>-->
-<!--                        <option value="importantNotUrgent">Ważne, ale niepilne</option>-->
-<!--                        <option value="notImportantUrgent">Nieważne, ale pilne</option>-->
-<!--                        <option value="notImportantNotUrgent">Nieważne i niepilne</option>-->
-<!--                    </select>-->
-<!--                    <button type="submit">Sortuj</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -38,6 +8,7 @@
 <div th:fragment="sortTasks">
     <section>
         <div class="container">
+            <h1>Sortuj Zadania: Znajdź Priorytety i Ustal Kolejność</h1>
             <div class="sortTasks-content">
                 <form action="/sortuj" method="get" id="sortForm">
                     <label for="sortOption">Sortuj według:</label>

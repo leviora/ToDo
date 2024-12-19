@@ -11,11 +11,8 @@
         <h1>Usuń Kategorię</h1>
         <p>Czy na pewno chcesz usunąć kategorię: <span th:text="${category.categoryName}"></span>?</p>
         <form th:action="@{/kategorie/usunKategorie/{categoryId}(categoryId=${category.categoryId})}" method="post">
-<!--            <span th:text="${category.categoryName}"></span>-->
-            <button type="submit">Usuń</button>
+            <button type="submit" >Usuń</button> <a href="/kategorie" class="button">Anuluj</a>
         </form>
-        <a class="button" th:href="@{/kategorie}">Anuluj</a>
-
     </div>
 </div>
 </body>

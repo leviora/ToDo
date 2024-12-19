@@ -12,12 +12,13 @@
         <ul>
             <li th:each="category : ${categories}" th:if="${category.categoryName !='Default'}">
                 <span th:text="${category.categoryName}"></span>
-                <a class="button"
-                   th:href="@{/kategorie/edytujKategorie/{categoryId}(categoryId=${category.categoryId})}">Edytuj</a>
+                <a class="button" th:href="@{/kategorie/edytujKategorie/{categoryId}(categoryId=${category.categoryId})}">Edytuj</a>
                 <a class="button" th:href="@{/kategorie/usunKategorie/{categoryId}(categoryId=${category.categoryId})}">Usuń</a>
             </li>
         </ul>
         <a class="button" th:href="@{/dodajKategorie}">Dodaj kategorię</a>
+
+
     </div>
 </div>
 </body>

@@ -8,25 +8,23 @@
 <body>
 
 <div th:fragment="auth-panel">
-    <header>
-        <nav class="auth-panel-container">
-            <div class="auth-links">
+    <nav class="auth-panel-container">
+        <div class="auth-links">
 
-                <button th:if="${!isLoggedIn}" type="button" class="login-link" onclick="location.href='/logowanie'">
-                    Zaloguj się
-                </button>
+            <button th:if="${!isLoggedIn}" type="button" class="login-link" onclick="location.href='/logowanie'">
+                Zaloguj się
+            </button>
 
-                <div th:if="${isLoggedIn}" class="user-profile">
-                    <a href="/panel-uzytkownika" class="avatar-link">
-                        <span th:text="${loggedUser}"></span>
-                        <img src="/images/profile.png" alt="Avatar użytkownika" class="avatar">
+            <div th:if="${isLoggedIn}" class="user-profile">
+                <a href="/panel-uzytkownika" class="avatar-link">
+                    <span th:text="${loggedUser}"></span>
+                    <img src="/images/profile.png" alt="Avatar użytkownika" class="avatar">
 
-                    </a>
-                </div>
-
+                </a>
             </div>
-        </nav>
-    </header>
+
+        </div>
+    </nav>
 </div>
 
 </body>

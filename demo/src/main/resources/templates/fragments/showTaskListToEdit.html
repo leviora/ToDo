@@ -23,11 +23,12 @@
                     <span th:text="${task.description}"></span>
 
                     <a class="button" th:href="@{/edytujZadanie/{taskId}(taskId = ${task.taskId})}">Edytuj zadanie</a>
+                </li>
+            </ul>
         </div>
-        </li>
-        </ul>
+        <a href="/" class="button">Powrót na stronę główną</a>
     </div>
+    <div th:replace="layout/footer :: footer"></div>
 </div>
-<div th:replace="layout/footer :: footer"></div>
 </body>
 </html>

@@ -27,7 +27,7 @@ public class StatsController {
         return "stats/mainView";
     }
 
-    @GetMapping("/completed-tasks")
+    @GetMapping("/zakonczone-zadania")
     public String getCompletedTasksStats(Model model, HttpSession session) {
         Map<String, Long> completedTasksStats = statsService.getCompletedTasksStats();
         model.addAttribute("completedTasksStats", completedTasksStats);
@@ -40,7 +40,7 @@ public class StatsController {
         return "stats/completed-tasks";
     }
 
-    @GetMapping("/progress")
+    @GetMapping("/postęp")
     public String getTasksProgressStats(Model model, HttpSession session) {
         Map<LocalDate, Long> progressStats = statsService.getTasksCompletedPerDay();
         model.addAttribute("progressStats", progressStats);
