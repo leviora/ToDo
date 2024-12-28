@@ -3,7 +3,6 @@ package com.mazowiecka.demo.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

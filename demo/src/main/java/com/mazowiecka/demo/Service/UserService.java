@@ -90,7 +90,6 @@ public class UserService {
     }
 
 
-
     public void changePassword(String username, String currentPassword, String newPassword, String confirmPassword) {
         Optional<User> userOptional = userRepository.findByUsername(username);
 

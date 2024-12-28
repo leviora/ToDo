@@ -2,20 +2,18 @@ package com.mazowiecka.demo.Service;
 
 import com.mazowiecka.demo.Entity.Category;
 import com.mazowiecka.demo.Entity.Task;
-import com.mazowiecka.demo.Exception.CategoryNotFoundException;
 import com.mazowiecka.demo.Repository.CategoryRepository;
 import com.mazowiecka.demo.Repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 @Service
 public class CategoryService {

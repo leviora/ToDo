@@ -32,7 +32,7 @@ public class StatsController {
         Map<String, Long> completedTasksStats = statsService.getCompletedTasksStats();
         model.addAttribute("completedTasksStats", completedTasksStats);
 
-        if(userService.isLoggedIn(session)) {
+        if (userService.isLoggedIn(session)) {
             String loggedUser = (String) session.getAttribute("loggedUser");
             model.addAttribute("loggedUser", loggedUser);
         }
@@ -45,7 +45,7 @@ public class StatsController {
         Map<LocalDate, Long> progressStats = statsService.getTasksCompletedPerDay();
         model.addAttribute("progressStats", progressStats);
 
-        if(userService.isLoggedIn(session)) {
+        if (userService.isLoggedIn(session)) {
             String loggedUser = (String) session.getAttribute("loggedUser");
             model.addAttribute("loggedUser", loggedUser);
         }

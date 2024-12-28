@@ -2,7 +2,6 @@ package com.mazowiecka.demo.Service;
 
 import com.mazowiecka.demo.Entity.ProjectUser;
 import com.mazowiecka.demo.Repository.ProjectUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
