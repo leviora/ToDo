@@ -10,18 +10,15 @@ import java.time.LocalDate;
 @Table(name = "tasks")
 @Getter
 @Setter
-
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private Long taskId;
-
     private String description;
     private String priority;
     private LocalDate due_Date;
     private boolean completed = false;
-
     @Column(name = "dynamic_priority")
     private String dynamicPriority;
 
@@ -32,7 +29,6 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
-
     public Task(Category category, String description) {
         this.category = category;
         this.description = description;
@@ -48,11 +44,9 @@ public class Task {
     public Task() {
 
     }
-
     public boolean isCompleted() {
         return completed;
     }
-
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }

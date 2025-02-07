@@ -53,5 +53,4 @@ public class StatsController {
         return "stats/progress";
     }
 
-
 }

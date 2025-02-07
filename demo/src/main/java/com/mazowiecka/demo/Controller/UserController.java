@@ -17,7 +17,8 @@ public class UserController {
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+    public UserController(UserService userService,
+                          BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -25,7 +26,7 @@ public class UserController {
     @GetMapping("/tworzenieUzytkownika")
     public String createUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "fragments/createUser";
+        return "pages/createUser";
     }
 
     @PostMapping("/tworzenieUzytkownika")
@@ -41,7 +42,7 @@ public class UserController {
             } else if (e.getMessage().contains("Hasło nie spełnia wymagań")) {
                 model.addAttribute("passwordError", "Hasło nie spełnia wymagań.");
             }
-            return "fragments/createUser";
+            return "pages/createUser";
         }
     }
 
@@ -69,10 +70,28 @@ public class UserController {
                 return "redirect:/";
             }
         }
-
         model.addAttribute("error", "Nieprawidłowa nazwa użytkownika lub hasło.");
         return "pages/loginPage";
     }
+
+    @GetMapping("/wylogowanie")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        System.out.println("Użytkownik został wylogowany.");
+        return "redirect:/logowanie";
+    }
+
+
+//    @PostMapping("/assignRole")
+//    public String assignRole(@RequestParam String username, @RequestParam Role role, Model model) {
+//        try {
+//            userService.assignRoleToUser(username, role);
+//            model.addAttribute("message", "Rola została przypisana pomyślnie.");
+//        } catch (IllegalArgumentException e) {
+//            model.addAttribute("error", e.getMessage());
+//        }
+//        return "pages/adminPanel";
+//    }
 
 
 }

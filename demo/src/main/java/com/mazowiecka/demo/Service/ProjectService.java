@@ -11,13 +11,14 @@ import java.util.Optional;
 
 @Service
 public class ProjectService {
-
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
     private final ProjectUserService projectUserService;
     private final TaskRepository taskRepository;
-
-    public ProjectService(ProjectRepository projectRepository, UserRepository userRepository, ProjectUserService projectUserService, TaskRepository taskRepository) {
+    public ProjectService(ProjectRepository projectRepository,
+                          UserRepository userRepository,
+                          ProjectUserService projectUserService,
+                          TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
         this.projectUserService = projectUserService;
@@ -32,15 +33,12 @@ public class ProjectService {
     public Optional<Project> getProjectById(Long project_id) {
         return projectRepository.findById(project_id);
     }
-
     public Project updateProject(Project updatedProject, Long projectId) {
         return projectRepository.save(updatedProject);
     }
-
     public Project saveProject(Project project) {
         return projectRepository.save(project);
     }
-
     public void deleteProject(Long projectId) {
 
         if (!projectRepository.existsById(projectId)) {
@@ -48,15 +46,12 @@ public class ProjectService {
         }
         projectRepository.deleteById(projectId);
     }
-
     public List<Project> getCompletedProjects() {
         return projectRepository.findByCompleted(true);
     }
-
     public List<Project> getProjectsByUser(User user) {
         return projectRepository.findByUser(user);
     }
-
     public void addTaskToProject(Long projectId, String description, User user) {
         Optional<Project> optionalProject = projectRepository.findById(projectId);
 
@@ -76,7 +71,6 @@ public class ProjectService {
             throw new IllegalArgumentException("Nie znaleziono projektu o podanym ID");
         }
     }
-
 
 }
 

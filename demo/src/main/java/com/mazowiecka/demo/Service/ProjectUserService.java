@@ -11,7 +11,6 @@ public class ProjectUserService {
     public ProjectUserService(ProjectUserRepository projectUserRepository) {
         this.projectUserRepository = projectUserRepository;
     }
-
     public ProjectUser saveProjectUser(ProjectUser projectUser) {
         return projectUserRepository.save(projectUser);
     }

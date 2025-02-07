@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Raport Użytkowników</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/header.css">
+
+    <script src="/js/menu.js" defer></script>
+</head>
+<body>
+<div th:replace="layout/header :: header"></div>
+<section style="margin-top: 50px;">
+    <div class="container">
+        <div class="userReports">
+            <h1>Raport Użytkowników</h1>
+            <table>
+                <tr>
+                    <th>Całkowita liczba użytkowników:</th>
+                    <td th:text="${totalUsers}"></td>
+                </tr>
+                <tr>
+                    <th>Liczba administratorów:</th>
+                    <td th:text="${admins}"></td>
+                </tr>
+                <tr>
+                    <th>Liczba użytkowników:</th>
+                    <td th:text="${regularUsers}"></td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-top: 20px;">
+            <a href="/dashboard" class="button">Powrót do panelu administracyjnego</a>
+        </div>
+    </div>
+</section>
+<div th:replace="layout/footer :: footer"></div>
+</body>
+</html>

@@ -24,6 +24,11 @@ public class Category {
                 '}';
     }
 
+    public Category(Long categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+    }
+
     public Category() {
     }
 

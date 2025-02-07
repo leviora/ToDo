@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Panel logowania</title>
@@ -11,8 +11,17 @@
     <nav class="auth-panel-container">
         <div class="auth-links">
 
+            <button th:if="${isLoggedIn}" type="button" class="login-link" onclick="location.href='/wylogowanie'">
+                Wyloguj się
+            </button>
+
             <button th:if="${!isLoggedIn}" type="button" class="login-link" onclick="location.href='/logowanie'">
                 Zaloguj się
+            </button>
+
+            <button th:if="${isLoggedIn} and ${loggedUser} == 'admin'" type="button" class="login-link"
+                    onclick="location.href='/dashboard'">
+                Panel administracyjny
             </button>
 
             <div th:if="${isLoggedIn}" class="user-profile">
@@ -22,7 +31,6 @@
 
                 </a>
             </div>
-
         </div>
     </nav>
 </div>

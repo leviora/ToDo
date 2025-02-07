@@ -74,7 +74,6 @@ public class TaskService {
         if (task.getDue_Date() == null) {
             return "brak terminu";
         }
-
         LocalDate today = LocalDate.now();
         LocalDate dueDate = task.getDue_Date();
 
@@ -89,7 +88,6 @@ public class TaskService {
             return "niski priorytet";
         }
     }
-
     public List<Task> getUncompletedTodayTasks() {
         List<Task> todayTasks = getTodayTasks();
         return todayTasks.stream()

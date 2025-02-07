@@ -70,7 +70,7 @@ public class UserService {
     public boolean checkLoginCredentials(String username, String rawPassword) {
         return userRepository.findByUsername(username)
                 .map(user -> {
-                    System.out.println("Sprawdzanie hasła: " + rawPassword + " vs " + user.getPassword());
+//                    System.out.println("Sprawdzanie hasła: " + rawPassword + " vs " + user.getPassword());
                     return passwordEncoder.matches(rawPassword, user.getPassword());
                 })
                 .orElseGet(() -> {
@@ -82,13 +82,11 @@ public class UserService {
     public boolean login(String username, String password) {
         return checkLoginCredentials(username, password);
     }
-
     public boolean isLoggedIn(HttpSession session) {
         return Optional.ofNullable(session)
                 .map(s -> s.getAttribute("loggedUser"))
                 .isPresent();
     }
-
 
     public void changePassword(String username, String currentPassword, String newPassword, String confirmPassword) {
         Optional<User> userOptional = userRepository.findByUsername(username);
@@ -122,7 +120,6 @@ public class UserService {
         userRepository.save(user);
         System.out.println("Zaktualizowany użytkownik: " + user);
     }
-
 
     public void updateEmail(String username, String newEmail) {
         User user = userRepository.findByUsername(username)

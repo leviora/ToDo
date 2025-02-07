@@ -14,7 +14,8 @@ public class StatsService {
     private final TaskRepository taskRepository;
     private final StatsRepository statsRepository;
 
-    public StatsService(TaskRepository taskRepository, StatsRepository statsRepository) {
+    public StatsService(TaskRepository taskRepository,
+                        StatsRepository statsRepository) {
         this.taskRepository = taskRepository;
         this.statsRepository = statsRepository;
 
@@ -31,6 +32,5 @@ public class StatsService {
                 .filter(Task::isCompleted)
                 .collect(Collectors.groupingBy(Task::getDue_Date, Collectors.counting()));
     }
-
 
 }

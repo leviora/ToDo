@@ -14,18 +14,14 @@ import java.util.List;
 @Getter
 @Setter
 public class Project {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_id")
     private Long project_id;
-
     @Column(nullable = false, name = "project_name")
     private String project_name;
-
     @Column(name = "project_description")
     private String project_description;
-
     @Column(name = "completed", nullable = false)
     private boolean completed;
 
@@ -38,6 +34,5 @@ public class Project {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProjectUser> projectUsers = new ArrayList<>();
-
 
 }
