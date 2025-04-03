@@ -39,8 +39,8 @@ public class UserController {
         } catch (IllegalArgumentException e) {
             if (e.getMessage().contains("Nazwa użytkownika jest już zajęta")) {
                 model.addAttribute("usernameError", "Nazwa użytkownika jest już zajęta.");
-            } else if (e.getMessage().contains("Hasło nie spełnia wymagań")) {
-                model.addAttribute("passwordError", "Hasło nie spełnia wymagań.");
+            } else if (e.getMessage().contains("Hasło musi zawierać minimum 8 znaków, w tym cyfrę i znak specjalny")) {
+                model.addAttribute("passwordError", "Hasło musi zawierać minimum 8 znaków, w tym cyfrę i znak specjalny");
             }
             return "pages/createUser";
         }

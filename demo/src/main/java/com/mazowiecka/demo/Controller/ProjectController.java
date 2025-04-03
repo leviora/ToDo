@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/projekty")
@@ -40,7 +41,10 @@ public class ProjectController {
     private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
     @GetMapping
-    public String getAllProjects(Model model) {
+    public String getAllProjects(Model model, HttpSession session) {
+
+        Integer userId = (Integer) session.getAttribute("user_id");
+
         List<Project> projects = projectRepository.findByCompleted(false);
         model.addAttribute("projects", projects);
         return "projects/projectList";

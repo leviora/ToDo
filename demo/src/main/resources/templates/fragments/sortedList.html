@@ -12,11 +12,10 @@
             <div th:if="${sortOption == 'date'}">
                 <h2>Zadania posortowane po dacie:</h2>
                 <ul>
-                    <li th:each="task : ${sortedTasks}">
+                    <li th:each="task : ${sortedTasks}" th:if="${task.completed == false}">
                         <span th:text="${task.due_Date}"></span> -
                         <span th:text="${task.category.categoryName}"></span> -
                         <span th:text="${task.description}"></span>
-
                     </li>
                 </ul>
             </div>
@@ -59,6 +58,7 @@
                 <ul>
                     <li th:each="task : ${sortedTasks}" th:if="${task.completed == false}">
                         <span th:text="${task.category.categoryName}"></span> -
+                        <span th:text="${task.due_Date}"></span> -
                         <span th:text="${task.description}"></span>
                     </li>
                 </ul>

@@ -44,7 +44,7 @@ public class UserService {
         }
 
         if (!isPasswordStrong(user.getPassword())) {
-            throw new IllegalArgumentException("Hasło nie spełnia wymagań siły.");
+            throw new IllegalArgumentException("Hasło musi zawierać minimum 8 znaków, w tym cyfrę i znak specjalny");
         }
 
         String hashedPassword = passwordEncoder.encode(user.getPassword());

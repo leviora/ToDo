@@ -13,6 +13,7 @@
         <form th:action="@{/kategorie/usunKategorie/{categoryId}(categoryId=${category.categoryId})}" method="post">
             <button type="submit" >Usuń</button> <a href="/kategorie" class="button">Anuluj</a>
         </form>
+        <a class="button" th:href="@{/}">Powrót na stronę główną</a>
     </div>
 </div>
 </body>

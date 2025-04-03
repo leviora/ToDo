@@ -28,12 +28,7 @@
                 <div>
                     <h2 th:text="'Projekt: ' + ${project.project_name}">Projekt: Nazwa projektu</h2>
                     <p th:text="'Opis: ' + ${project.project_description}">Opis projektu</p>
-                    <h3>Zadania:</h3>
-                    <ul>
-                        <li th:each="task : ${project.tasks}">
-                            <p th:text="${task.description}">Opis zadania</p>
-                        </li>
-                    </ul>
+
                     <div class="button-group">
 
                         <form th:action="@{/projekty/edytowanie/{project_id}(project_id=${project.project_id})}"
@@ -51,6 +46,14 @@
                             <button type="submit">Oznacz jako zakończony</button>
                         </form>
                     </div>
+
+                    <h3>Zadania:</h3>
+                    <ul>
+                        <li th:each="task : ${project.tasks}">
+                            <p th:text="${task.description}">Opis zadania</p>
+                        </li>
+                    </ul>
+
                 </div>
                 <hr/>
             </li>
