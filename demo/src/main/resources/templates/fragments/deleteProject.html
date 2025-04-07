@@ -13,25 +13,25 @@
 <!--</html>-->
 
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Usuń Kategorię</title>
-  <link rel="stylesheet" href="main.css">
-</head>
-<body>
-<div th:fragment="deleteCategoryForm">
-  <div class="container">
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title>Usuń Kategorię</title>-->
+<!--  <link rel="stylesheet" href="main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:fragment="deleteCategoryForm">-->
+<!--  <div class="container">-->
 
 
-    <form th:action="@{/projekty/usun/{projectId}(projectId=${project.project_id})}" method="post">
-      <span th:text="${project.project_name}"></span>
-      <button type="submit">Usuń</button>
-    </form>
+<!--    <form th:action="@{/projekty/usun/{projectId}(projectId=${project.project_id})}" method="post">-->
+<!--      <span th:text="${project.project_name}"></span>-->
+<!--      <button type="submit">Usuń</button>-->
+<!--    </form>-->
 
-    <a class="button" th:href="@{/projekty}">Anuluj</a>
+<!--    <a class="button" th:href="@{/projekty}">Anuluj</a>-->
 
-  </div>
-</div>
-</body>
-</html>
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

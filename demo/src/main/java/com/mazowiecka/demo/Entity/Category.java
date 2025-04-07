@@ -1,11 +1,17 @@
 package com.mazowiecka.demo.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "Categories")
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "categories")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Category {
@@ -17,19 +23,15 @@ public class Category {
     @Column(name = "category_name", unique = true)
     private String categoryName;
 
+    @OneToMany(mappedBy = "category")
+    private List<Task> tasks = new ArrayList<>();
+
+
     @Override
     public String toString() {
         return "Category{" +
                 "categoryName='" + categoryName + '\'' +
                 '}';
-    }
-
-    public Category(Long categoryId, String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-    }
-
-    public Category() {
     }
 
 }

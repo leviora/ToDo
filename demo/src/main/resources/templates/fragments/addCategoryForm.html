@@ -1,22 +1,22 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Dodaj Kategorię</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-<section>
-    <div th:fragment="addCategoryForm">
-        <div class="container">
-            <h2>Dodaj kategorię</h2>
-            <form id="addCategory" th:action="@{/dodajKategorie}" method="post" th:object="${category}">
-                <label for="category">Kategoria:</label>
-                <input type="text" id="category" th:field="*{categoryName}"/>
-                <button type="submit" class="button">Dodaj kategorię</button>
-            </form>
-        </div>
-    </div>
-</section>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Dodaj Kategorię</title>-->
+<!--    <link rel="stylesheet" href="main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<section>-->
+<!--    <div th:fragment="addCategoryForm">-->
+<!--        <div class="container">-->
+<!--            <h2>Dodaj kategorię</h2>-->
+<!--            <form id="addCategory" th:action="@{/dodajKategorie}" method="post" th:object="${category}">-->
+<!--                <label for="category">Kategoria:</label>-->
+<!--                <input type="text" id="category" th:field="*{categoryName}"/>-->
+<!--                <button type="submit" class="button">Dodaj kategorię</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--</body>-->
+<!--</html>-->

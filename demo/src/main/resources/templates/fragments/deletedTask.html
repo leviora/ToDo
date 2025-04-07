@@ -1,22 +1,22 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuwanie Zadania</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Usuwanie Zadania</title>-->
+<!--    <link rel="stylesheet" href="css/main.css">-->
+<!--</head>-->
+<!--<body>-->
 
-<ul>
-    <li th:each="task : ${tasks}">
-        <div>
-            <span class="taskCategory" th:text="${task.category}"></span> -
-            <span class="taskDescription" th:text="${task.description}"></span>
-            <a th:href="@{'/zadania/usunZadania/' + ${task.taskId}}">Usuń zadanie</a>
-        </div>
-    </li>
-</ul>
-<a class="button" th:href="@{/}">Powrót na stronę główną</a>
-</body>
-</html>
+<!--<ul>-->
+<!--    <li th:each="task : ${tasks}">-->
+<!--        <div>-->
+<!--            <span class="taskCategory" th:text="${task.category}"></span> - -->
+<!--            <span class="taskDescription" th:text="${task.description}"></span>-->
+<!--            <a th:href="@{'/zadania/usunZadania/' + ${task.taskId}}">Usuń zadanie</a>-->
+<!--        </div>-->
+<!--    </li>-->
+<!--</ul>-->
+<!--<a class="button" th:href="@{/}">Powrót na stronę główną</a>-->
+<!--</body>-->
+<!--</html>-->

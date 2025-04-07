@@ -1,26 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Edytuj kategorię</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-<div th:fragment="editCategoryForm">
-    <div class="container">
-        <h2>Edytuj kategorię</h2>
-        <form th:object="${category}" th:action="@{/edytujKategorie/{categoryId}(categoryId=${category.categoryId})}"
-              method="post">
-            <input type="hidden" th:field="*{categoryId}"/>
-            <label>Nazwa kategorii:</label>
-            <input type="text" th:field="*{categoryName}" required/>
-            <button class="button" type="submit">Zapisz</button>
-        </form>
-        <a class="button" th:href="@{/}">Powrót na stronę główną</a>
-    </div>
-</div>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Edytuj kategorię</title>-->
+<!--    <link rel="stylesheet" href="main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:fragment="editCategoryForm">-->
+<!--    <div class="container">-->
+<!--        <h2>Edytuj kategorię</h2>-->
+<!--        <form th:object="${category}" th:action="@{/edytujKategorie/{categoryId}(categoryId=${category.categoryId})}"-->
+<!--              method="post">-->
+<!--            <input type="hidden" th:field="*{categoryId}"/>-->
+<!--            <label>Nazwa kategorii:</label>-->
+<!--            <input type="text" th:field="*{categoryName}" required/>-->
+<!--            <button class="button" type="submit">Zapisz</button>-->
+<!--        </form>-->
+<!--        <a class="button" th:href="@{/}">Powrót na stronę główną</a>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 
 
 

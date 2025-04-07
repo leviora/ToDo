@@ -2,33 +2,44 @@ package com.mazowiecka.demo.Controller;
 
 import com.mazowiecka.demo.Entity.Category;
 import com.mazowiecka.demo.Entity.Task;
+import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Repository.CategoryRepository;
 import com.mazowiecka.demo.Repository.TaskRepository;
+import com.mazowiecka.demo.Repository.UserRepository;
 import com.mazowiecka.demo.Service.CategoryService;
 import com.mazowiecka.demo.Service.TaskService;
 import com.mazowiecka.demo.Exception.TaskNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 @Controller
 public class TaskController {
-    @Autowired
-    private TaskRepository taskRepository;
-    @Autowired
-    private TaskService taskService;
+    private final TaskRepository taskRepository;
+    private final TaskService taskService;
+    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
-    public TaskController(TaskService taskService) {
+    private final UserRepository userRepository;
+
+    public TaskController(TaskRepository taskRepository,
+                          TaskService taskService,
+                          CategoryRepository categoryRepository,
+                          CategoryService categoryService,
+                          UserRepository userRepository) {
+        this.taskRepository = taskRepository;
         this.taskService = taskService;
+        this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
+        this.userRepository = userRepository;
     }
-
-    @Autowired
-    private CategoryRepository categryRepository;
-    @Autowired
-    private CategoryService categoryService;
 
     @GetMapping("/dodajZadanie")
     public String showAddTaskPage(Model model) {
@@ -51,10 +62,22 @@ public class TaskController {
         } else {
             category = categoryService.getCategoryById(categoryId);
         }
+
         task.setCategory(category);
+
+        // pobieranie zalogowanego użytkownika i przypisanie go do zadania
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        task.setUser(user);
+
         taskService.addTask(task);
         return "redirect:/";
     }
+
 
     @GetMapping("/edytujZadanie")
     public String showTasktoEdit(Model model) {
@@ -94,21 +117,27 @@ public class TaskController {
 
     }
 
-    @GetMapping("/usunZadanie")
-    public String showTasktoDelete(Model model) {
-        List<Task> tasks = taskService.getAllTasks()
-                .stream()
-                .filter(task -> !task.isCompleted())
-                .collect(Collectors.toList());
-        model.addAttribute("tasks", tasks);
-        return "fragments/showTaskListToDelete";
-    }
-
-    @GetMapping("/usunZadanie/{taskId}")
-    public String deleteTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task deletedTask) {
-        taskService.deleteTask(taskId, deletedTask);
+    @PostMapping("/usunZadanie")
+    public String usunZadanie(@RequestParam("taskId") Long taskId) {
+        taskService.deleteTask(taskId);
         return "redirect:/";
     }
+
+//    @GetMapping("/usunZadanie")
+//    public String showTasktoDelete(Model model) {
+//        List<Task> tasks = taskService.getAllTasks()
+//                .stream()
+//                .filter(task -> !task.isCompleted())
+//                .collect(Collectors.toList());
+//        model.addAttribute("tasks", tasks);
+//        return "fragments/showTaskListToDelete";
+//    }
+//
+//    @GetMapping("/usunZadanie/{taskId}")
+//    public String deleteTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task deletedTask) {
+//        taskService.deleteTask(taskId, deletedTask);
+//        return "redirect:/";
+//    }
 
     @PostMapping("/changeStatus/{taskId}")
     public String changeTaskStatus(@PathVariable Long taskId, Model model) {
@@ -133,7 +162,7 @@ public class TaskController {
         List<Task> sortedTasks = getSortedTasks(sortOption);
         model.addAttribute("sortedTasks", sortedTasks);
         model.addAttribute("sortOption", sortOption);
-        return "/pages/sort.html";
+        return "/pages/sort";
     }
 
     private List<Task> getSortedTasks(String sortOption) {
@@ -184,5 +213,11 @@ public class TaskController {
         model.addAttribute("tasks", tasksWithDynamicPriority);
         return "pages/dynamicPriorityPage";
     }
+
+    @GetMapping("/zarzadzaj-zadaniami")
+    public String manageTasks() {
+        return "pages/manage-tasks";
+    }
+
 
 }

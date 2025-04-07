@@ -6,14 +6,15 @@
     <link rel="stylesheet" href="/css/eisenhowerMatrix.css">
 </head>
 <body>
-<div th:fragment="eisenhowerMatrix">
+<div th:fragment="eisenhowerMatrix" xmlns:th="http://www.w3.org/1999/xhtml">
     <section class="eisenhowerMatrix">
         <div class="container">
-            <h1>Priorytetyzuj i Zarządzaj Czasem</h1>
             <div class="eisenhower-matrix-content">
-                <div class="Ważne Pilne" data-description="Co to znaczy? Zadania, które wymagają natychmiastowej reakcji i są
-                        kluczowe dla Twoich wartości oraz celów np. opłacić rachunki.
-                        Dlaczego to istotne? Pomagają nam skoncentrować się na tym, co naprawdę ma znaczenie i nie pozwalają nam na odkładanie ważnych spraw na później.">
+                <div class="Ważne Pilne">
+                    <!--                     data-description="Co to znaczy? Zadania, które wymagają natychmiastowej reakcji i są-->
+                    <!--                        kluczowe dla Twoich wartości oraz celów np. opłacić rachunki.-->
+                    <!--                        Dlaczego to istotne? Pomagają nam skoncentrować się na tym, co naprawdę ma znaczenie i nie pozwalają nam na odkładanie ważnych spraw na później."-->
+
                     <span>Ważne Pilne</span>
                     <div class="tasks">
                         <div th:each="task : ${tasks}"
@@ -30,10 +31,11 @@
                     </div>
                 </div>
 
-                <div class="Pilne Nieważne" data-description="Co to znaczy? Zadania, które wymagają szybkiej reakcji,
-                        ale nie mają większego znaczenia w kontekście Twoich celów np. odpowiedzieć na email.
-                        Dlaczego to istotne? Pozwalają nam reagować na bieżące sprawy, ale często można je delegować lub
-                        zrealizować szybciej, by skupić się na ważniejszych zadaniach.">
+                <div class="Pilne Nieważne">
+                    <!--                     data-description="Co to znaczy? Zadania, które wymagają szybkiej reakcji,-->
+                    <!--                        ale nie mają większego znaczenia w kontekście Twoich celów np. odpowiedzieć na email.-->
+                    <!--                        Dlaczego to istotne? Pozwalają nam reagować na bieżące sprawy, ale często można je delegować lub-->
+                    <!--                        zrealizować szybciej, by skupić się na ważniejszych zadaniach."-->
                     <span>Pilne Nieważne</span>
                     <div class="tasks">
                         <div th:each="task : ${tasks}"
@@ -51,10 +53,10 @@
                     </div>
                 </div>
 
-                <div class="Niepilne Ważne"
-                     data-description="Co to znaczy? Zadania, które są kluczowe dla Twojego rozwoju lub wartości,
-                                                                      ale nie wymagają natychmiastowej interwencji np. nauka nowego języka obcego. Dlaczego to istotne?
-                                                                      Pozwalają inwestować czas w rozwój osobisty i budowanie umiejętności, które mogą przynieść korzyści w przyszłości. ">
+                <div class="Niepilne Ważne">
+<!--                     data-description="Co to znaczy? Zadania, które są kluczowe dla Twojego rozwoju lub wartości,-->
+<!--                     ale nie wymagają natychmiastowej interwencji np. nauka nowego języka obcego. Dlaczego to istotne?-->
+<!--                     Pozwalają inwestować czas w rozwój osobisty i budowanie umiejętności, które mogą przynieść korzyści w przyszłości."-->
                     <span>Niepilne Ważne</span>
                     <div class="tasks">
                         <div th:each="task : ${tasks}"
@@ -72,9 +74,10 @@
                     </div>
                 </div>
 
-                <div class="Niepilne Nieważne" data-description="Co to znaczy? Zadania, które nie są istotne ani pilne, i mogą być uznane za rozpraszacze
-                                                                         np. przeglądanie mediów społecznościowych. Dlaczego to istotne?
-                                                                         Pomagają zrozumieć, które aktywności można ograniczyć, aby skupić się na tym, co przynosi wartość.">
+                <div class="Niepilne Nieważne">
+<!--                     data-description="Co to znaczy? Zadania, które nie są istotne ani pilne, i mogą być uznane za rozpraszacze-->
+<!--                     np. przeglądanie mediów społecznościowych. Dlaczego to istotne?-->
+<!--                     Pomagają zrozumieć, które aktywności można ograniczyć, aby skupić się na tym, co przynosi wartość."-->
                     <span>Niepilne Nieważne</span>
                     <div class="tasks">
                         <div th:each="task : ${tasks}"
@@ -90,6 +93,7 @@
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
