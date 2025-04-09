@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
@@ -41,7 +42,6 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
-
 
     public Task(String description, String priority, LocalDate due_Date, boolean completed) {
         this.description = description;

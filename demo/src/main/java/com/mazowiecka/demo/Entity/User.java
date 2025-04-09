@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,10 @@ public class User implements UserDetails {
     String username;
     String password;
     String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Task> tasks;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

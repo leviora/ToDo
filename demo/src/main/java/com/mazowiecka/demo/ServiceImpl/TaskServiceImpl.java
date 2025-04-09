@@ -1,7 +1,9 @@
 package com.mazowiecka.demo.ServiceImpl;
 
 import com.mazowiecka.demo.Entity.Task;
+import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Repository.TaskRepository;
+import com.mazowiecka.demo.Repository.UserRepository;
 import com.mazowiecka.demo.Service.TaskService;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -12,9 +14,11 @@ import java.util.stream.Collectors;
 @Service
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -90,10 +94,19 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public void deleteTask(Long taskId) {
         taskRepository.deleteById(taskId);
+    }
+
+    @Override
+    public List<Task> findTasksByUserId(Long userId) {
+        return taskRepository.findAllByUser_Id(userId);
+    }
+@Override
+    public List<Task> getTasksByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow();
+        return taskRepository.findByUser(user);
     }
 
 

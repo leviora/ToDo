@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Macierz Einsenhowera</title>
     <link rel="stylesheet" href="/css/eisenhowerMatrix.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <div th:fragment="eisenhowerMatrix" xmlns:th="http://www.w3.org/1999/xhtml">
@@ -18,14 +19,15 @@
                     <span>Ważne Pilne</span>
                     <div class="tasks">
                         <div th:each="task : ${tasks}"
-                             th:if="${task.priority == 'urgent-important' and !task.completed}" class="task">
+                             th:if="${task.priority == 'urgent-important' and !task.completed and task.project == null}" class="task">
                             <span th:text="${task.due_Date}"></span> -
                             <span th:text="${task.category.categoryName}"></span> -
                             <span th:text="${task.description}"></span>
                             <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
                                 <input type="hidden" name="completed" value="true"/>
                                 <input type="hidden" name="taskId" th:value="${task.taskId}"/>
-                                <button type="submit">Zakończ zadanie</button>
+                                <button type="submit" class="btn btn-light">Zakończ zadanie</button>
+
                             </form>
                         </div>
                     </div>
@@ -39,7 +41,7 @@
                     <span>Pilne Nieważne</span>
                     <div class="tasks">
                         <div th:each="task : ${tasks}"
-                             th:if="${task.priority == 'urgent-not-important' and !task.completed}"
+                             th:if="${task.priority == 'urgent-not-important' and !task.completed and task.project == null}"
                              class="task">
                             <span th:text="${task.due_Date}"></span> -
                             <span th:text="${task.category.categoryName}"></span> -
@@ -47,7 +49,7 @@
                             <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
                                 <input type="hidden" name="completed" value="true"/>
                                 <input type="hidden" name="taskId" th:value="${task.taskId}"/>
-                                <button type="submit">Zakończ zadanie</button>
+                                <button type="submit" class="btn btn-light">Zakończ zadanie</button>
                             </form>
                         </div>
                     </div>
@@ -60,7 +62,7 @@
                     <span>Niepilne Ważne</span>
                     <div class="tasks">
                         <div th:each="task : ${tasks}"
-                             th:if="${task.priority == 'not-urgent-important' and !task.completed}"
+                             th:if="${task.priority == 'not-urgent-important' and !task.completed and task.project == null}"
                              class="task">
                             <span th:text="${task.due_Date}"></span> -
                             <span th:text="${task.category.categoryName}"></span> -
@@ -68,7 +70,7 @@
                             <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
                                 <input type="hidden" name="completed" value="true"/>
                                 <input type="hidden" name="taskId" th:value="${task.taskId}"/>
-                                <button type="submit">Zakończ zadanie</button>
+                                <button type="submit" class="btn btn-light">Zakończ zadanie</button>
                             </form>
                         </div>
                     </div>
@@ -81,7 +83,7 @@
                     <span>Niepilne Nieważne</span>
                     <div class="tasks">
                         <div th:each="task : ${tasks}"
-                             th:if="${task.priority == 'not-urgent-not-important' and !task.completed}"
+                             th:if="${task.priority == 'not-urgent-not-important' and !task.completed and task.project == null}"
                              class="task">
                             <span th:text="${task.due_Date}"></span> -
                             <span th:text="${task.category.categoryName}"></span> -
@@ -89,7 +91,7 @@
                             <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
                                 <input type="hidden" name="completed" value="true"/>
                                 <input type="hidden" name="taskId" th:value="${task.taskId}"/>
-                                <button type="submit">Zakończ zadanie</button>
+                                <button type="submit" class="btn btn-light">Zakończ zadanie</button>
                             </form>
                         </div>
                     </div>

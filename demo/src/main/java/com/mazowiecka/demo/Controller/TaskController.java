@@ -9,6 +9,7 @@ import com.mazowiecka.demo.Repository.UserRepository;
 import com.mazowiecka.demo.Service.CategoryService;
 import com.mazowiecka.demo.Service.TaskService;
 import com.mazowiecka.demo.Exception.TaskNotFoundException;
+import com.mazowiecka.demo.Service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,29 +17,32 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import java.util.stream.Collectors;
 
-//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+import java.util.List;
+
+@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 @Controller
 public class TaskController {
     private final TaskRepository taskRepository;
     private final TaskService taskService;
     private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
-
     private final UserRepository userRepository;
+
+    private final UserService userService;
 
     public TaskController(TaskRepository taskRepository,
                           TaskService taskService,
                           CategoryRepository categoryRepository,
                           CategoryService categoryService,
-                          UserRepository userRepository) {
+                          UserRepository userRepository,
+                          UserService userService) {
         this.taskRepository = taskRepository;
         this.taskService = taskService;
         this.categoryRepository = categoryRepository;
         this.categoryService = categoryService;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/dodajZadanie")
@@ -65,7 +69,6 @@ public class TaskController {
 
         task.setCategory(category);
 
-        // pobieranie zalogowanego użytkownika i przypisanie go do zadania
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -78,23 +81,22 @@ public class TaskController {
         return "redirect:/";
     }
 
-
-    @GetMapping("/edytujZadanie")
-    public String showTasktoEdit(Model model) {
-        List<Task> tasks = taskService.getAllTasks()
-                .stream()
-                .filter(task -> !task.isCompleted())
-                .collect(Collectors.toList());
-        model.addAttribute("tasks", tasks);
-        return "fragments/showTaskListToEdit";
-    }
+//    @GetMapping("/edytujZadanie")
+//    public String showTasktoEdit(Model model) {
+//        List<Task> tasks = taskService.getAllTasks()
+//                .stream()
+//                .filter(task -> !task.isCompleted())
+//                .collect(Collectors.toList());
+//        model.addAttribute("tasks", tasks);
+//        return "fragments/showTaskListToEdit";
+//    }
 
     @GetMapping("/edytujZadanie/{taskId}")
     public String showEditForm(@PathVariable("taskId") Long taskId, Model model) {
         Task task = taskService.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
         model.addAttribute("task", task);
-        return "fragments/editForm";
+        return "pages/editForm";
     }
 
     @PostMapping("/edytujZadanie/{taskId}")
@@ -113,14 +115,14 @@ public class TaskController {
         existingTask.setDue_Date(updatedTask.getDue_Date());
 
         taskService.updateTask(existingTask, taskId);
-        return "redirect:/";
+        return "redirect:/zarzadzaj-zadaniami";
 
     }
 
-    @PostMapping("/usunZadanie")
-    public String usunZadanie(@RequestParam("taskId") Long taskId) {
+    @PostMapping("/usunZadanie/{taskId}")
+    public String usunZadanie(@PathVariable("taskId") Long taskId) {
         taskService.deleteTask(taskId);
-        return "redirect:/";
+        return "redirect:/zarzadzaj-zadaniami";
     }
 
 //    @GetMapping("/usunZadanie")
@@ -185,37 +187,53 @@ public class TaskController {
     @PostMapping("/usunZakonczoneZadania")
     public String deleteCompletedTasks() {
         taskService.deleteCompletedTasks();
-        return "pages/completedTasks";
+        return "pages/manage-tasks";
     }
 
-    @PostMapping("/tasks/updateDynamicPriority")
-    public String updateDynamicPriority(@RequestParam Long taskId, Model model) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new IllegalArgumentException("Zadanie nie znalezione"));
+//    @PostMapping("/tasks/updateDynamicPriority")
+//    public String updateDynamicPriority(@RequestParam Long taskId, Model model) {
+//        Task task = taskRepository.findById(taskId)
+//                .orElseThrow(() -> new IllegalArgumentException("Zadanie nie znalezione"));
+//
+//        taskRepository.save(task);
+//
+//        return "redirect:/tasks";
+//    }
+//
+//    @GetMapping("/tasks/dynamic-priority")
+//    public String getTasksWithDynamicPriority(Model model) {
+//        List<Task> tasks = taskService.getAllTasks();
+//        List<Task> tasksWithDynamicPriority = tasks.stream()
+//                .map(task -> {
+//                    String dynamicPriority = taskService.calculateDynamicPriority(task);
+//                    task.setDynamicPriority(dynamicPriority);
+//                    System.out.println("Zadanie: " + task.getDescription() + ", Dynamiczny priorytet: " + dynamicPriority);
+//                    return task;
+//                })
+//                .collect(Collectors.toList());
+//
+//        model.addAttribute("tasks", tasksWithDynamicPriority);
+//        return "pages/dynamicPriorityPage";
+//    }
 
-        taskRepository.save(task);
-
-        return "redirect:/tasks";
-    }
-
-    @GetMapping("/tasks/dynamic-priority")
-    public String getTasksWithDynamicPriority(Model model) {
-        List<Task> tasks = taskService.getAllTasks();
-        List<Task> tasksWithDynamicPriority = tasks.stream()
-                .map(task -> {
-                    String dynamicPriority = taskService.calculateDynamicPriority(task);
-                    task.setDynamicPriority(dynamicPriority);
-                    System.out.println("Zadanie: " + task.getDescription() + ", Dynamiczny priorytet: " + dynamicPriority);
-                    return task;
-                })
-                .collect(Collectors.toList());
-
-        model.addAttribute("tasks", tasksWithDynamicPriority);
-        return "pages/dynamicPriorityPage";
-    }
+//    @GetMapping("/manage-tasks")
+//    public String showManageTasks(Model model, Principal principal) {
+//        String username = principal.getName();
+//        User user = userService.findByUsername(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("Nie znaleziono użytkownika o nazwie: " + username));
+//
+//        List<Task> userTasks = taskService.findTasksByUserId(user.getId());
+//
+//        model.addAttribute("tasks", userTasks);
+//        return "pages/manage-tasks";
+//    }
 
     @GetMapping("/zarzadzaj-zadaniami")
-    public String manageTasks() {
+    public String showManageTasks(Model model) {
+        User user = userService.getCurrentUser();
+        List<Task> userTasks = taskService.findTasksByUserId(user.getId());
+
+        model.addAttribute("tasks", userTasks);
         return "pages/manage-tasks";
     }
 

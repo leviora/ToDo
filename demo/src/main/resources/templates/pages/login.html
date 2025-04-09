@@ -8,14 +8,23 @@
         <form th:action="@{/login}" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Nazwa użytkownika</label>
-                <input type="text" class="form-control form-control-sm" id="username" name="username" style="max-width: 300px;">
+                <input type="text" class="form-control form-control-sm" id="username" name="username"
+                       style="max-width: 300px;">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Hasło</label>
-                <input type="password" class="form-control form-control-sm" id="password" name="password" style="max-width: 300px;">
+                <input type="password" class="form-control form-control-sm" id="password" name="password"
+                       style="max-width: 300px;">
             </div>
             <button type="submit" class="btn btn-primary">Zaloguj się</button>
         </form>
+
+        <div class="mt-3">
+            <p>Nie masz jeszcze konta?
+                <a th:href="@{/register}">Zarejestruj się</a>
+            </p>
+        </div>
+
     </div>
 </th:block>
 </body>

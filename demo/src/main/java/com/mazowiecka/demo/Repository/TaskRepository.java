@@ -1,6 +1,7 @@
 package com.mazowiecka.demo.Repository;
 
 import com.mazowiecka.demo.Entity.Task;
+import com.mazowiecka.demo.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,5 +25,9 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     long countByCompleted(boolean completed);
 
     long countByPriority(String priority);
+
+    List<Task> findAllByUser_Id(Long userId);
+    List<Task> findByUser(User user);
+
 
 }

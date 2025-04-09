@@ -1,69 +1,69 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel użytkownika</title>
-    <link rel="stylesheet" href="/css/user-panel.css">
-    <script src="/js/menu.js" defer></script>
-</head>
-<body>
-<div th:replace="~{layout/header :: header}"></div>
-<div th:fragment="user-panel">
-    <div class="messages">
-        <div th:if="${error}" class="error-message">
-            <p th:text="${error}"></p>
-        </div>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Panel użytkownika</title>-->
+<!--    <link rel="stylesheet" href="/css/user-panel.css">-->
+<!--    <script src="/js/menu.js" defer></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:replace="~{layout/header :: header}"></div>-->
+<!--<div th:fragment="user-panel">-->
+<!--    <div class="messages">-->
+<!--        <div th:if="${error}" class="error-message">-->
+<!--            <p th:text="${error}"></p>-->
+<!--        </div>-->
 
-        <div th:if="${success}" class="success-message">
-            <p th:text="${success}"></p>
-        </div>
-    </div>
+<!--        <div th:if="${success}" class="success-message">-->
+<!--            <p th:text="${success}"></p>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <section class="user-section">
-        <div class="container">
+<!--    <section class="user-section">-->
+<!--        <div class="container">-->
 
-            <div class="user-panel-content">
+<!--            <div class="user-panel-content">-->
 
-                <div class="welcome-section">
-                    <div class="avatar-container">
-                        <img src="/images/profile.png" alt="Avatar użytkownika" class="avatar">
-                    </div>
-                    <h2>Miło Cię widzieć <span th:text="${loggedUser}"></span></h2>
-                </div>
+<!--                <div class="welcome-section">-->
+<!--                    <div class="avatar-container">-->
+<!--                        <img src="/images/profile.png" alt="Avatar użytkownika" class="avatar">-->
+<!--                    </div>-->
+<!--                    <h2>Miło Cię widzieć <span th:text="${loggedUser}"></span></h2>-->
+<!--                </div>-->
 
-                <div class="user-sections">
+<!--                <div class="user-sections">-->
 
-                    <div class="user-section">
-                        <h3>Konto i bezpieczeństwo</h3>
-                        <ul>
-                            <li><a href="/panel-uzytkownika/edytuj-profil">Twoje dane</a></li>
-                            <li><a href="/panel-uzytkownika/wylogowanie">Wyloguj się</a></li>
-                            <li><a href="/panel-uzytkownika/usun-konto">Usuń konto</a></li>
-                        </ul>
-                    </div>
+<!--                    <div class="user-section">-->
+<!--                        <h3>Konto i bezpieczeństwo</h3>-->
+<!--                        <ul>-->
+<!--                            <li><a href="/panel-uzytkownika/edytuj-profil">Twoje dane</a></li>-->
+<!--                            <li><a href="/panel-uzytkownika/wylogowanie">Wyloguj się</a></li>-->
+<!--                            <li><a href="/panel-uzytkownika/usun-konto">Usuń konto</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
 
-                    <div class="user-section">
-                        <h3>Grupowanie zadań w projekty</h3>
-                        <ul>
-                            <li><a href="/projekty/utworz-projekt">Utwórz nowy projekt</a></li>
-                            <li><a href="/projekty">Zarządzaj swoimi projektami</a></li>
-                            <li><a href="/projekty/dodaj-zadanie">Dodaj zadanie do projektu</a></li>
-                        </ul>
-                    </div>
+<!--                    <div class="user-section">-->
+<!--                        <h3>Grupowanie zadań w projekty</h3>-->
+<!--                        <ul>-->
+<!--                            <li><a href="/projekty/utworz-projekt">Utwórz nowy projekt</a></li>-->
+<!--                            <li><a href="/projekty">Zarządzaj swoimi projektami</a></li>-->
+<!--                            <li><a href="/projekty/dodaj-zadanie">Dodaj zadanie do projektu</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
 
-                    <div class="user-section">
-                        <h3>Statystyki zadań</h3>
-                        <ul>
-                            <li><a href="/statystyki">Przegląd statystyk</a></li>
-                        </ul>
-                    </div>
+<!--                    <div class="user-section">-->
+<!--                        <h3>Statystyki zadań</h3>-->
+<!--                        <ul>-->
+<!--                            <li><a href="/statystyki">Przegląd statystyk</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
 
-                </div>
-                <a href="/" class="button" style="color:#FFFFFF;">Powrót na stronę główną</a>
-            </div>
-        </div>
-    </section>
-</div>
-<div th:replace="~{layout/footer :: footer}"></div>
-</body>
-</html>
+<!--                </div>-->
+<!--                <a href="/" class="button" style="color:#FFFFFF;">Powrót na stronę główną</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--</div>-->
+<!--<div th:replace="~{layout/footer :: footer}"></div>-->
+<!--</body>-->
+<!--</html>-->
