@@ -78,7 +78,7 @@ public class TaskController {
         task.setUser(user);
 
         taskService.addTask(task);
-        return "redirect:/";
+        return "redirect:/dashboard";
     }
 
 //    @GetMapping("/edytujZadanie")
@@ -149,7 +149,7 @@ public class TaskController {
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
         task.setCompleted(true);
         taskService.updateTask(task, taskId);
-        return "redirect:/";
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/zakonczoneZadania")

@@ -1,35 +1,52 @@
 package com.mazowiecka.demo.Controller;
 
-import com.mazowiecka.demo.Entity.Task;
-import com.mazowiecka.demo.Entity.User;
+import com.mazowiecka.demo.Entity.ContactMessage;
+import com.mazowiecka.demo.Repository.ContactMessageRepository;
 import com.mazowiecka.demo.Service.TaskService;
 import com.mazowiecka.demo.Service.UserService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.security.Principal;
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class HomeController {
     private final TaskService taskService;
     private final UserService userService;
 
-    public HomeController(TaskService taskService, UserService userService) {
+    private final ContactMessageRepository contactMessageRepository;
+
+    public HomeController(TaskService taskService,
+                          UserService userService,
+                          ContactMessageRepository contactMessageRepository) {
         this.taskService = taskService;
         this.userService = userService;
+        this.contactMessageRepository = contactMessageRepository;
     }
 
     @GetMapping("/")
-    public String homePage(Model model, Principal principal) {
-        if (principal != null) {
-            String username = principal.getName();
-            List<Task> userTasks = taskService.getTasksByUsername(username);
-            model.addAttribute("tasks", userTasks);
-        }
+    public String homePage() {
+
         return "index";
+    }
+
+    @PostMapping("/send-message")
+    public String handleContactForm(@RequestParam String name,
+                                    @RequestParam String email,
+                                    @RequestParam String message,
+                                    RedirectAttributes redirectAttributes) {
+
+        ContactMessage contactMessage = new ContactMessage();
+        contactMessage.setName(name);
+        contactMessage.setEmail(email);
+        contactMessage.setMessage(message);
+
+        contactMessageRepository.save(contactMessage);
+
+        redirectAttributes.addFlashAttribute("messageSent", true);
+
+        return "redirect:/";
     }
 }
 

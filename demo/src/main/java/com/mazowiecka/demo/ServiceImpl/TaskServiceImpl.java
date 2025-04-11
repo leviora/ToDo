@@ -6,6 +6,7 @@ import com.mazowiecka.demo.Repository.TaskRepository;
 import com.mazowiecka.demo.Repository.UserRepository;
 import com.mazowiecka.demo.Service.TaskService;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -25,10 +26,12 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
+
     @Override
     public Optional<Task> getTaskById(Long id) {
         return taskRepository.findById(id);
     }
+
     @Override
     public Task addTask(Task task) {
         return taskRepository.save(task);
@@ -38,6 +41,7 @@ public class TaskServiceImpl implements TaskService {
     public Task updateTask(Task updatedTask, Long taskId) {
         return taskRepository.save(updatedTask);
     }
+
     @Override
     public List<Task> getTodayTasks() {
         List<Task> tasks = taskRepository.findAll();
@@ -48,25 +52,30 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
         return todayTasks;
     }
+
     @Override
     public boolean isSameDay(LocalDate localDate1, LocalDate localDate2) {
         return localDate1.isEqual(localDate2);
     }
+
     @Override
     public List<Task> getCompletedTasks() {
         List<Task> completedTasks = taskRepository.findAll();
         completedTasks = completedTasks.stream().filter(task -> task.isCompleted() == true).collect(Collectors.toList());
         return completedTasks;
     }
+
     @Override
     public List<Task> findTasksByPriority(String priority) {
         return taskRepository.findTasksByPriority(priority);
     }
+
     @Override
     public void deleteCompletedTasks() {
         List<Task> completedTasks = taskRepository.findByCompleted(true);
         taskRepository.deleteAll(completedTasks);
     }
+
     @Override
     public String calculateDynamicPriority(Task task) {
         if (task.getDue_Date() == null) {
@@ -86,6 +95,7 @@ public class TaskServiceImpl implements TaskService {
             return "niski priorytet";
         }
     }
+
     @Override
     public List<Task> getUncompletedTodayTasks() {
         List<Task> todayTasks = getTodayTasks();
@@ -103,7 +113,8 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> findTasksByUserId(Long userId) {
         return taskRepository.findAllByUser_Id(userId);
     }
-@Override
+
+    @Override
     public List<Task> getTasksByUsername(String username) {
         User user = userRepository.findByUsername(username).orElseThrow();
         return taskRepository.findByUser(user);

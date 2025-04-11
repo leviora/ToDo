@@ -1,18 +1,30 @@
-//document.addEventListener("DOMContentLoaded", function () {
-//    fetch('/statystyki/data')
-//        .then(response => {
-//            if (!response.ok) {
-//                throw new Error('Błąd podczas pobierania statystyk');
-//            }
-//            return response.json();
-//        })
-//        .then(data => {
-//            document.getElementById('total-tasks').textContent = data.totalTasks;
-//            document.getElementById('completed-tasks').textContent = data.completedTasks;
-//            document.getElementById('pending-tasks').textContent = data.pendingTasks;
-//        })
-//        .catch(error => {
-//            console.error(error);
-//            document.getElementById('stats-container').textContent = 'Nie udało się załadować statystyk.';
-//        });
-//});
+document.addEventListener("DOMContentLoaded", function () {
+    const chartCanvas = document.getElementById("completedTasksChart");
+    if (chartCanvas) {
+        fetch("/api/statystyki/zadania")
+            .then(response => response.json())
+            .then(data => {
+                const ctx = chartCanvas.getContext("2d");
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Zakończone', 'Nieukończone'],
+                        datasets: [{
+                            data: [data.completed, data.uncompleted],
+                            backgroundColor: ['#198754', '#dc3545'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error("Błąd wczytywania danych wykresu:", error));
+    }
+});

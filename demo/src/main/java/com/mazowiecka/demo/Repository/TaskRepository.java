@@ -1,5 +1,6 @@
 package com.mazowiecka.demo.Repository;
 
+import com.mazowiecka.demo.Entity.Project;
 import com.mazowiecka.demo.Entity.Task;
 import com.mazowiecka.demo.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,6 +29,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findAllByUser_Id(Long userId);
     List<Task> findByUser(User user);
-
+    List<Task> findByProject(Project project);
 
 }

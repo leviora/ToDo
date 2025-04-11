@@ -8,8 +8,8 @@ import com.mazowiecka.demo.Repository.TaskRepository;
 import com.mazowiecka.demo.Service.ProjectService;
 import com.mazowiecka.demo.Service.TaskService;
 import com.mazowiecka.demo.Service.UserService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -146,9 +146,47 @@ public class ProjectController {
         return "pages/projects/addTask";
     }
 
+//    @GetMapping("/dodaj-zadanie")
+//    public String showAddTaskForm(Model model, @AuthenticationPrincipal User loggedUser) {
+//        List<Project> userProjects = projectService.getProjectsByUser(loggedUser); // Tylko projekty przypisane do użytkownika
+//        model.addAttribute("task", new Task());
+//        model.addAttribute("projects", userProjects);
+//        return "pages/projects/addTask";
+//    }
+
+
     @PostMapping("/dodaj-zadanie")
     public String addTaskToProject(@RequestParam("projectId") Long projectId, @RequestParam("description") String description, @AuthenticationPrincipal User loggedUser) {
         projectService.addTaskToProject(projectId, description, loggedUser);
         return "redirect:/projekty";
     }
+
+//    @PostMapping("/dodaj-zadanie")
+//    public String addTaskToProject(@RequestParam("projectId") Long projectId,
+//                                   @RequestParam("description") String description,
+//                                   @AuthenticationPrincipal User loggedUser) {
+//        // Sprawdź, czy projekt istnieje
+//        Optional<Project> projectOptional = projectRepository.findById(projectId);
+//        if (projectOptional.isEmpty()) {
+//            return "error"; // Projekt nie istnieje
+//        }
+//
+//        Project project = projectOptional.get();
+//
+//        // Sprawdź, czy użytkownik ma uprawnienia do przypisania zadania do tego projektu
+//        if (!project.getUser().equals(loggedUser)) {
+//            return "error"; // Użytkownik nie ma uprawnień do tego projektu
+//        }
+//
+//        // Utwórz nowe zadanie i przypisz je do projektu oraz użytkownika
+//        Task task = new Task();
+//        task.setDescription(description);
+//        task.setProject(project);
+//        task.setUser(loggedUser);  // Przypisz zadanie do zalogowanego użytkownika
+//
+//        taskService.addTask(task);  // Zapisz zadanie do bazy danych
+//
+//        return "redirect:/projekty"; // Przekieruj do listy projektów
+//    }
+
 }

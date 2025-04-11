@@ -1,4 +1,4 @@
-package com.mazowiecka.demo.Service;
+package com.mazowiecka.demo.ServiceImpl;
 
 import com.mazowiecka.demo.Repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

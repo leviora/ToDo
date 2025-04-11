@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     const taskListItems = document.querySelectorAll("li");
     taskListItems.forEach((item, index) => {
