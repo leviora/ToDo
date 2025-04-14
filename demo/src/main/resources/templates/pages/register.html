@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+
+<th:block th:fragment="content">
+    <div class="container" mt-4>
+        <h2>Rejestracja</h2>
+        <form th:action="@{/register}" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Nazwa użytkownika</label>
+                <input type="text" class="form-control form-control-sm" id="username" name="username" style="max-width: 300px;">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Hasło</label>
+                <input type="password" class="form-control form-control-sm" id="password" name="password" style="max-width: 300px;">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="text" class="form-control form-control-sm" id="email" name="email" style="max-width: 300px;">
+            </div>
+            <button type="submit" class="btn btn-primary">Zarejestruj się</button>
+        </form>
+    </div>
+</th:block>
+</body>
+</html>

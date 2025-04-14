@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+<th:block th:fragment="content">
+
+    <style>
+        h2 {
+            color: #f4623a;
+        }
+
+        .card {
+            height: 250px; /* dokładna wysokość */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .card-title {
+            margin-bottom: 0.5rem;
+            color: #f4623a;
+        }
+
+        .card-text {
+            flex-grow: 1;
+        }
+
+        .btn {
+            margin-top: auto;
+        }
+    </style>
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Panel administratora</h2>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h5 class="card-title">Użytkownicy</h5>
+                            <p class="card-text">Zarządzaj kontami użytkowników</p>
+                        </div>
+                        <a th:href="@{/admin/uzytkownicy}" class="btn btn-outline-primary mt-3">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Statystyki</h5>
+                        <p class="card-text">Podsumowanie aktywności w systemie.</p>
+                        <a th:href="@{/admin/statystyki}" class="btn btn-outline-primary btn-sm">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+
+<th:block th:fragment="content">
+  <div class="container mt-5 text-center">
+    <h2 class="mb-4">
+      Czy na pewno chcesz usunąć swoje konto,
+      <span th:text="${loggedUser}" class="text-danger"></span>?
+    </h2>
+    <p class="mb-4">
+      <strong class="text-danger">Uwaga:</strong> Usunięcie konta jest <strong>nieodwracalne</strong>,
+      a wszystkie Twoje dane zostaną utracone.
+    </p>
+
+    <form th:action="@{/panel-uzytkownika/usun-konto}" method="post" class="d-flex justify-content-center gap-3">
+      <button type="submit" class="btn btn-danger">Usuń konto</button>
+      <a href="/panel-uzytkownika" class="btn btn-outline-secondary">Anuluj</a>
+    </form>
+  </div>
+</th:block>
+
+</body>
+</html>

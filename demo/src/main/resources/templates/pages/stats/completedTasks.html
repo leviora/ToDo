@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+<th:block th:fragment="content">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Statystyki zakończonych zadań</h2>
+
+        <div class="row justify-content-center align-items-center" style="margin-bottom:50px;">
+            <div class="col-md-4 text-center">
+                <canvas id="completedTasksChart" width="200" height="200"></canvas>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Świetna robota! 🎉</h5>
+                        <p class="card-text text-muted">
+                            Każde zakończone zadanie to krok bliżej do celu. <br>
+                            Kontynuuj w tym tempie, a osiągniesz wszystko, co zaplanujesz! 💪<br><br>
+                            <em>„Małe postępy prowadzą do wielkich osiągnięć.”</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    const completedTasksData = {
+        completed: [[${completedTasksStats['completed']}]],
+        notCompleted: [[${completedTasksStats['notCompleted']}]]
+    };
+
+    const ctx = document.getElementById('completedTasksChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Zakończone', 'Nie zakończone'],
+            datasets: [{
+                data: [completedTasksData.completed, completedTasksData.notCompleted],
+                backgroundColor: ['#198754', '#f4623a'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    align: 'start',
+                    labels: {
+                        boxWidth: 20,
+                        boxHeight: 12,
+                        padding: 12,
+                        textAlign: 'left',
+                        usePointStyle: true
+                    }
+                },
+                title: {
+                    display: false
+                }
+            }
+        }
+    });
+    /*]]>*/
+</script>
+
+</th:block>
+</body>
+</html>

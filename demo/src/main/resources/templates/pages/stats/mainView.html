@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<head>
+    <meta charset="UTF-8">
+    <title>Twoje statystyki</title>
+</head>
+<body>
+
+<th:block th:fragment="content">
+    <div class="container mt-4">
+
+        <h1 class="text-center mb-4">Twoje statystyki</h1>
+
+        <div class="list-group">
+            <a href="/statystyki/zakonczone-zadania" class="list-group-item list-group-item-action" style="width:300px;">
+                Zadania ukończone
+            </a>
+            <a href="/statystyki/postęp" class="list-group-item list-group-item-action" style="width:300px;">
+                Postęp zadań w czasie
+            </a>
+        </div>
+
+    </div>
+</th:block>
+
+</body>
+</html>

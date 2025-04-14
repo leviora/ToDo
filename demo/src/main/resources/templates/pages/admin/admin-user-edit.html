@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+<th:block th:fragment="content">
+  <div class="container mt-4">
+    <h2>Edytuj użytkownika</h2>
+
+    <form th:action="@{'/admin/uzytkownicy/' + ${user.id} + '/edytuj'}" method="post" class="mt-3">
+      <div class="mb-3">
+        <label for="username" class="form-label">Nazwa użytkownika</label>
+        <input type="text" class="form-control" id="username" name="username"
+               th:value="${user.username}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email"
+               th:value="${user.email}" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+      <a th:href="@{/admin/uzytkownicy}" class="btn btn-secondary">Anuluj</a>
+    </form>
+  </div>
+</th:block>
+</body>
+</html>

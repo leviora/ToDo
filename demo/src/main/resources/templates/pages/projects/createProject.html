@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+
+<th:block th:fragment="content">
+  <div class="container mt-4">
+    <h2>Utwórz nowy projekt</h2>
+
+    <form th:action="@{/projekty/utworz-projekt}" th:object="${project}" method="post">
+      <div class="mb-3">
+        <label for="project_name" class="form-label">Nazwa projektu:</label>
+        <input type="text" id="project_name" th:field="*{project_name}" class="form-control form-control-sm"
+               style="max-width: 500px;" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="project_description" class="form-label">Opis projektu:</label>
+        <textarea id="project_description" th:field="*{project_description}"
+                  class="form-control form-control-sm" style="max-width: 500px;" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success">Utwórz projekt</button>
+      <a href="/panel-uzytkownika" class="btn btn-secondary ms-2">Powrót do panelu</a>
+    </form>
+  </div>
+</th:block>
+
+</body>
+</html>

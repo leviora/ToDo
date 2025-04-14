@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+
+<th:block th:fragment="content">
+  <div class="container mt-4">
+    <h2>Lista projektów</h2>
+
+    <div th:each="project : ${projects}" class="mb-4 p-3 border rounded">
+      <h4 th:text="'Projekt: ' + ${project.project_name}">Projekt: Nazwa projektu</h4>
+      <p th:text="'Opis: ' + ${project.project_description}">Opis projektu</p>
+
+      <div class="d-flex flex-wrap gap-2 mb-2">
+        <form th:action="@{/projekty/edytowanie/{project_id}(project_id=${project.project_id})}" method="get">
+          <button type="submit" class="btn btn-warning btn-sm">Edytuj</button>
+        </form>
+
+        <form th:action="@{/projekty/usun/{project_id}(project_id=${project.project_id})}" method="post"
+              onsubmit="return confirm('Czy na pewno chcesz usunąć ten projekt?')">
+          <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+        </form>
+
+        <form th:action="@{/projekty/zakoncz/{project_id}(project_id=${project.project_id})}" method="post">
+          <button type="submit" class="btn btn-secondary btn-sm">Zakończ</button>
+        </form>
+      </div>
+
+      <h5>Zadania:</h5>
+      <ul class="list-group">
+        <li th:each="task : ${project.tasks}" class="list-group-item">
+          <span th:text="${task.description}">Opis zadania</span>
+        </li>
+      </ul>
+    </div>
+
+    <a th:href="@{/panel-uzytkownika}" class="btn btn-secondary" style="margin-top:50px;">Powrót do panelu użytkownika</a>
+  </div>
+</th:block>
+
+</body>
+</html>

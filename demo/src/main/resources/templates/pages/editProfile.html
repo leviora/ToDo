@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+
+<th:block th:fragment="content">
+  <div class="container mt-5">
+    <h1 class="mb-4 text-center">Edytuj Profil</h1>
+
+    <div class="mb-5">
+      <h4>Zmiana nazwy użytkownika</h4>
+      <p>Obecna nazwa użytkownika: <strong th:text="${loggedUsername}"></strong></p>
+      <form th:action="@{/panel-uzytkownika/zmien-nazwe-uzytkownika}" method="post" class="row g-3">
+        <div class="col-md-6">
+          <input type="text" id="newUsername" name="newUsername" class="form-control" placeholder="Wprowadź nową nazwę" required >
+        </div>
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary">Zmień nazwę</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="mb-5">
+      <h4>Zmiana adresu e-mail</h4>
+      <p>Obecny adres e-mail: <strong th:text="${loggedEmail}"></strong></p>
+      <form th:action="@{/panel-uzytkownika/zmien-email}" method="post" class="row g-3">
+        <div class="col-md-6">
+          <input type="email" id="newEmail" name="newEmail" class="form-control" placeholder="Wprowadź nowy e-mail" required>
+        </div>
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary">Zmień e-mail</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="mb-5">
+      <h4>Zmień hasło</h4>
+      <form th:action="@{/panel-uzytkownika/zmien-haslo}" method="post">
+        <div class="mb-3">
+          <label for="currentPassword" class="form-label">Obecne hasło</label>
+          <input type="password" id="currentPassword" name="currentPassword" class="form-control" required style="width:300px;">
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Nowe hasło</label>
+          <input type="password" id="newPassword" name="newPassword" class="form-control" required style="width:300px;">
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Potwierdź nowe hasło</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required style="width:300px;">
+        </div>
+        <button type="submit" class="btn btn-primary">Zmień hasło</button>
+      </form>
+    </div>
+  </div>
+</th:block>
+
+</body>
+</html>

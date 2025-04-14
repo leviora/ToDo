@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+<th:block th:fragment="content">
+    <style>
+    #today-tasks h2 {
+        color: #f4623a;
+    }
+
+    .today-task-card {
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border-radius: 1rem;
+        border: 1px solid #dee2e6;
+        background-color: #fff;
+        transition: transform 0.2s ease-in-out;
+        border-left: 4px solid #f4623a;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .today-task-card:hover {
+        transform: scale(1.01);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .today-task-card p {
+        margin: 0.25rem 0;
+        color: #343a40;
+    }
+
+    #today-tasks .btn {
+    background-color: #f4623a !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 0.85rem !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    margin-top: 5px;
+    transition: background-color 0.3s ease !important;
+}
+
+#today-tasks .btn:hover {
+    background-color: #e5532f !important;
+}
+
+
+    .page-section {
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+
+    #add-tasks {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        padding-left: calc(50vw - 50%);
+        padding-right: calc(50vw - 50%);
+    }
+
+    html, body {
+        overflow-x: hidden;
+    }
+</style>
+
+
+
+    <!-- today tasks-->
+    <section class="page-section pt-5" id="today-tasks">
+
+    <div class="container px-4 px-lg-5">
+            <h2 class="text-center mb-4">Zadania na Dziś</h2>
+
+            <div class="row">
+                <div class="col-md-4" th:each="task : ${todayTasks}">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p class="card-text" th:text="'Opis: ' + ${task.description}"></p>
+                            <p class="card-text" th:text="'Termin: ' + ${task.due_Date}"></p>
+                            <button type="submit" class="btn btn-primary btn-xl">Zakończ zadanie</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- einsenhower matrix-->
+    <section class="page-section bg-dark text-white matrix-section" id="add-tasks">
+    <div class="container px-4 px-lg-5">
+
+                <a th:href="@{/dodajZadanie}" class="btn btn-light">
+                    <i class="bi bi-plus-circle"></i> Dodaj zadanie
+                </a>
+
+                <h2 class="text-center mt-0">Priorytetyzuj i Zarządzaj Czasem</h2>
+                <div th:replace="fragments/einsenhowerMatrix"></div>
+            </div>
+        </section>
+
+</th:block>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+<th:block th:fragment="content">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Postęp wykonanych zadań</h2>
+
+        <div class="row justify-content-center align-items-center">
+
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body text-center">
+                        <canvas id="progressChart" height="160"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Świetnie Ci idzie! 🚀</h5>
+                        <p class="card-text text-muted">
+                            Regularna praca przynosi efekty. <br>
+                            Każdy dzień z zakończonym zadaniem to sukces!<br><br>
+                            <em>„Codzienny postęp, choćby niewielki, prowadzi do wielkich rezultatów.”</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        let progressData = /*[[${progressStatsJson}]]*/ '{}';
+        progressData = JSON.parse(progressData);
+
+        const labels = Object.keys(progressData).sort();
+        const data = labels.map(date => progressData[date]);
+
+        const ctx = document.getElementById('progressChart').getContext('2d');
+
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Zakończone zadania',
+                    data: data,
+                    fill: true,
+                    borderColor: '#198754',
+                    backgroundColor: 'rgba(25, 135, 84, 0.2)',
+                    tension: 0.2,
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Data'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Liczba zadań'
+                        },
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+        /*]]>*/
+    </script>
+</th:block>
+</body>
+</html>

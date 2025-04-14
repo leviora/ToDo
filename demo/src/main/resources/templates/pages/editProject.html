@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+
+<th:block th:fragment="content">
+  <div class="container mt-4">
+    <h2>Edytuj projekt</h2>
+
+    <form th:action="@{/projekty/edytowanie/{project_id}(project_id=${project.project_id})}" method="post">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nazwa projektu:</label>
+        <input type="text" id="name" name="project_name" th:value="${project.project_name}"
+               class="form-control form-control-sm" style="max-width: 500px;" required/>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Opis projektu:</label>
+        <textarea id="description" name="project_description"
+                  th:text="${project.project_description}" class="form-control form-control-sm"
+                  style="max-width: 500px;"></textarea>
+      </div>
+
+      <div class="form-check mb-3">
+        <input type="checkbox" id="completed" name="completed" class="form-check-input"
+               th:checked="${project.completed}"/>
+        <label for="completed" class="form-check-label">Czy zakończony</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Zapisz</button>
+      <a href="/panel-uzytkownika" class="btn btn-secondary ms-2">Powrót do panelu</a>
+    </form>
+  </div>
+</th:block>
+
+</body>
+</html>

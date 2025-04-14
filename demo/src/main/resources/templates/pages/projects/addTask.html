@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
+<body>
+
+<th:block th:fragment="content">
+    <div class="container mt-4">
+        <h2>Dodaj zadanie do projektu</h2>
+
+        <form action="/projekty/dodaj-zadanie" method="post">
+            <div class="mb-3">
+                <label for="projectId" class="form-label">Projekt:</label>
+                <select name="projectId" id="projectId" class="form-select form-select-sm" style="max-width: 300px;" required>
+                    <option th:each="project : ${projects}"
+                            th:value="${project.project_id}"
+                            th:text="${project.project_name}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Opis zadania:</label>
+                <textarea name="description" id="description" class="form-control form-control-sm" style="max-width: 500px;" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Dodaj zadanie</button>
+            <a href="/panel-uzytkownika" class="btn btn-secondary ms-2">Powrót do panelu</a>
+        </form>
+    </div>
+</th:block>
+
+</body>
+</html>
