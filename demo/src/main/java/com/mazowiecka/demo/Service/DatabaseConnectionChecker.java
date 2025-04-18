@@ -21,15 +21,11 @@ public class DatabaseConnectionChecker {
         try {
             Connection connection = DataSourceUtils.getConnection(dataSource);
 
-            if (connection != null && !connection.isClosed()) {
-                System.out.println("Połączenie z bazą danych zostało pomyślnie nawiązane.");
-            } else {
-                System.err.println("Nie udało się nawiązać połączenia z bazą danych.");
-            }
+            if (connection != null && !connection.isClosed())
 
-            DataSourceUtils.releaseConnection(connection, dataSource);
+                DataSourceUtils.releaseConnection(connection, dataSource);
         } catch (SQLException e) {
-            System.err.println("Błąd podczas sprawdzania połączenia z bazą danych: " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }

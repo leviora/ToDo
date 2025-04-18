@@ -75,7 +75,12 @@
                         <div class="card-body">
                             <p class="card-text" th:text="'Opis: ' + ${task.description}"></p>
                             <p class="card-text" th:text="'Termin: ' + ${task.due_Date}"></p>
-                            <button type="submit" class="btn btn-primary btn-xl">Zakończ zadanie</button>
+<!--                            <button type="submit" class="btn btn-primary btn-xl">Zakończ zadanie</button>-->
+                            <form th:action="@{'/changeStatus/' + ${task.taskId}}" method="post">
+                                <input type="hidden" name="completed" value="true"/>
+                                <input type="hidden" name="taskId" th:value="${task.taskId}"/>
+                                <button type="submit" class="btn btn-primary btn-xl">Zakończ zadanie</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -42,7 +42,8 @@ public class ProjectController {
     }
 
     @GetMapping
-    public String getAllProjects(Model model, @AuthenticationPrincipal User loggedUser) {
+    public String getAllProjects(Model model,
+                                 @AuthenticationPrincipal User loggedUser) {
         List<Project> projects = projectRepository.findByCompleted(false);
         model.addAttribute("projects", projects);
         return "pages/projects/projectList";
@@ -54,10 +55,26 @@ public class ProjectController {
         return "pages/projects/createProject";
     }
 
+//    @PostMapping("/utworz-projekt")
+//    public String createProject(@ModelAttribute Project project,
+//                                Model model,
+//                                @AuthenticationPrincipal User loggedUser) {
+//        try {
+//            project.setUser(loggedUser);
+//            projectService.saveProject(project);
+//            return "redirect:/projekty";
+//        } catch (Exception e) {
+//            model.addAttribute("error", "Wystąpił błąd podczas tworzenia projektu.");
+//            return "pages/projects/createProject";
+//        }
+//    }
+
     @PostMapping("/utworz-projekt")
-    public String createProject(@ModelAttribute Project project, Model model, @AuthenticationPrincipal User loggedUser) {
+    public String createProject(@ModelAttribute Project project,
+                                Model model,
+                                @AuthenticationPrincipal User loggedUser) {
         try {
-            project.setUser(loggedUser);
+            project.setUser(loggedUser); // ← i to już jest pełna encja z relacjami
             projectService.saveProject(project);
             return "redirect:/projekty";
         } catch (Exception e) {
@@ -66,8 +83,11 @@ public class ProjectController {
         }
     }
 
+
+
     @GetMapping("/edytowanie/{project_id}")
-    public String showEditProjectForm(@PathVariable Long project_id, Model model) {
+    public String showEditProjectForm(@PathVariable Long project_id,
+                                      Model model) {
         Optional<Project> project = projectService.getProjectById(project_id);
         if (project.isPresent()) {
             model.addAttribute("project", project.get());
@@ -79,7 +99,9 @@ public class ProjectController {
     }
 
     @PostMapping("/edytowanie/{project_id}")
-    public String editProject(@PathVariable Long project_id, @ModelAttribute Project updatedProject, Model model) {
+    public String editProject(@PathVariable Long project_id,
+                              @ModelAttribute Project updatedProject,
+                              Model model) {
         Optional<Project> optionalProject = projectService.getProjectById(project_id);
         if (optionalProject.isEmpty()) {
             model.addAttribute("error", "Nie znaleziono projektu o podanym ID.");
@@ -101,7 +123,10 @@ public class ProjectController {
     }
 
     @PostMapping("/zakoncz/{project_id}")
-    public String completeProject(@PathVariable Long project_id, Model model, RedirectAttributes redirectAttributes, @AuthenticationPrincipal User loggedUser) {
+    public String completeProject(@PathVariable Long project_id,
+                                  Model model,
+                                  RedirectAttributes redirectAttributes,
+                                  @AuthenticationPrincipal User loggedUser) {
         Optional<Project> optionalProject = projectService.getProjectById(project_id);
         if (optionalProject.isEmpty()) {
             model.addAttribute("error", "Nie znaleziono projektu o podanym ID.");
@@ -122,7 +147,9 @@ public class ProjectController {
     }
 
     @PostMapping("/usun/{project_id}")
-    public String deleteProject(@PathVariable Long project_id, Model model, RedirectAttributes redirectAttributes) {
+    public String deleteProject(@PathVariable Long project_id,
+                                Model model,
+                                RedirectAttributes redirectAttributes) {
         Optional<Project> projectOptional = projectService.getProjectById(project_id);
         if (projectOptional.isEmpty()) {
             model.addAttribute("error", "Projekt o podanym ID nie istnieje.");
@@ -140,53 +167,19 @@ public class ProjectController {
     }
 
     @GetMapping("/dodaj-zadanie")
-    public String showAddTaskForm(Model model, @AuthenticationPrincipal User loggedUser) {
+    public String showAddTaskForm(Model model,
+                                  @AuthenticationPrincipal User loggedUser) {
         model.addAttribute("task", new Task());
         model.addAttribute("projects", projectService.getProjectsByUser(loggedUser));
         return "pages/projects/addTask";
     }
 
-//    @GetMapping("/dodaj-zadanie")
-//    public String showAddTaskForm(Model model, @AuthenticationPrincipal User loggedUser) {
-//        List<Project> userProjects = projectService.getProjectsByUser(loggedUser); // Tylko projekty przypisane do użytkownika
-//        model.addAttribute("task", new Task());
-//        model.addAttribute("projects", userProjects);
-//        return "pages/projects/addTask";
-//    }
-
-
     @PostMapping("/dodaj-zadanie")
-    public String addTaskToProject(@RequestParam("projectId") Long projectId, @RequestParam("description") String description, @AuthenticationPrincipal User loggedUser) {
+    public String addTaskToProject(@RequestParam("projectId") Long projectId,
+                                   @RequestParam("description") String description,
+                                   @AuthenticationPrincipal User loggedUser) {
         projectService.addTaskToProject(projectId, description, loggedUser);
         return "redirect:/projekty";
     }
-
-//    @PostMapping("/dodaj-zadanie")
-//    public String addTaskToProject(@RequestParam("projectId") Long projectId,
-//                                   @RequestParam("description") String description,
-//                                   @AuthenticationPrincipal User loggedUser) {
-//        // Sprawdź, czy projekt istnieje
-//        Optional<Project> projectOptional = projectRepository.findById(projectId);
-//        if (projectOptional.isEmpty()) {
-//            return "error"; // Projekt nie istnieje
-//        }
-//
-//        Project project = projectOptional.get();
-//
-//        // Sprawdź, czy użytkownik ma uprawnienia do przypisania zadania do tego projektu
-//        if (!project.getUser().equals(loggedUser)) {
-//            return "error"; // Użytkownik nie ma uprawnień do tego projektu
-//        }
-//
-//        // Utwórz nowe zadanie i przypisz je do projektu oraz użytkownika
-//        Task task = new Task();
-//        task.setDescription(description);
-//        task.setProject(project);
-//        task.setUser(loggedUser);  // Przypisz zadanie do zalogowanego użytkownika
-//
-//        taskService.addTask(task);  // Zapisz zadanie do bazy danych
-//
-//        return "redirect:/projekty"; // Przekieruj do listy projektów
-//    }
 
 }

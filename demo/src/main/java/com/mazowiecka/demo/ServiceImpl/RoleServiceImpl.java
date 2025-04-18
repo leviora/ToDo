@@ -3,7 +3,6 @@ package com.mazowiecka.demo.ServiceImpl;
 import com.mazowiecka.demo.Entity.Role;
 import com.mazowiecka.demo.Repository.RoleRepository;
 import com.mazowiecka.demo.Service.RoleService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +13,7 @@ public class RoleServiceImpl implements RoleService {
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
+
     @Override
     public void initializeRoles() {
         findOrCreateRole(Role.RoleName.ROLE_USER);
@@ -29,6 +29,7 @@ public class RoleServiceImpl implements RoleService {
                     return roleRepository.save(role);
                 });
     }
+
     @Override
     public Role getRoleByName(Role.RoleName roleName) {
         return roleRepository.findByName(roleName)

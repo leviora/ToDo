@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edycja zadania</title>
-</head>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: template}">
 <body>
 
 <th:block th:fragment="content">
+
+    <style>
+        h2 {
+            color: #f4623a;
+        }
+    </style>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Edycja zadania</h1>
 
-        <form id="task" th:action="@{'/edytujZadanie/'+${task.taskId}}" method="post" th:object="${task}" class="needs-validation" novalidate>
+        <form id="task" th:action="@{'/edytujZadanie/' + ${task.taskId}}" method="post" th:object="${task}" class="needs-validation" novalidate>
 
-            <input type="hidden" th:field="*{taskId}"/>
+            <input type="hidden" th:field="*{taskId}" />
 
             <div class="mb-3">
                 <label for="category" class="form-label">Kategoria:</label>

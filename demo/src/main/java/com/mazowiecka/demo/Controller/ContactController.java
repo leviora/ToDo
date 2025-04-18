@@ -21,7 +21,7 @@ public class ContactController {
     @GetMapping("/messages")
     public String showMessages(Model model) {
         model.addAttribute("messages", contactMessageRepository.findAll());
-        return "messages"; // utworzyć widok
+        return "messages";
     }
 
 }

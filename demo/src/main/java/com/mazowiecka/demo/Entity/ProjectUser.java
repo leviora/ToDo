@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @Table(name = "project_user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"project_id", "user_id"})
-        }
+}
 )
 public class ProjectUser {
 

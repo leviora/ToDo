@@ -20,7 +20,10 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectUserService projectUserService;
     private final TaskRepository taskRepository;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository, ProjectUserService projectUserService, TaskRepository taskRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository,
+                              UserRepository userRepository,
+                              ProjectUserService projectUserService,
+                              TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
         this.projectUserService = projectUserService;
@@ -38,7 +41,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project updateProject(Project updatedProject, Long projectId) {
+    public Project updateProject(Project updatedProject,
+                                 Long projectId) {
         return projectRepository.save(updatedProject);
     }
 
@@ -63,7 +67,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void addTaskToProject(Long projectId, String description, User user) {
+    public void addTaskToProject(Long projectId,
+                                 String description,
+                                 User user) {
         Optional<Project> optionalProject = projectRepository.findById(projectId);
 
         if (optionalProject.isPresent()) {

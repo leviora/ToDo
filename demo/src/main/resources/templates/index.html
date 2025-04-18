@@ -47,12 +47,12 @@
                     <a class="nav-link" th:href="@{/panel-uzytkownika}">Panel użytkownika</a>
                 </li>
 
-                <!-- Dla gościa -->
+                <!-- Guest -->
                 <li class="nav-item" th:if="${!isLoggedIn}">
                     <a class="nav-link" th:href="@{/login}">Zaloguj się</a>
                 </li>
 
-                <!-- Dla zalogowanego -->
+                <!-- LoggedIn -->
                 <li class="nav-item" th:if="${isLoggedIn}">
                     <a class="nav-link" href="#"
                        onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Wyloguj się</a>

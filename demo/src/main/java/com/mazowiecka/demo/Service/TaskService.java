@@ -33,6 +33,7 @@ public interface TaskService {
     public List<Task> getUncompletedTodayTasks();
 
     List<Task> findTasksByUserId(Long userId);
+
     public List<Task> getTasksByUsername(String username);
 
 }

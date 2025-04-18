@@ -1,39 +1,39 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel logowania</title>
-    <link rel="stylesheet" href="/css/auth-panel.css">
-</head>
-<body>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Panel logowania</title>-->
+<!--    <link rel="stylesheet" href="/css/auth-panel.css">-->
+<!--</head>-->
+<!--<body>-->
 
-<div th:fragment="auth-panel">
-    <nav class="auth-panel-container">
-        <div class="auth-links">
+<!--<div th:fragment="auth-panel">-->
+<!--    <nav class="auth-panel-container">-->
+<!--        <div class="auth-links">-->
 
-            <button th:if="${isLoggedIn}" type="button" class="login-link" onclick="location.href='/wylogowanie'">
-                Wyloguj się
-            </button>
+<!--            <button th:if="${isLoggedIn}" type="button" class="login-link" onclick="location.href='/wylogowanie'">-->
+<!--                Wyloguj się-->
+<!--            </button>-->
 
-            <button th:if="${!isLoggedIn}" type="button" class="login-link" onclick="location.href='/logowanie'">
-                Zaloguj się
-            </button>
+<!--            <button th:if="${!isLoggedIn}" type="button" class="login-link" onclick="location.href='/logowanie'">-->
+<!--                Zaloguj się-->
+<!--            </button>-->
 
-            <button th:if="${isLoggedIn} and ${loggedUser} == 'admin'" type="button" class="login-link"
-                    onclick="location.href='/dashboard'">
-                Panel administracyjny
-            </button>
+<!--            <button th:if="${isLoggedIn} and ${loggedUser} == 'admin'" type="button" class="login-link"-->
+<!--                    onclick="location.href='/dashboard'">-->
+<!--                Panel administracyjny-->
+<!--            </button>-->
 
-            <div th:if="${isLoggedIn}" class="user-profile">
-                <a href="/panel-uzytkownika" class="avatar-link">
-                    <span th:text="${loggedUser}"></span>
-                    <img src="/images/profile.png" alt="Avatar użytkownika" class="avatar">
+<!--            <div th:if="${isLoggedIn}" class="user-profile">-->
+<!--                <a href="/panel-uzytkownika" class="avatar-link">-->
+<!--                    <span th:text="${loggedUser}"></span>-->
+<!--                    <img src="/images/profile.png" alt="Avatar użytkownika" class="avatar">-->
 
-                </a>
-            </div>
-        </div>
-    </nav>
-</div>
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </nav>-->
+<!--</div>-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

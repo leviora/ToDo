@@ -26,7 +26,7 @@ public class UserPanelController {
         try {
             User user = userService.getCurrentUser();
             model.addAttribute("loggedUser", user.getUsername());
-            return "pages/user-panel";
+            return "pages/user/user-panel";
         } catch (Exception e) {
             return "redirect:/login";
         }
@@ -39,7 +39,7 @@ public class UserPanelController {
             model.addAttribute("isLoggedIn", true);
             model.addAttribute("loggedUsername", user.getUsername());
             model.addAttribute("loggedEmail", user.getEmail());
-            return "pages/editProfile";
+            return "pages/user/editProfile";
         } catch (Exception e) {
             return "redirect:/login";
         }
@@ -54,7 +54,7 @@ public class UserPanelController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
         }
-        return "pages/user-panel";
+        return "pages/user/user-panel";
     }
 
     @PostMapping("/zmien-email")
@@ -66,7 +66,7 @@ public class UserPanelController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
         }
-        return "pages/user-panel";
+        return "pages/user/user-panel";
     }
 
     @PostMapping("/zmien-haslo")
@@ -81,7 +81,7 @@ public class UserPanelController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
         }
-        return "pages/user-panel";
+        return "pages/user/user-panel";
     }
 
     @GetMapping("/usun-konto")
@@ -106,7 +106,7 @@ public class UserPanelController {
             return "redirect:/logout";
         } catch (Exception e) {
             model.addAttribute("error", "Nie udało się usunąć konta.");
-            return "pages/user-panel";
+            return "pages/user/user-panel";
         }
     }
 }

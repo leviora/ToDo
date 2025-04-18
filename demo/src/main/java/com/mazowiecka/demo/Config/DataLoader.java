@@ -38,18 +38,12 @@ public class DataLoader implements CommandLineRunner {
             Role adminRole = new Role();
             adminRole.setName(Role.RoleName.ROLE_ADMIN);
             roleRepository.save(adminRole);
-            System.out.println("✅ Rola ADMIN została utworzona.");
-        } else {
-            System.out.println("🔹 Rola ADMIN już istnieje.");
         }
 
         if (roleRepository.findByName(Role.RoleName.ROLE_USER).isEmpty()) {
             Role userRole = new Role();
             userRole.setName(Role.RoleName.ROLE_USER);
             roleRepository.save(userRole);
-            System.out.println("✅ Rola USER została utworzona.");
-        } else {
-            System.out.println("🔹 Rola USER już istnieje.");
         }
     }
 
@@ -65,12 +59,7 @@ public class DataLoader implements CommandLineRunner {
                 admin.setRoles(Set.of(adminRole.get()));
 
                 userRepository.save(admin);
-                System.out.println("✅ Użytkownik admin został utworzony.");
-            } else {
-                System.out.println("⚠️ Rola ADMIN nie została znaleziona w bazie.");
             }
-        } else {
-            System.out.println("🔹 Użytkownik admin już istnieje.");
         }
     }
 
@@ -86,12 +75,7 @@ public class DataLoader implements CommandLineRunner {
                 user.setRoles(Set.of(userRole.get()));
 
                 userRepository.save(user);
-                System.out.println("✅ Użytkownik user został utworzony.");
-            } else {
-                System.out.println("⚠️ Rola USER nie została znaleziona w bazie.");
             }
-        } else {
-            System.out.println("🔹 Użytkownik user już istnieje.");
         }
     }
 }

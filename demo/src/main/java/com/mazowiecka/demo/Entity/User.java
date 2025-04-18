@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +38,15 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     Set<Role> roles;
+
+    @Column(name = "created_date")
+    LocalDate createdDate;
+
+    @PrePersist
+    public void onCreate() {
+        this.createdDate = LocalDate.now();
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

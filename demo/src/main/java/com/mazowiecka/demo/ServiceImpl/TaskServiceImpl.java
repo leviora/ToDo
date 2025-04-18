@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,7 +18,8 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository,
+                           UserRepository userRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
     }
@@ -38,7 +40,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTask(Task updatedTask, Long taskId) {
+    public Task updateTask(Task updatedTask,
+                           Long taskId) {
         return taskRepository.save(updatedTask);
     }
 
@@ -54,7 +57,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean isSameDay(LocalDate localDate1, LocalDate localDate2) {
+    public boolean isSameDay(LocalDate localDate1,
+                             LocalDate localDate2) {
         return localDate1.isEqual(localDate2);
     }
 
@@ -119,6 +123,5 @@ public class TaskServiceImpl implements TaskService {
         User user = userRepository.findByUsername(username).orElseThrow();
         return taskRepository.findByUser(user);
     }
-
 
 }

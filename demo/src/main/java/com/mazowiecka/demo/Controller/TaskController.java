@@ -3,12 +3,12 @@ package com.mazowiecka.demo.Controller;
 import com.mazowiecka.demo.Entity.Category;
 import com.mazowiecka.demo.Entity.Task;
 import com.mazowiecka.demo.Entity.User;
+import com.mazowiecka.demo.Exception.TaskNotFoundException;
 import com.mazowiecka.demo.Repository.CategoryRepository;
 import com.mazowiecka.demo.Repository.TaskRepository;
 import com.mazowiecka.demo.Repository.UserRepository;
 import com.mazowiecka.demo.Service.CategoryService;
 import com.mazowiecka.demo.Service.TaskService;
-import com.mazowiecka.demo.Exception.TaskNotFoundException;
 import com.mazowiecka.demo.Service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -51,7 +51,7 @@ public class TaskController {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("task", task);
         model.addAttribute("categories", categories);
-        return "pages/addTask";
+        return "pages/user/addTask";
     }
 
     @PostMapping("/dodajZadanie")
@@ -81,26 +81,19 @@ public class TaskController {
         return "redirect:/dashboard";
     }
 
-//    @GetMapping("/edytujZadanie")
-//    public String showTasktoEdit(Model model) {
-//        List<Task> tasks = taskService.getAllTasks()
-//                .stream()
-//                .filter(task -> !task.isCompleted())
-//                .collect(Collectors.toList());
-//        model.addAttribute("tasks", tasks);
-//        return "fragments/showTaskListToEdit";
-//    }
-
     @GetMapping("/edytujZadanie/{taskId}")
-    public String showEditForm(@PathVariable("taskId") Long taskId, Model model) {
+    public String showEditForm(@PathVariable("taskId") Long taskId,
+                               Model model) {
         Task task = taskService.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
         model.addAttribute("task", task);
-        return "pages/editForm";
+        return "pages/user/EditForm";
     }
 
     @PostMapping("/edytujZadanie/{taskId}")
-    public String editTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task updatedTask, Model model) {
+    public String editTask(@PathVariable("taskId") Long taskId,
+                           @ModelAttribute Task updatedTask,
+                           Model model) {
 
         Task existingTask = taskService.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + taskId));
@@ -125,24 +118,9 @@ public class TaskController {
         return "redirect:/zarzadzaj-zadaniami";
     }
 
-//    @GetMapping("/usunZadanie")
-//    public String showTasktoDelete(Model model) {
-//        List<Task> tasks = taskService.getAllTasks()
-//                .stream()
-//                .filter(task -> !task.isCompleted())
-//                .collect(Collectors.toList());
-//        model.addAttribute("tasks", tasks);
-//        return "fragments/showTaskListToDelete";
-//    }
-//
-//    @GetMapping("/usunZadanie/{taskId}")
-//    public String deleteTask(@PathVariable("taskId") Long taskId, @ModelAttribute Task deletedTask) {
-//        taskService.deleteTask(taskId, deletedTask);
-//        return "redirect:/";
-//    }
-
     @PostMapping("/changeStatus/{taskId}")
-    public String changeTaskStatus(@PathVariable Long taskId, Model model) {
+    public String changeTaskStatus(@PathVariable Long taskId,
+                                   Model model) {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
         Task task = taskService.getTaskById(taskId)
@@ -159,74 +137,36 @@ public class TaskController {
         return "pages/completedTasks";
     }
 
-    @GetMapping("/sortuj")
-    public String sortTasks(@RequestParam("sortOption") String sortOption, Model model) {
-        List<Task> sortedTasks = getSortedTasks(sortOption);
-        model.addAttribute("sortedTasks", sortedTasks);
-        model.addAttribute("sortOption", sortOption);
-        return "/pages/sort";
-    }
-
-    private List<Task> getSortedTasks(String sortOption) {
-        switch (sortOption) {
-            case "date":
-                return taskRepository.findAllByOrderByDueDateAsc();
-            case "importantUrgent":
-                return taskService.findTasksByPriority("urgent-important");
-            case "importantNotUrgent":
-                return taskService.findTasksByPriority("not-urgent-important");
-            case "notImportantUrgent":
-                return taskService.findTasksByPriority("urgent-not-important");
-            case "notImportantNotUrgent":
-                return taskService.findTasksByPriority("not-urgent-not-important");
-            default:
-                return taskRepository.findAll();
-        }
-    }
+//    @GetMapping("/sortuj")
+//    public String sortTasks(@RequestParam("sortOption") String sortOption,
+//                            Model model) {
+//        List<Task> sortedTasks = getSortedTasks(sortOption);
+//        model.addAttribute("sortedTasks", sortedTasks);
+//        model.addAttribute("sortOption", sortOption);
+//        return "/pages/sort";
+//    }
+//    private List<Task> getSortedTasks(String sortOption) {
+//        switch (sortOption) {
+//            case "date":
+//                return taskRepository.findAllByOrderByDueDateAsc();
+//            case "importantUrgent":
+//                return taskService.findTasksByPriority("urgent-important");
+//            case "importantNotUrgent":
+//                return taskService.findTasksByPriority("not-urgent-important");
+//            case "notImportantUrgent":
+//                return taskService.findTasksByPriority("urgent-not-important");
+//            case "notImportantNotUrgent":
+//                return taskService.findTasksByPriority("not-urgent-not-important");
+//            default:
+//                return taskRepository.findAll();
+//        }
+//    }
 
     @PostMapping("/usunZakonczoneZadania")
     public String deleteCompletedTasks() {
         taskService.deleteCompletedTasks();
-        return "pages/manage-tasks";
+        return "pages/user/manage-tasks";
     }
-
-//    @PostMapping("/tasks/updateDynamicPriority")
-//    public String updateDynamicPriority(@RequestParam Long taskId, Model model) {
-//        Task task = taskRepository.findById(taskId)
-//                .orElseThrow(() -> new IllegalArgumentException("Zadanie nie znalezione"));
-//
-//        taskRepository.save(task);
-//
-//        return "redirect:/tasks";
-//    }
-//
-//    @GetMapping("/tasks/dynamic-priority")
-//    public String getTasksWithDynamicPriority(Model model) {
-//        List<Task> tasks = taskService.getAllTasks();
-//        List<Task> tasksWithDynamicPriority = tasks.stream()
-//                .map(task -> {
-//                    String dynamicPriority = taskService.calculateDynamicPriority(task);
-//                    task.setDynamicPriority(dynamicPriority);
-//                    System.out.println("Zadanie: " + task.getDescription() + ", Dynamiczny priorytet: " + dynamicPriority);
-//                    return task;
-//                })
-//                .collect(Collectors.toList());
-//
-//        model.addAttribute("tasks", tasksWithDynamicPriority);
-//        return "pages/dynamicPriorityPage";
-//    }
-
-//    @GetMapping("/manage-tasks")
-//    public String showManageTasks(Model model, Principal principal) {
-//        String username = principal.getName();
-//        User user = userService.findByUsername(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("Nie znaleziono użytkownika o nazwie: " + username));
-//
-//        List<Task> userTasks = taskService.findTasksByUserId(user.getId());
-//
-//        model.addAttribute("tasks", userTasks);
-//        return "pages/manage-tasks";
-//    }
 
     @GetMapping("/zarzadzaj-zadaniami")
     public String showManageTasks(Model model) {
@@ -234,7 +174,7 @@ public class TaskController {
         List<Task> userTasks = taskService.findTasksByUserId(user.getId());
 
         model.addAttribute("tasks", userTasks);
-        return "pages/manage-tasks";
+        return "pages/user/manage-tasks";
     }
 
 

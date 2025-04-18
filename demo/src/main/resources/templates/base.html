@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:fragment="template" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:fragment="template"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -43,14 +45,14 @@
         align-items: center;
     }
 
-
-
     @media (max-width: 991.98px) {
         .navbar-collapse {
             flex-wrap: wrap;
             justify-content: center;
         }
     }
+
+
 
     </style>
 
@@ -63,19 +65,28 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <a th:href="@{'/'}">Strona główna</a>
             <a th:href="@{'/zarzadzaj-zadaniami'}">Zarządzaj zadaniami</a>
-            <a th:if="${isLoggedIn}" class="nav-link" th:href="@{panel-uzytkownika}">Panel użytkownika</a>
 
-            <!-- Dla administratora -->
+            <!-- LoggedIn -->
+            <a th:if="${isLoggedIn}" class="nav-link" th:href="@{/panel-uzytkownika}">Panel użytkownika</a>
+
+            <!-- User -->
+            <a sec:authorize="hasRole('ROLE_USER')" class="nav-link" th:href="@{/dashboard}">
+                Dashboard
+            </a>
+
+
+            <!-- Admin-->
+
             <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" th:href="@{/admin}">
                 Panel administratora
             </a>
 
-            <!-- Dla zalogowanego -->
-            <li class="nav-item list-unstyled" th:if="${isLoggedIn}">
-                <a class="nav-link" href="/"
-                   onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Wyloguj się</a>
-                <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
-            </li>
+            <!-- LoggedIn -->
+            <a th:if="${isLoggedIn}" href="/"
+               onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                Wyloguj się
+            </a>
+            <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
 
         </div>
     </div>

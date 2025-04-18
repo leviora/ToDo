@@ -26,12 +26,12 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepository,
                            RoleRepository roleRepository,
-                           PasswordEncoder passwordEncoder)
-    {
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -59,7 +59,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long id, User user) {
+    public User updateUser(Long id,
+                           User user) {
         if (!userRepository.existsById(id)) {
             throw new RuntimeException("User not found");
         }
@@ -111,8 +112,10 @@ public class UserServiceImpl implements UserService {
         );
         SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
+
     @Override
-    public void updateEmail(String username, String newEmail) {
+    public void updateEmail(String username,
+                            String newEmail) {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isEmpty()) {
             throw new IllegalArgumentException("Nie znaleziono użytkownika.");
@@ -124,7 +127,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(String username, String currentPassword, String newPassword, String confirmPassword) {
+    public void changePassword(String username,
+                               String currentPassword,
+                               String newPassword,
+                               String confirmPassword) {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isEmpty()) {
             throw new IllegalArgumentException("Nie znaleziono użytkownika.");

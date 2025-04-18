@@ -24,11 +24,6 @@ public class SecurityConfig {
                 )
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
-//                .formLogin(login -> login
-//                        .loginPage("/login")
-//                        .defaultSuccessUrl("/dashboard", true)
-//                        .permitAll()
-//                )
 
                 .formLogin(login -> login
                         .loginPage("/login")

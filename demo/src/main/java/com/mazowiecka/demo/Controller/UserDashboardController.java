@@ -23,7 +23,8 @@ public class UserDashboardController {
     }
 
     @GetMapping
-    public String showUserDashboard(Model model, Principal principal) {
+    public String showUserDashboard(Model model,
+                                    Principal principal) {
         if (principal != null) {
             String username = principal.getName();
             List<Task> userTasks = taskService.getTasksByUsername(username);

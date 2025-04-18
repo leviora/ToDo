@@ -17,7 +17,8 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final TaskRepository taskRepository;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository, TaskRepository taskRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository,
+                               TaskRepository taskRepository) {
         this.categoryRepository = categoryRepository;
         this.taskRepository = taskRepository;
     }
@@ -52,7 +53,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category updateCategory(Category updatedCategory, Long categoryId) {
+    public Category updateCategory(Category updatedCategory,
+                                   Long categoryId) {
         return categoryRepository.save(updatedCategory);
     }
 

@@ -1,6 +1,8 @@
 package com.mazowiecka.demo.Service;
 
-import com.mazowiecka.demo.Entity.*;
+import com.mazowiecka.demo.Entity.Project;
+import com.mazowiecka.demo.Entity.User;
+
 import java.util.List;
 import java.util.Optional;
 

@@ -21,6 +21,7 @@ public class GlobalControllerAdvice {
         if (isLoggedIn) {
             String username = authentication.getName();
             model.addAttribute("username", username);
+            model.addAttribute("roles", authentication.getAuthorities());
         }
     }
 }

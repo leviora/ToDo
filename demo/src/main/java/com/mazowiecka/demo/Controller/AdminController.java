@@ -1,18 +1,22 @@
 package com.mazowiecka.demo.Controller;
 
 import com.mazowiecka.demo.DTO.UserDTO;
-import com.mazowiecka.demo.Entity.Role;
+import com.mazowiecka.demo.Entity.Task;
 import com.mazowiecka.demo.Entity.User;
 import com.mazowiecka.demo.Mapper.UserMapper;
 import com.mazowiecka.demo.Service.RoleService;
+import com.mazowiecka.demo.Service.TaskService;
 import com.mazowiecka.demo.Service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @PreAuthorize("hasRole('ADMIN')")
@@ -23,10 +27,14 @@ public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
 
+    private final TaskService taskService;
+
     public AdminController(UserService userService,
-                           RoleService roleService) {
+                           RoleService roleService,
+                           TaskService taskService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.taskService = taskService;
     }
 
     @GetMapping
@@ -45,7 +53,8 @@ public class AdminController {
     }
 
     @GetMapping("/uzytkownicy/{id}")
-    public String showUserDetails(@PathVariable Long id, Model model) {
+    public String showUserDetails(@PathVariable Long id,
+                                  Model model) {
         User user = userService.getUserById(id);
         UserDTO userDTO = UserMapper.INSTANCE.toDTO(user);
         model.addAttribute("user", userDTO);
@@ -59,14 +68,16 @@ public class AdminController {
     }
 
     @GetMapping("/uzytkownicy/{id}/edytuj")
-    public String editUserForm(@PathVariable Long id, Model model) {
+    public String editUserForm(@PathVariable Long id,
+                               Model model) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "pages/admin/admin-user-edit";
     }
 
     @PostMapping("/uzytkownicy/{id}/edytuj")
-    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
+    public String updateUser(@PathVariable Long id,
+                             @ModelAttribute("user") User updatedUser) {
         User existingUser = userService.getUserById(id);
         existingUser.setUsername(updatedUser.getUsername());
         existingUser.setEmail(updatedUser.getEmail());
@@ -74,36 +85,42 @@ public class AdminController {
         return "redirect:/admin/uzytkownicy";
     }
 
-//    @GetMapping("/uzytkownicy/{id}/edytuj")
-//    public String editUserForm(@PathVariable Long id, Model model) {
-//        User user = userService.getUserById(id);
-//        UserDTO userDTO = UserMapper.INSTANCE.toDTO(user);
-//
-//        // 🔽 domyślnie ustawiamy pierwszą rolę jako wybraną (jeśli istnieje)
-//        if (user.getRoles() != null && !user.getRoles().isEmpty()) {
-//            userDTO.setRole(user.getRoles().iterator().next().getName().name());
-//        }
-//
-//        model.addAttribute("user", userDTO);
-//        return "pages/admin/admin-user-edit";
-//    }
-//
-//    @PostMapping("/uzytkownicy/{id}/edytuj")
-//    public String updateUser(@PathVariable Long id, @ModelAttribute("user") UserDTO userDTO) {
-//        User user = userService.getUserById(id);
-//        user.setUsername(userDTO.getUsername());
-//        user.setEmail(userDTO.getEmail());
-//
-//        // Pobieramy rolę z bazy danych na podstawie Stringa
-//        if (userDTO.getRole() != null) {
-//            Role.RoleName roleName = Role.RoleName.valueOf(userDTO.getRole());
-//            Role role = roleService.getRoleByName(roleName);
-//            user.setRoles(Set.of(role));
-//        }
-//
-//        userService.updateUser(id, user);
-//        return "redirect:/admin/uzytkownicy";
-//    }
+    @GetMapping("/statystyki")
+    public String showStatistics(Model model) {
+        List<User> users = userService.getAllUsers();
+        List<Task> allTasks = taskService.getAllTasks();
+
+        // Średnia liczba zadań na użytkownika
+        double avgTasks = users.isEmpty() ? 0 : (double) allTasks.size() / users.size();
+        model.addAttribute("avgTasks", avgTasks);
+
+        // Postęp – zakończone zadania w czasie
+        Map<LocalDate, Long> completedByDate = allTasks.stream()
+                .filter(Task::isCompleted)
+                .filter(task -> task.getDue_Date() != null)
+                .collect(Collectors.groupingBy(Task::getDue_Date, TreeMap::new, Collectors.counting()));
+
+        List<String> progressDates = completedByDate.keySet().stream()
+                .map(LocalDate::toString).toList();
+        List<Long> progressCounts = new ArrayList<>(completedByDate.values());
+
+        model.addAttribute("progressDates", progressDates);
+        model.addAttribute("progressCounts", progressCounts);
+
+        // Nowi użytkownicy w czasie
+        Map<LocalDate, Long> newUsers = users.stream()
+                .filter(user -> user.getCreatedDate() != null)
+                .collect(Collectors.groupingBy(User::getCreatedDate, TreeMap::new, Collectors.counting()));
+
+        List<String> userCreationDates = newUsers.keySet().stream()
+                .map(LocalDate::toString).toList();
+        List<Long> userCreationCounts = new ArrayList<>(newUsers.values());
+
+        model.addAttribute("userCreationDates", userCreationDates);
+        model.addAttribute("userCreationCounts", userCreationCounts);
+
+        return "pages/admin/statistics";
+    }
 
 
 }
