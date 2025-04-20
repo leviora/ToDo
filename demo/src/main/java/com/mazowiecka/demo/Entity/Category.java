@@ -26,7 +26,6 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Task> tasks = new ArrayList<>();
 
-
     @Override
     public String toString() {
         return "Category{" +

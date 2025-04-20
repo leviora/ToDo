@@ -24,19 +24,15 @@ import java.util.Optional;
 public class ProjectController {
 
     private final ProjectService projectService;
-    private final UserService userService;
-    private final TaskService taskService;
+
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
 
+
     public ProjectController(ProjectService projectService,
-                             UserService userService,
-                             TaskService taskService,
                              ProjectRepository projectRepository,
                              TaskRepository taskRepository) {
         this.projectService = projectService;
-        this.userService = userService;
-        this.taskService = taskService;
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
     }
@@ -54,20 +50,6 @@ public class ProjectController {
         model.addAttribute("project", new Project());
         return "pages/projects/createProject";
     }
-
-//    @PostMapping("/utworz-projekt")
-//    public String createProject(@ModelAttribute Project project,
-//                                Model model,
-//                                @AuthenticationPrincipal User loggedUser) {
-//        try {
-//            project.setUser(loggedUser);
-//            projectService.saveProject(project);
-//            return "redirect:/projekty";
-//        } catch (Exception e) {
-//            model.addAttribute("error", "Wystąpił błąd podczas tworzenia projektu.");
-//            return "pages/projects/createProject";
-//        }
-//    }
 
     @PostMapping("/utworz-projekt")
     public String createProject(@ModelAttribute Project project,
@@ -134,12 +116,6 @@ public class ProjectController {
         }
 
         Project project = optionalProject.get();
-
-//        if (!project.getUser().getId().equals(loggedUser.getId())) {
-//            model.addAttribute("error", "Nie masz uprawnień do tej operacji.");
-//            return "error";
-//        }
-
         project.setCompleted(true);
         projectService.saveProject(project);
         redirectAttributes.addFlashAttribute("message", "Super! Udało Ci się ukończyć projekt.");

@@ -1,4 +1,4 @@
-package com.mazowiecka.demo.Service;
+package com.mazowiecka.demo.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;

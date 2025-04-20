@@ -3,7 +3,6 @@ package com.mazowiecka.demo.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mazowiecka.demo.Service.StatsService;
-import com.mazowiecka.demo.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +16,10 @@ import java.util.Map;
 @RequestMapping("/statystyki")
 public class StatsController {
     private final StatsService statsService;
-    private final UserService userService;
 
-    public StatsController(StatsService statsService,
-                           UserService userService) {
+
+    public StatsController(StatsService statsService) {
         this.statsService = statsService;
-        this.userService = userService;
     }
 
     @GetMapping

@@ -23,23 +23,18 @@ import java.util.List;
 @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 @Controller
 public class TaskController {
-    private final TaskRepository taskRepository;
     private final TaskService taskService;
-    private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
     private final UserRepository userRepository;
 
     private final UserService userService;
 
-    public TaskController(TaskRepository taskRepository,
-                          TaskService taskService,
-                          CategoryRepository categoryRepository,
+    public TaskController(TaskService taskService,
                           CategoryService categoryService,
                           UserRepository userRepository,
                           UserService userService) {
-        this.taskRepository = taskRepository;
+
         this.taskService = taskService;
-        this.categoryRepository = categoryRepository;
         this.categoryService = categoryService;
         this.userRepository = userRepository;
         this.userService = userService;
@@ -136,31 +131,6 @@ public class TaskController {
         model.addAttribute("completedTasks", completedTasks);
         return "pages/completedTasks";
     }
-
-//    @GetMapping("/sortuj")
-//    public String sortTasks(@RequestParam("sortOption") String sortOption,
-//                            Model model) {
-//        List<Task> sortedTasks = getSortedTasks(sortOption);
-//        model.addAttribute("sortedTasks", sortedTasks);
-//        model.addAttribute("sortOption", sortOption);
-//        return "/pages/sort";
-//    }
-//    private List<Task> getSortedTasks(String sortOption) {
-//        switch (sortOption) {
-//            case "date":
-//                return taskRepository.findAllByOrderByDueDateAsc();
-//            case "importantUrgent":
-//                return taskService.findTasksByPriority("urgent-important");
-//            case "importantNotUrgent":
-//                return taskService.findTasksByPriority("not-urgent-important");
-//            case "notImportantUrgent":
-//                return taskService.findTasksByPriority("urgent-not-important");
-//            case "notImportantNotUrgent":
-//                return taskService.findTasksByPriority("not-urgent-not-important");
-//            default:
-//                return taskRepository.findAll();
-//        }
-//    }
 
     @PostMapping("/usunZakonczoneZadania")
     public String deleteCompletedTasks() {

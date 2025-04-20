@@ -16,17 +16,11 @@ import java.util.Optional;
 @Service
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
-    private final UserRepository userRepository;
-    private final ProjectUserService projectUserService;
     private final TaskRepository taskRepository;
 
     public ProjectServiceImpl(ProjectRepository projectRepository,
-                              UserRepository userRepository,
-                              ProjectUserService projectUserService,
                               TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
-        this.userRepository = userRepository;
-        this.projectUserService = projectUserService;
         this.taskRepository = taskRepository;
     }
 

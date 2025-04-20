@@ -25,15 +25,11 @@ import java.util.stream.Collectors;
 public class AdminController {
 
     private final UserService userService;
-    private final RoleService roleService;
-
     private final TaskService taskService;
 
     public AdminController(UserService userService,
-                           RoleService roleService,
                            TaskService taskService) {
         this.userService = userService;
-        this.roleService = roleService;
         this.taskService = taskService;
     }
 

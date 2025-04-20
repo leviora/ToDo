@@ -12,16 +12,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class HomeController {
-    private final TaskService taskService;
-    private final UserService userService;
 
     private final ContactMessageRepository contactMessageRepository;
 
-    public HomeController(TaskService taskService,
-                          UserService userService,
-                          ContactMessageRepository contactMessageRepository) {
-        this.taskService = taskService;
-        this.userService = userService;
+    public HomeController(ContactMessageRepository contactMessageRepository) {
         this.contactMessageRepository = contactMessageRepository;
     }
 
